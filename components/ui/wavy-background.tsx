@@ -192,6 +192,17 @@ export const WavyBackground = ({
                         "radial-gradient(70% 45% at 50% 40%, rgba(15,21,36,0.55) 0%, rgba(15,21,36,0) 70%)",
                 }}
             />
+            {/* Fundido inferior: las ondas se desvanecen hacia el fondo de la
+                siguiente sección (#0F1524), suavizando el corte entre el hero
+                y el contenido que sigue. */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 bottom-0 z-[2] h-32 md:h-40"
+                style={{
+                    background:
+                        "linear-gradient(to bottom, rgba(15,21,36,0) 0%, rgba(15,21,36,0.7) 55%, #0F1524 100%)",
+                }}
+            />
             <div className={cn("relative z-10 w-full", className)} {...props}>
                 {children}
             </div>

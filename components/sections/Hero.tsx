@@ -24,7 +24,7 @@ export function Hero({ title, subtitle, description, primaryCTA, secondaryCTA, b
     return (
         <WavyBackground
             className="max-w-5xl mx-auto"
-            containerClassName="relative min-h-[92svh] md:min-h-screen"
+            containerClassName="relative min-h-[100svh] md:min-h-screen"
             colors={[
                 "#26377D", // Flumen Deep Blue
                 "#00B8A9", // Aqua/Teal
