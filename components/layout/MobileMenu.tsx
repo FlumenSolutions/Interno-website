@@ -56,7 +56,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                             <div className="pt-6 border-t">
                                 <Button asChild className="w-full" size="lg">
                                     <Link href="/contacto" onClick={onClose}>
-                                        Auditoría Gratuita
+                                        Cuéntanos tu idea
                                     </Link>
                                 </Button>
                             </div>

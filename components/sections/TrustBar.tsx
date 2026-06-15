@@ -6,8 +6,8 @@ import { ScrollReveal } from './ScrollReveal'
 const trustMetrics = [
     {
         icon: Award,
-        value: 'n8n / Make',
-        label: 'Herramientas que dominamos',
+        value: 'IA + código',
+        label: 'Construimos más rápido con IA de última generación',
     },
     {
         icon: Users,
@@ -16,8 +16,8 @@ const trustMetrics = [
     },
     {
         icon: Clock,
-        value: '24/7',
-        label: 'Automatizaciones que no descansan',
+        value: 'A la medida',
+        label: 'Software hecho para tu negocio, no plantillas',
     },
     {
         icon: ShieldCheck,

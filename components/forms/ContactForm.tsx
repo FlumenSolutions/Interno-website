@@ -104,11 +104,11 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
     }
 
     const defaultTitle = source === 'audit'
-        ? 'Agenda tu Auditoría de Automatización'
+        ? 'Cuéntanos tu idea'
         : 'Contáctanos'
 
     const defaultDescription = source === 'audit'
-        ? 'Cuéntanos lo esencial sobre tu negocio y evaluamos si la automatización puede ayudarte.'
+        ? 'Cuéntanos qué necesitas para tu negocio y te decimos qué podemos construir.'
         : 'Completa el formulario y nos pondremos en contacto contigo.'
 
     return (

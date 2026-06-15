@@ -9,12 +9,12 @@ export const faqs: FAQ[] = [
     {
         category: 'general',
         question: '¿Qué es Flumen Solutions?',
-        answer: 'Somos una consultora especializada en automatización de procesos empresariales. Ayudamos a empresas en Colombia a eliminar tareas manuales, integrar sistemas y escalar operaciones sin aumentar costos.',
+        answer: 'Somos un equipo de ingenieros que construye software a la medida con IA: aplicaciones, sitios web, chatbots y automatizaciones. Ayudamos a empresas en Colombia a tener la herramienta que necesitan, construida más rápido y a menor costo gracias a la IA.',
     },
     {
         category: 'general',
-        question: '¿En qué se diferencia de contratar más personal?',
-        answer: 'La automatización trabaja 24/7 con procesos consistentes, no requiere capacitación continua, no se enferma ni toma vacaciones, y el costo es una inversión única vs. salarios recurrentes. Además, permite que tu equipo se enfoque en tareas estratégicas.',
+        question: '¿Qué tipo de cosas construyen?',
+        answer: 'Aplicaciones a la medida (paneles internos, portales de clientes, sistemas de gestión), páginas y sitios web, chatbots y asistentes con IA, y automatización de tareas repetitivas. Si tu negocio necesita una herramienta de software, probablemente podemos construirla.',
     },
     {
         category: 'general',
@@ -25,74 +25,74 @@ export const faqs: FAQ[] = [
     // Servicios
     {
         category: 'servicios',
-        question: '¿Cuánto tiempo toma implementar una automatización?',
-        answer: 'Depende de la complejidad. Proyectos simples pueden estar listos en 2-3 semanas, mientras que implementaciones complejas pueden tomar 6-8 semanas. En la auditoría inicial te damos un timeline exacto.',
+        question: '¿Cuánto tiempo toma construir mi proyecto?',
+        answer: 'Depende de qué tan grande sea. Como construimos apoyados en IA, solemos llegar a una versión funcional para probar mucho más rápido que un desarrollo tradicional. Cuando nos cuentes tu idea te damos un tiempo estimado concreto.',
     },
     {
         category: 'servicios',
-        question: '¿Necesito conocimientos técnicos para usar las automatizaciones?',
-        answer: 'No. Diseñamos las automatizaciones para que funcionen sin intervención técnica. Además, capacitamos a tu equipo para que puedan monitorear y hacer ajustes básicos si lo desean.',
+        question: '¿Necesito conocimientos técnicos?',
+        answer: 'No. Nos encargamos de toda la parte técnica y te explicamos todo sin jerga. Te entregamos algo listo para usar y te acompañamos para que tú y tu equipo lo aprovechen.',
     },
     {
         category: 'servicios',
-        question: '¿Qué pasa si mi sistema no es compatible?',
-        answer: 'Trabajamos con APIs y webhooks que permiten conectar prácticamente cualquier sistema. Si tu software tiene una API o permite exportar datos, podemos integrarlo. En casos excepcionales, buscamos alternativas viables.',
+        question: '¿Se conecta con las herramientas que ya uso?',
+        answer: 'Sí. Trabajamos con APIs e integraciones que permiten conectar prácticamente cualquier sistema. Si tu software tiene API o permite exportar datos, podemos integrarlo.',
     },
     {
         category: 'servicios',
-        question: '¿Puedo automatizar solo una parte de mi proceso?',
-        answer: 'Sí, absolutamente. De hecho, recomendamos empezar con automatizaciones pequeñas y de alto impacto, y luego escalar a procesos más complejos.',
+        question: '¿Puedo empezar con algo pequeño?',
+        answer: 'Sí, y de hecho lo recomendamos. Conviene empezar con una primera versión enfocada en lo de mayor impacto, probarla con uso real, y crecer desde ahí.',
     },
 
     // Costos
     {
         category: 'costos',
-        question: '¿Cuánto cuesta una automatización?',
-        answer: 'Los proyectos van desde $2M COP para automatizaciones simples hasta $15M COP para implementaciones complejas con IA. En la auditoría gratuita te damos una cotización exacta basada en tus necesidades.',
+        question: '¿Cuánto cuesta un proyecto?',
+        answer: 'Depende del alcance. Como construimos apoyados en IA, solemos lograr costos más bajos que un desarrollo tradicional. Cuando nos cuentes tu idea te damos una cotización clara y sin sorpresas antes de empezar.',
     },
     {
         category: 'costos',
         question: '¿Hay costos recurrentes?',
-        answer: 'Depende de las herramientas. Si usamos n8n en tu servidor, no hay costos de licencia. Si usamos servicios cloud como Make o APIs de terceros, hay costos mensuales que te detallamos antes de empezar.',
+        answer: 'Depende del proyecto. Algunos servicios (hosting, una base de datos en la nube, APIs de terceros) tienen un costo mensual, normalmente bajo. Te detallamos cualquier costo recurrente antes de empezar, sin letra pequeña.',
     },
     {
         category: 'costos',
-        question: '¿Cómo se mide el retorno de la inversión?',
-        answer: 'El retorno proviene del tiempo que tu equipo deja de gastar en tareas manuales y de la reducción de errores. En la auditoría gratuita estimamos contigo cuántas horas podrías recuperar y en qué procesos, para que tengas una base concreta antes de invertir.',
+        question: '¿De quién es el código y los datos?',
+        answer: 'Tuyos. Eres dueño del código y de los datos de lo que construimos. No te dejamos amarrado: si el día de mañana quieres seguir por tu cuenta o con otro equipo, puedes hacerlo.',
     },
 
     // Técnico
     {
         category: 'tecnico',
-        question: '¿Qué herramientas usan?',
-        answer: 'Principalmente n8n y Make para automatizaciones, WhatsApp Business API para integraciones de mensajería, y OpenAI/LangChain para asistentes de IA. Elegimos la mejor herramienta según tus necesidades.',
+        question: '¿Con qué tecnología construyen?',
+        answer: 'Usamos tecnologías web modernas y probadas (como React, Next.js y bases de datos en la nube) y nos apoyamos en IA de última generación para construir más rápido. Elegimos la herramienta adecuada según lo que tu proyecto necesite.',
     },
     {
         category: 'tecnico',
         question: '¿Mis datos están seguros?',
-        answer: 'Sí. Implementamos las automatizaciones siguiendo mejores prácticas de seguridad. Si usas n8n en tu servidor, tus datos nunca salen de tu infraestructura. Firmamos acuerdos de confidencialidad cuando es necesario.',
+        answer: 'Sí. Construimos siguiendo buenas prácticas de seguridad y tú eres el dueño de tus datos. Firmamos acuerdos de confidencialidad cuando es necesario.',
     },
     {
         category: 'tecnico',
-        question: '¿Qué pasa si algo falla?',
-        answer: 'Configuramos alertas automáticas para detectar errores. Incluimos soporte post-implementación y documentación completa. Además, diseñamos fallbacks para que los procesos críticos nunca se detengan.',
+        question: '¿Qué pasa si algo falla después de entregar?',
+        answer: 'Te acompañamos después de la entrega: incluimos soporte y documentación de lo que construimos. Si aparece un problema, lo revisamos y lo resolvemos.',
     },
 
     // Proceso
     {
         category: 'proceso',
-        question: '¿Cómo funciona la auditoría gratuita?',
-        answer: 'Es una sesión de 30-60 minutos donde analizamos tus procesos actuales, identificamos oportunidades de automatización y te damos una propuesta con ROI estimado. Sin compromiso.',
+        question: '¿Cómo es la primera conversación?',
+        answer: 'Nos cuentas tu idea o el problema que quieres resolver, y nosotros te decimos con claridad qué se puede construir, cómo lo haríamos y un estimado de tiempo. Sin tecnicismos y sin compromiso.',
     },
     {
         category: 'proceso',
-        question: '¿Capacitan a nuestro equipo?',
-        answer: 'Sí, todos nuestros proyectos incluyen capacitación para que tu equipo pueda usar, monitorear y hacer ajustes básicos a las automatizaciones.',
+        question: '¿Puedo ir viendo avances?',
+        answer: 'Sí. Trabajamos hacia una versión funcional que puedas probar pronto, e iremos ajustando con tu retroalimentación en vez de desaparecer hasta el final.',
     },
     {
         category: 'proceso',
-        question: '¿Dan soporte después de la implementación?',
-        answer: 'Sí, incluimos 30 días de soporte post-implementación. Después puedes contratar planes de soporte mensual o solicitar ajustes puntuales según necesites.',
+        question: '¿Dan soporte después de entregar?',
+        answer: 'Sí, te acompañamos después de la entrega. Podemos hacer ajustes, agregar funcionalidades o darte soporte continuo según lo que necesites.',
     },
 ]
 

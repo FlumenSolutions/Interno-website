@@ -67,7 +67,7 @@ export default function ServicePage({ params }: ServicePageProps) {
                 title={service.title}
                 subtitle={service.description}
                 primaryCTA={{
-                    text: 'Solicitar Auditoría Personalizada',
+                    text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
             />
@@ -245,10 +245,10 @@ export default function ServicePage({ params }: ServicePageProps) {
 
             {/* CTA */}
             <CTASection
-                title={`¿Listo para implementar ${service.title}?`}
-                description="Solicita una auditoría personalizada y descubre cómo podemos ayudarte"
+                title={`¿Quieres algo así para tu negocio?`}
+                description="Cuéntanos tu idea y te decimos qué podemos construir, sin compromiso"
                 primaryCTA={{
-                    text: 'Solicitar Auditoría Gratuita',
+                    text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
                 variant="accent"

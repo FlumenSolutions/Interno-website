@@ -9,7 +9,7 @@ import { Target, Eye, Award, Users } from 'lucide-react'
 export const metadata: Metadata = genMeta({
     title: 'Sobre Nosotros - Flumen Solutions',
     description:
-        'Somos expertos en automatización de procesos empresariales en Colombia. Ayudamos a empresas a recuperar tiempo, reducir errores y escalar a través de la automatización inteligente.',
+        'Tres ingenieros que construyen software a la medida con IA para empresas en Colombia: aplicaciones, sitios web, chatbots y automatizaciones, sin humo y sin jerga.',
     path: '/nosotros',
 })
 
@@ -27,7 +27,7 @@ const values = [
     {
         icon: Award,
         title: 'Fundamento Técnico',
-        description: 'Equipo de ingeniería que trabaja a fondo con las principales herramientas de automatización.',
+        description: 'Equipo de ingeniería que construye software a la medida con IA de última generación.',
     },
     {
         icon: Eye,
@@ -41,7 +41,7 @@ export default function NosotrosPage() {
         <>
             <PageHeader
                 title="Sobre Flumen Solutions"
-                description="Ayudamos a empresas a recuperar tiempo, reducir errores y escalar a través de la automatización inteligente."
+                description="Construimos el software que tu negocio necesita — apps, sitios web, chatbots y automatizaciones — con IA de última generación."
             />
 
             {/* Mission & Vision */}
@@ -59,10 +59,10 @@ export default function NosotrosPage() {
                                     </div>
                                     <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Nuestra Misión</h2>
                                     <p className="text-body text-white/70 leading-relaxed">
-                                        Democratizar la automatización empresarial en Colombia, haciendo que tecnologías
-                                        avanzadas sean accesibles para empresas de todos los tamaños. Creemos que ningún
-                                        negocio debería perder tiempo en tareas repetitivas cuando puede enfocarse en lo
-                                        que realmente importa: sus clientes y su crecimiento.
+                                        Hacer que el software a la medida sea accesible para empresas de todos los tamaños
+                                        en Colombia. Con la IA podemos construir más rápido y a menor costo, así que ningún
+                                        negocio debería quedarse sin la herramienta que necesita para enfocarse en lo que
+                                        realmente importa: sus clientes y su crecimiento.
                                     </p>
                                 </div>
                             </article>
@@ -78,9 +78,9 @@ export default function NosotrosPage() {
                                     </div>
                                     <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Nuestra Visión</h2>
                                     <p className="text-body text-white/70 leading-relaxed">
-                                        Ser un referente de automatización en Colombia, reconocido por transformar
-                                        negocios a través de soluciones inteligentes que generan resultados medibles y
-                                        sostenibles en el tiempo.
+                                        Ser un referente en desarrollo de software con IA en Colombia, reconocido por
+                                        construir herramientas que de verdad resuelven el día a día de los negocios,
+                                        con honestidad y sin promesas infladas.
                                     </p>
                                 </div>
                             </article>
@@ -128,27 +128,27 @@ export default function NosotrosPage() {
                         {[
                             {
                                 title: 'Fundadores Técnicos',
-                                description: 'Construido por ingenieros que diseñan e implementan cada automatización de principio a fin.',
+                                description: 'Construido por ingenieros que diseñan y desarrollan cada solución de principio a fin.',
                             },
                             {
-                                title: 'Tecnología de Punta',
-                                description: 'Usamos las mejores herramientas: n8n, Make, OpenAI, y más.',
+                                title: 'Construimos con IA',
+                                description: 'Usamos IA de última generación para entregar más rápido y a menor costo.',
                             },
                             {
                                 title: 'Soporte Local',
                                 description: 'Equipo en Colombia que entiende tu mercado y responde rápido.',
                             },
                             {
-                                title: 'Implementación Rápida',
-                                description: 'Proyectos listos en 2-8 semanas según complejidad.',
+                                title: 'Entrega Rápida',
+                                description: 'Llegamos a una versión funcional para probar en mucho menos tiempo.',
                             },
                             {
                                 title: 'Sin Costos Ocultos',
                                 description: 'Presupuestos claros y transparentes desde el inicio.',
                             },
                             {
-                                title: 'Capacitación Incluida',
-                                description: 'Tu equipo aprende a usar y mantener las automatizaciones.',
+                                title: 'Tuyo de Principio a Fin',
+                                description: 'Eres dueño del código y los datos, listo para crecer.',
                             },
                         ].map((item, index) => (
                             <ScrollReveal key={index} delay={index * 0.1}>
@@ -170,11 +170,11 @@ export default function NosotrosPage() {
                         <div className="max-w-3xl mx-auto text-center">
                             <h2 className="text-h2 mb-4 text-white">Nuestro Equipo</h2>
                             <p className="text-body text-muted-foreground mb-12">
-                                Flumen fue fundada por tres ingenieros apasionados por la automatización.
-                                Diseñamos, construimos e implementamos cada solución de principio a fin.
+                                Flumen fue fundada por tres ingenieros apasionados por construir software útil.
+                                Diseñamos, desarrollamos y entregamos cada solución de principio a fin.
                             </p>
                             <p className="text-body-lg font-semibold text-accent">
-                                Trabajamos con n8n, Make y tecnologías de IA
+                                Construimos con IA de última generación
                             </p>
                         </div>
                     </ScrollReveal>
@@ -184,9 +184,9 @@ export default function NosotrosPage() {
             {/* CTA */}
             <CTASection
                 title="¿Listo para trabajar con nosotros?"
-                description="Agenda una auditoría gratuita y descubre cómo podemos ayudarte"
+                description="Cuéntanos tu idea y te decimos qué podemos construir, sin compromiso"
                 primaryCTA={{
-                    text: 'Solicitar Auditoría Gratuita',
+                    text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
                 variant="accent"

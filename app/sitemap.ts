@@ -7,10 +7,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticRoutes = [
         '',
         '/servicios',
+        '/servicios/desarrollo-aplicaciones',
+        '/servicios/paginas-web',
+        '/servicios/chatbots-asistentes-ia',
         '/servicios/automatizacion-procesos',
-        '/servicios/integracion-crm',
-        '/servicios/asistentes-ia',
-        '/servicios/implementacion-n8n',
         '/proceso',
         '/recursos',
         '/nosotros',

@@ -5,10 +5,10 @@ import Image from 'next/image'
 import { Mail, MapPin, ArrowRight } from 'lucide-react'
 
 const services = [
-    { name: 'Automatización de Procesos', href: '/servicios/automatizacion-procesos' },
-    { name: 'Integración CRM', href: '/servicios/integracion-crm' },
-    { name: 'Asistentes de IA', href: '/servicios/asistentes-ia' },
-    { name: 'Implementación n8n', href: '/servicios/implementacion-n8n' },
+    { name: 'Aplicaciones a la medida', href: '/servicios/desarrollo-aplicaciones' },
+    { name: 'Páginas y sitios web', href: '/servicios/paginas-web' },
+    { name: 'Chatbots con IA', href: '/servicios/chatbots-asistentes-ia' },
+    { name: 'Automatización de procesos', href: '/servicios/automatizacion-procesos' },
 ]
 
 const company = [
@@ -101,7 +101,7 @@ export function Footer() {
                             href="/contacto"
                             className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#0B0F1A] rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm group"
                         >
-                            Auditoría Gratuita
+                            Cuéntanos tu idea
                             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                         </Link>
                     </div>

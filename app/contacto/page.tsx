@@ -8,9 +8,9 @@ import { Metadata } from 'next'
 import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 
 export const metadata: Metadata = genMeta({
-    title: 'Contacto - Solicita tu Auditoría Gratuita',
+    title: 'Contacto - Cuéntanos tu idea',
     description:
-        'Agenda una auditoría gratuita de automatización para tu negocio. Respuesta en menos de 24 horas. Bogotá, Colombia.',
+        'Cuéntanos qué necesitas — una app, un sitio web, un chatbot o una automatización — y te decimos qué podemos construir. Respuesta en menos de 24 horas. Bogotá, Colombia.',
     path: '/contacto',
 })
 
@@ -22,8 +22,8 @@ export default function ContactoPage() {
     return (
         <>
             <Hero
-                title="Solicita tu Auditoría Gratuita"
-                subtitle="Descubre cuánto tiempo y dinero puedes ahorrar automatizando tu negocio"
+                title="Cuéntanos tu idea"
+                subtitle="Una app, un sitio web, un chatbot o una automatización — dinos qué necesitas y te decimos qué podemos construir"
                 description="Te respondemos en menos de 24 horas. Sin compromiso."
             />
 
@@ -34,8 +34,8 @@ export default function ContactoPage() {
                         <ScrollReveal>
                             <ContactForm
                                 source="audit"
-                                title="Agenda tu Auditoría de Automatización"
-                                description="Cuéntanos lo esencial sobre tu negocio y evaluamos si la automatización puede ayudarte."
+                                title="Cuéntanos tu idea"
+                                description="Cuéntanos qué necesitas para tu negocio y te decimos qué podemos construir."
                             />
                         </ScrollReveal>
 

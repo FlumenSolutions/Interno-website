@@ -9,9 +9,9 @@ import { Metadata } from 'next'
 import { Search, Lightbulb, Code, Rocket, HeadphonesIcon } from 'lucide-react'
 
 export const metadata: Metadata = genMeta({
-    title: 'Nuestro Proceso de Automatización',
+    title: 'Cómo trabajamos — De tu idea al software funcionando',
     description:
-        'Conoce nuestra metodología de 5 fases para automatizar tu negocio: auditoría, diseño, desarrollo, implementación y soporte continuo.',
+        'Conoce nuestro proceso para construir tu software: entendemos tu idea, diseñamos la solución, la construimos con IA y la entregamos funcionando, con acompañamiento.',
     path: '/proceso',
 })
 
@@ -21,8 +21,8 @@ export default function ProcesoPage() {
     return (
         <>
             <PageHeader
-                title="Nuestro Proceso"
-                description="Desde la auditoría inicial hasta el soporte continuo, te acompañamos en cada paso del camino."
+                title="Cómo trabajamos"
+                description="Desde que nos cuentas tu idea hasta el soporte continuo, te acompañamos en cada paso del camino."
             />
 
             <section className="section-padding bg-background">
@@ -40,13 +40,13 @@ export default function ProcesoPage() {
                         <ScrollReveal delay={0.1}>
                             <ProcessStep
                                 icon={<Search className="w-7 h-7 text-accent" />}
-                                title="Auditoría y Análisis"
-                                description="Comenzamos con una auditoría gratuita de tus procesos actuales. Identificamos cuellos de botella, tareas repetitivas y oportunidades de automatización. Te presentamos un análisis detallado con ROI estimado y priorización de iniciativas."
+                                title="Cuéntanos tu idea"
+                                description="Empezamos por entender qué necesita tu negocio: el problema que quieres resolver o la herramienta que te hace falta. Te decimos con claridad qué se puede construir, cómo lo haríamos y un estimado de tiempo. Sin tecnicismos y sin compromiso."
                                 deliverables={[
-                                    'Mapeo completo de procesos actuales',
-                                    'Identificación de oportunidades de automatización',
-                                    'Propuesta con ROI estimado y priorización',
-                                    'Timeline y presupuesto detallado',
+                                    'Entendemos tu necesidad real',
+                                    'Propuesta clara de qué construir',
+                                    'Estimado de tiempo y presupuesto',
+                                    'Todo explicado sin jerga',
                                 ]}
                             />
                         </ScrollReveal>
@@ -68,13 +68,13 @@ export default function ProcesoPage() {
                         <ScrollReveal delay={0.3}>
                             <ProcessStep
                                 icon={<Code className="w-7 h-7 text-accent" />}
-                                title="Desarrollo e Integración"
-                                description="Configuramos las automatizaciones usando las mejores herramientas (n8n, Make, APIs personalizadas). Integramos con tus sistemas existentes (CRM, ERP, WhatsApp, etc.) y realizamos pruebas exhaustivas."
+                                title="Desarrollo con IA"
+                                description="Construimos tu software apoyados en IA de última generación para llegar a algo funcional más rápido. Lo conectamos con las herramientas que ya usas y lo probamos a fondo antes de entregar."
                                 deliverables={[
-                                    'Automatizaciones configuradas y funcionales',
-                                    'Integraciones con sistemas existentes',
-                                    'Pruebas de funcionalidad y rendimiento',
-                                    'Documentación técnica completa',
+                                    'Software construido y funcional',
+                                    'Versión funcional para probar pronto',
+                                    'Integración con tus herramientas',
+                                    'Documentación de lo construido',
                                 ]}
                             />
                         </ScrollReveal>
@@ -163,7 +163,7 @@ export default function ProcesoPage() {
                 title="¿Listo para comenzar?"
                 description="Agenda tu auditoría gratuita y da el primer paso hacia la automatización"
                 primaryCTA={{
-                    text: 'Solicitar Auditoría Gratuita',
+                    text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
                 variant="accent"

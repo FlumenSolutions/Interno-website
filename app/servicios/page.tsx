@@ -6,9 +6,9 @@ import { generateMetadata as genMeta } from '@/lib/seo'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = genMeta({
-    title: 'Servicios de Automatización Empresarial',
+    title: 'Qué construimos — Software a la medida con IA',
     description:
-        'Automatización de procesos, integración de CRM y WhatsApp, asistentes de IA con RAG, e implementación de n8n. Soluciones completas para empresas en Colombia.',
+        'Aplicaciones a la medida, páginas web, chatbots con IA y automatización de procesos. Software hecho para tu negocio, construido más rápido con IA. Colombia.',
     path: '/servicios',
 })
 
@@ -16,8 +16,8 @@ export default function ServiciosPage() {
     return (
         <>
             <PageHeader
-                title="Servicios de Automatización"
-                description="Desde automatización de procesos hasta asistentes de IA, tenemos la solución perfecta para cada necesidad de tu empresa."
+                title="Qué construimos"
+                description="Desde aplicaciones y sitios web hasta chatbots con IA y automatizaciones — software a la medida de lo que tu negocio necesita."
             />
 
             <section className="section-padding bg-background">
@@ -41,15 +41,15 @@ export default function ServiciosPage() {
 
                     <ScrollReveal delay={0.4}>
                         <div className="mt-16 p-8 bg-accent/10 border border-accent/20 rounded-lg text-center max-w-3xl mx-auto">
-                            <h3 className="text-h3 mb-4 text-white">¿No estás seguro cuál servicio necesitas?</h3>
+                            <h3 className="text-h3 mb-4 text-white">¿No sabes por dónde empezar?</h3>
                             <p className="text-body text-white/80 mb-6">
-                                Agenda una auditoría gratuita y te ayudaremos a identificar la mejor solución para tu negocio.
+                                Cuéntanos qué necesitas y te decimos qué podemos construir para tu negocio, sin compromiso.
                             </p>
                             <a
                                 href="/contacto"
                                 className="inline-block px-8 py-3 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors font-medium shadow-lg shadow-accent/20"
                             >
-                                Agendar Auditoría Gratuita
+                                Cuéntanos tu idea
                             </a>
                         </div>
                     </ScrollReveal>

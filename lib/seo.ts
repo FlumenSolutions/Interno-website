@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flumensolutions.com'
 const siteName = 'Flumen Solutions'
-const siteDescription = 'Automatización de procesos empresariales, integración de CRM y WhatsApp, asistentes de IA y consultoría en automatización en Bogotá, Colombia.'
+const siteDescription = 'Desarrollo de software a la medida con IA: aplicaciones, páginas web, chatbots y automatización de procesos para empresas en Bogotá, Colombia.'
 
 export function generateMetadata({
     title,
@@ -32,14 +32,15 @@ export function generateMetadata({
         },
         description: metaDescription,
         keywords: [
+            'desarrollo de software a la medida',
+            'desarrollo de aplicaciones',
+            'desarrollo web',
+            'páginas web',
+            'chatbots con IA',
+            'asistentes con IA',
             'automatización de procesos',
-            'integración CRM',
-            'WhatsApp Business',
-            'asistentes IA',
-            'n8n',
-            'Make',
-            'automatización empresarial',
-            'Bogotá',
+            'software con inteligencia artificial',
+            'desarrollo de software Bogotá',
             'Colombia',
         ],
         authors: [{ name: siteName }],
