@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { auditFormSchema } from '@/lib/validations'
-
-const WEBHOOK_URL = 'https://n8n.flumensolutions.com/webhook/form-pagina-web'
+import { prisma } from '@/lib/prisma'
+import { sendLeadEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
     try {
         const body = await request.json()
 
-        // Validate
         const result = auditFormSchema.safeParse(body)
         if (!result.success) {
             return NextResponse.json(
@@ -18,38 +17,41 @@ export async function POST(request: NextRequest) {
 
         const data = result.data
 
-        // Prepare formatted data for webhook
-        const webhookPayload = {
-            formType: 'audit',
-            timestamp: new Date().toISOString(),
-            data: {
-                nombre: data.name,
-                email: data.email,
-                telefono: data.phone,
-                empresa: data.company,
-                areaAutomatizacion: data.automationArea,
-                tamañoEmpresa: data.companySize || 'No especificado',
-                mensaje: data.message,
-            },
-            metadata: {
-                source: 'Página Web - Formulario de Auditoría',
-                userAgent: request.headers.get('user-agent') || 'Unknown',
-                ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'Unknown',
-            },
+        // El área y tamaño se anexan al mensaje guardado (la tabla leads no tiene esas columnas).
+        const fullMessage = [
+            data.message,
+            '',
+            `Área de automatización: ${data.automationArea}`,
+            `Tamaño de empresa: ${data.companySize || 'No especificado'}`,
+        ].join('\n')
+
+        // 1) Guardar el lead en la BD.
+        try {
+            await prisma.lead.create({
+                data: {
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    company: data.company,
+                    message: fullMessage,
+                    source: 'audit',
+                },
+            })
+        } catch (dbError) {
+            console.error('Error guardando lead en BD:', dbError)
         }
 
-        // Send to n8n webhook
-        const webhookResponse = await fetch(WEBHOOK_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(webhookPayload),
+        // 2) Enviar el correo de aviso.
+        await sendLeadEmail({
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            company: data.company,
+            message: data.message,
+            source: 'audit',
+            automationArea: data.automationArea,
+            companySize: data.companySize,
         })
-
-        if (!webhookResponse.ok) {
-            throw new Error(`Webhook responded with status: ${webhookResponse.status}`)
-        }
 
         return NextResponse.json({ success: true }, { status: 200 })
     } catch (error) {
