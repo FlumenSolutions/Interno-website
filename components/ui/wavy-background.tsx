@@ -56,16 +56,25 @@ export const WavyBackground = ({
         let animationId = 0;
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
+        // iOS Safari ignora ctx.filter (blur) en canvas 2D, así que el difuminado
+        // se aplica también por CSS sobre el <canvas>. Para que el blur por CSS no
+        // deje ver bordes duros en los extremos, el canvas se dibuja con un margen
+        // extra (overscan) y se posiciona ligeramente fuera del contenedor.
+        const overscan = blur * 2;
+
         const resize = () => {
             // Usa el tamaño real del contenedor (cae al viewport si por timing aún es 0).
             const rect = canvas.getBoundingClientRect();
-            const cssW = Math.max(rect.width, window.innerWidth) || window.innerWidth || 1280;
-            const cssH = Math.max(rect.height, window.innerHeight) || window.innerHeight || 800;
+            const baseW = Math.max(rect.width, window.innerWidth) || window.innerWidth || 1280;
+            const baseH = Math.max(rect.height, window.innerHeight) || window.innerHeight || 800;
+            const cssW = baseW + overscan * 2;
+            const cssH = baseH + overscan * 2;
             w = canvas.width = cssW * dpr;
             h = canvas.height = cssH * dpr;
             canvas.style.width = `${cssW}px`;
             canvas.style.height = `${cssH}px`;
-            ctx.filter = `blur(${blur}px)`;
+            // El difuminado se aplica por CSS sobre el <canvas> (ver style), no con
+            // ctx.filter, porque iOS Safari ignora ctx.filter en canvas 2D.
         };
 
         const drawWave = (n: number) => {
@@ -151,9 +160,18 @@ export const WavyBackground = ({
             )}
         >
             <canvas
-                className="absolute inset-0 z-0 h-full w-full"
+                className="absolute z-0"
                 ref={canvasRef}
                 aria-hidden="true"
+                style={{
+                    // Blur por CSS: funciona en iOS Safari (donde ctx.filter se ignora).
+                    // El canvas se dibuja con overscan, por eso se posiciona con un
+                    // offset negativo igual al margen extra para ocultar los bordes.
+                    top: `${-blur * 2}px`,
+                    left: `${-blur * 2}px`,
+                    filter: `blur(${blur}px)`,
+                    WebkitFilter: `blur(${blur}px)`,
+                }}
             />
             {/* Scrim doble: (1) un velo vertical que oscurece la franja del título
                 (centro-arriba) pero deja respirar la corriente abajo, y (2) un realce
