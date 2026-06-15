@@ -34,7 +34,7 @@ export function Navbar() {
 
     return (
         <>
-            <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-3 md:pt-4">
+            <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-[max(1rem,env(safe-area-inset-left),env(safe-area-inset-right))] pt-[calc(0.75rem+env(safe-area-inset-top))] md:pt-[calc(1rem+env(safe-area-inset-top))]">
                 <nav
                     className={`flex w-full max-w-6xl items-center justify-between gap-4 rounded-2xl border px-4 md:px-5 transition-all duration-300 ${isScrolled
                         ? 'h-14 md:h-16 border-white/10 bg-[#0F1524]/85 shadow-lg shadow-black/30 backdrop-blur-lg'

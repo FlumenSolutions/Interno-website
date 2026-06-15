@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
@@ -14,6 +14,14 @@ export const metadata: Metadata = genMeta({
     description:
         'Automatización de procesos, integración de CRM y WhatsApp, asistentes de IA y consultoría en automatización en Bogotá, Colombia. Recupera tiempo operativo y escala sin contratar.',
 })
+
+// viewportFit: 'cover' permite que env(safe-area-inset-*) tenga valores reales
+// en iPhones con notch / Dynamic Island / indicador de inicio.
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+    viewportFit: 'cover',
+}
 
 export default function RootLayout({
     children,

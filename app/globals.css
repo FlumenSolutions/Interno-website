@@ -192,11 +192,18 @@
   border: 1px solid hsl(var(--border));
   border-radius: calc(var(--radius) - 2px);
   padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
+  /* 16px en móvil para evitar el zoom automático de iOS Safari al enfocar */
+  font-size: 1rem;
   line-height: 1.25rem;
   color: hsl(var(--foreground));
   transition: all 0.2s;
   outline: none;
+}
+
+@media (min-width: 768px) {
+  .phone-input-container .PhoneInputInput {
+    font-size: 0.875rem;
+  }
 }
 
 .phone-input-container .PhoneInputInput:focus {

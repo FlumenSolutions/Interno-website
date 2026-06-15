@@ -2,6 +2,11 @@
   "name": "flumen-solutions",
   "version": "1.0.0",
   "private": true,
+  "browserslist": [
+    "defaults",
+    "iOS >= 13",
+    "Safari >= 13"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",

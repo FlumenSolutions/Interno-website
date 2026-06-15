@@ -107,46 +107,48 @@ export const WavyBackground = ({
             drawWave(7);
         };
 
-        let running = false;
+        // El loop NUNCA se detiene por completo mientras la página está visible:
+        // recalcula él mismo, cada pocos frames, si el hero está a la vista y solo
+        // entonces dibuja. Antes se usaba un IntersectionObserver para pausar, pero
+        // en iOS Safari, tras un pull-to-refresh / overscroll (rebote elástico), el
+        // observer no siempre vuelve a disparar "visible" y las ondas se quedaban
+        // congeladas/desaparecidas. Este enfoque es autocorrector: si el hero vuelve
+        // al viewport, el siguiente chequeo lo detecta y reanuda el dibujo.
+        let frame = 0;
+        let onScreen = true;
+        const isOnScreen = () => {
+            const rect = canvas.getBoundingClientRect();
+            return rect.bottom > 0 && rect.top < window.innerHeight;
+        };
         const loop = () => {
-            drawFrame();
+            // Chequeo de visibilidad barato (~6 veces/seg). Cuando el hero está fuera
+            // de pantalla saltamos el dibujo (el coste real: ruido + trazos), pero el
+            // loop sigue vivo para reanudar al instante al volver.
+            if (frame++ % 10 === 0) onScreen = isOnScreen();
+            if (onScreen) drawFrame();
             animationId = requestAnimationFrame(loop);
-        };
-        const start = () => {
-            if (running || reduceMotion) return;
-            running = true;
-            animationId = requestAnimationFrame(loop);
-        };
-        const stop = () => {
-            running = false;
-            cancelAnimationFrame(animationId);
         };
 
         resize();
         drawFrame(); // primer frame siempre, incluso con reduced-motion
 
-        // Arranca la animación de inmediato. Los navegadores ya pausan requestAnimationFrame
-        // automáticamente en pestañas en segundo plano, así que no hace falta gestionarlo a mano.
-        start();
+        // Con reduced-motion dejamos solo el frame estático; sin él, arrancamos el loop.
+        if (!reduceMotion) animationId = requestAnimationFrame(loop);
 
-        // Pausa solo cuando el hero sale del viewport (ahorra CPU al hacer scroll).
-        const io = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    start();
-                } else {
-                    stop();
-                }
-            },
-            { threshold: 0 }
-        );
-        io.observe(canvas);
+        // bfcache (iOS Safari): al restaurar la página el canvas puede volver en
+        // blanco, así que se redibuja.
+        const onPageShow = () => {
+            resize();
+            onScreen = isOnScreen();
+            drawFrame();
+        };
+        window.addEventListener("pageshow", onPageShow);
 
         window.addEventListener("resize", resize);
 
         return () => {
-            stop();
-            io.disconnect();
+            cancelAnimationFrame(animationId);
+            window.removeEventListener("pageshow", onPageShow);
             window.removeEventListener("resize", resize);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps

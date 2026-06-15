@@ -22,7 +22,7 @@ export function WhatsAppButton() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={`fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20BA5A] transition-all duration-300 group ${isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
+            className={`fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20BA5A] transition-all duration-300 group ${isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                 }`}
             aria-label="Contactar por WhatsApp"
         >
