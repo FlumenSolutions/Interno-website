@@ -64,9 +64,13 @@ export const WavyBackground = ({
 
         const resize = () => {
             // Usa el tamaño real del contenedor (cae al viewport si por timing aún es 0).
+            // visualViewport refleja el viewport real en iOS (barra de URL, overscroll)
+            // mejor que innerHeight, evitando que el canvas quede mal dimensionado.
             const rect = canvas.getBoundingClientRect();
-            const baseW = Math.max(rect.width, window.innerWidth) || window.innerWidth || 1280;
-            const baseH = Math.max(rect.height, window.innerHeight) || window.innerHeight || 800;
+            const vw = window.visualViewport?.width || window.innerWidth;
+            const vh = window.visualViewport?.height || window.innerHeight;
+            const baseW = Math.max(rect.width, vw) || vw || 1280;
+            const baseH = Math.max(rect.height, vh) || vh || 800;
             const cssW = baseW + overscan * 2;
             const cssH = baseH + overscan * 2;
             w = canvas.width = cssW * dpr;
@@ -135,21 +139,42 @@ export const WavyBackground = ({
         // Con reduced-motion dejamos solo el frame estático; sin él, arrancamos el loop.
         if (!reduceMotion) animationId = requestAnimationFrame(loop);
 
-        // bfcache (iOS Safari): al restaurar la página el canvas puede volver en
-        // blanco, así que se redibuja.
-        const onPageShow = () => {
+        // Re-sincroniza tamaño + visibilidad y dibuja. Se llama tras eventos que en
+        // iOS dejan el canvas desfasado (overscroll/pull-to-refresh, cambio de la
+        // barra de URL, restauración de bfcache).
+        const resync = () => {
             resize();
             onScreen = isOnScreen();
             drawFrame();
         };
-        window.addEventListener("pageshow", onPageShow);
 
+        // bfcache (iOS Safari): al restaurar la página el canvas puede volver en blanco.
+        window.addEventListener("pageshow", resync);
         window.addEventListener("resize", resize);
+
+        // iOS Safari: el pull-to-refresh / overscroll elástico mueve el layout y
+        // cambia visualViewport sin disparar siempre un "resize" fiable; cuando el
+        // rebote termina, el canvas puede quedar desplazado y las ondas "se van
+        // hacia abajo" sin volver. Re-sincronizamos al terminar el scroll y ante
+        // cualquier cambio de visualViewport para autocorregirlo.
+        let scrollTimer: ReturnType<typeof setTimeout>;
+        const onScrollEnd = () => {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(resync, 120);
+        };
+        window.addEventListener("scroll", onScrollEnd, { passive: true });
+        const vv = window.visualViewport;
+        vv?.addEventListener("resize", resync);
+        vv?.addEventListener("scroll", onScrollEnd);
 
         return () => {
             cancelAnimationFrame(animationId);
-            window.removeEventListener("pageshow", onPageShow);
+            clearTimeout(scrollTimer);
+            window.removeEventListener("pageshow", resync);
             window.removeEventListener("resize", resize);
+            window.removeEventListener("scroll", onScrollEnd);
+            vv?.removeEventListener("resize", resync);
+            vv?.removeEventListener("scroll", onScrollEnd);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
