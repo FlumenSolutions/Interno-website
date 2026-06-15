@@ -51,20 +51,24 @@ export function ScrollReveal({ children, delay = 0, className = '' }: ScrollReve
                     observer.disconnect()
                 }
             },
-            // En móvil dispara apenas el elemento empieza a asomar (margen positivo,
-            // se adelanta) para que la animación ya esté terminando cuando el usuario
-            // lo ve. En desktop, un pequeño margen negativo se siente más intencional.
-            { rootMargin: mobile ? '120px 0px' : '-60px 0px', threshold: 0 }
+            // Dispara cuando el elemento asoma un poco por el borde inferior. En móvil
+            // las tarjetas se apilan en 1 columna: un margen grande haría que las de
+            // abajo dispararan tarde y se revelaran de golpe. Un umbral pequeño y
+            // simétrico hace que cada una entre suave justo al aparecer.
+            { rootMargin: mobile ? '0px 0px -10% 0px' : '-60px 0px', threshold: 0.01 }
         )
         observer.observe(el)
         return () => observer.disconnect()
     }, [])
 
-    // En móvil: animación más corta y sin escalonado largo (el delay se recorta),
-    // porque el scroll táctil es rápido y un delay completo se siente como lag.
-    const duration = isMobile ? 0.45 : 0.6
-    const effectiveDelay = isMobile ? Math.min(delay, 0.15) : delay
-    const distance = isMobile ? 14 : 20
+    // En móvil: animación corta y SIN escalonado. El stagger (delays 0.1→0.6) está
+    // pensado para filas horizontales en desktop; en móvil las tarjetas se apilan en
+    // una columna y cada ScrollReveal se observa por separado, así que un delay por
+    // tarjeta hace que esperen su turno y "aparezcan de golpe". Cada una se revela al
+    // entrar, sin delay, con su propio observer — entrada limpia e independiente.
+    const duration = isMobile ? 0.5 : 0.6
+    const effectiveDelay = isMobile ? 0 : delay
+    const distance = isMobile ? 16 : 20
 
     return (
         <div
