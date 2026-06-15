@@ -17,7 +17,6 @@ export default function ServiciosPage() {
         <>
             <PageHeader
                 title="Servicios de Automatización"
-                subtitle="Soluciones Integrales"
                 description="Desde automatización de procesos hasta asistentes de IA, tenemos la solución perfecta para cada necesidad de tu empresa."
             />
 

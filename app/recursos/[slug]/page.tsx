@@ -1,6 +1,6 @@
-import { Hero } from '@/components/sections/Hero'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
-import { generateMetadata as genMeta } from '@/lib/seo'
+import { SectionBackground } from '@/components/sections/SectionBackground'
+import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { Metadata } from 'next'
 import { getPostBySlug } from '../actions'
 import { notFound } from 'next/navigation'
@@ -41,20 +41,44 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         notFound()
     }
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flumensolutions.com'
+    const articleSchema = generateArticleSchema({
+        title: post.title,
+        description: post.metaDescription || post.excerpt,
+        slug: post.slug,
+        publishedAt: post.publishedAt?.toISOString(),
+        image: post.coverImage || undefined,
+    })
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: 'Inicio', url: siteUrl },
+        { name: 'Recursos', url: `${siteUrl}/recursos` },
+        { name: post.title, url: `${siteUrl}/recursos/${post.slug}` },
+    ])
+
     return (
         <div className="bg-background min-h-screen pb-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
             {/* Editorial Header */}
-            <header className="pt-32 pb-12 container max-w-4xl mx-auto text-center">
+            <header className="relative overflow-hidden pt-36 md:pt-40 pb-12">
+                <SectionBackground variant="dots" glows={['top']} />
+                <div className="container max-w-4xl mx-auto text-center relative z-10">
                 <ScrollReveal>
                     {post.category && (
-                        <span className="inline-block px-3 py-1 mb-6 text-xs font-medium tracking-widest uppercase border border-white/20 rounded-full text-white/80">
+                        <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 text-xs font-semibold tracking-wide rounded-full border border-accent/30 bg-accent/10 text-accent">
                             {post.category}
                         </span>
                     )}
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6 leading-tight">
+                    <h1 className="text-balance text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6 leading-[1.1]">
                         {post.title}
                     </h1>
-                    <div className="flex items-center justify-center gap-3 text-sm text-muted-foreground">
+                    <div className="flex items-center justify-center gap-3 text-sm text-white/60">
                         {post.publishedAt && (
                             <time dateTime={post.publishedAt.toISOString()}>
                                 {new Date(post.publishedAt).toLocaleDateString('es-CO', {
@@ -68,6 +92,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <span>5 min lectura</span>
                     </div>
                 </ScrollReveal>
+                </div>
             </header>
 
             {/* Cover Image */}

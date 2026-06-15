@@ -1,13 +1,11 @@
 import { notFound } from 'next/navigation'
 import { Hero } from '@/components/sections/Hero'
-import { CaseCard } from '@/components/sections/CaseCard'
 import { FAQAccordion } from '@/components/sections/FAQAccordion'
 import { CTASection } from '@/components/sections/CTASection'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
 import { getServiceBySlug } from '@/data/services'
-import { getCasesByService } from '@/data/cases'
 import { getFAQsByCategory } from '@/data/faqs'
-import { generateMetadata as genMeta, generateServiceSchema } from '@/lib/seo'
+import { generateMetadata as genMeta, generateServiceSchema, generateFAQSchema, generateBreadcrumbSchema } from '@/lib/seo'
 import { Metadata } from 'next'
 import { CheckCircle, Sparkles, Zap, Target } from 'lucide-react'
 
@@ -32,15 +30,21 @@ export default function ServicePage({ params }: ServicePageProps) {
     const service = getServiceBySlug(params.slug)
     if (!service) notFound()
 
-    const relatedCases = getCasesByService(service.slug)
     const faqs = getFAQsByCategory('servicios')
     const Icon = service.icon
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flumensolutions.com'
     const serviceSchema = generateServiceSchema({
         name: service.title,
         description: service.description,
-        url: `${process.env.NEXT_PUBLIC_SITE_URL}/servicios/${service.slug}`,
+        url: `${siteUrl}/servicios/${service.slug}`,
     })
+    const faqSchema = faqs.length > 0 ? generateFAQSchema(faqs) : null
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: 'Inicio', url: siteUrl },
+        { name: 'Servicios', url: `${siteUrl}/servicios` },
+        { name: service.title, url: `${siteUrl}/servicios/${service.slug}` },
+    ])
 
     return (
         <>
@@ -48,6 +52,16 @@ export default function ServicePage({ params }: ServicePageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
             />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+            />
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
 
             <Hero
                 title={service.title}
@@ -55,10 +69,6 @@ export default function ServicePage({ params }: ServicePageProps) {
                 primaryCTA={{
                     text: 'Solicitar Auditoría Personalizada',
                     href: '/contacto',
-                }}
-                secondaryCTA={{
-                    text: 'Ver Casos de Éxito',
-                    href: '/casos-exito',
                 }}
             />
 
@@ -145,7 +155,7 @@ export default function ServicePage({ params }: ServicePageProps) {
                                 <span className="text-sm font-medium text-accent">Casos de uso</span>
                             </div>
                             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Casos de uso</h2>
-                            <p className="text-white/60 max-w-2xl mx-auto">Ejemplos reales de cómo este servicio transforma negocios</p>
+                            <p className="text-white/60 max-w-2xl mx-auto">Ejemplos de cómo este servicio puede transformar tu negocio</p>
                         </div>
                     </ScrollReveal>
 
@@ -219,35 +229,6 @@ export default function ServicePage({ params }: ServicePageProps) {
                     </div>
                 </div>
             </section>
-
-            {/* Related Cases */}
-            {relatedCases.length > 0 && (
-                <section className="relative py-24 bg-background">
-                    <div className="container">
-                        <ScrollReveal>
-                            <div className="text-center mb-16">
-                                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Casos de éxito relacionados</h2>
-                                <p className="text-white/60 max-w-2xl mx-auto">Empresas que ya implementaron este servicio</p>
-                            </div>
-                        </ScrollReveal>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            {relatedCases.map((caseStudy, index) => (
-                                <ScrollReveal key={caseStudy.id} delay={index * 0.1}>
-                                    <CaseCard
-                                        client={caseStudy.client}
-                                        industry={caseStudy.industry}
-                                        location={caseStudy.location}
-                                        challenge={caseStudy.challenge}
-                                        results={caseStudy.results}
-                                        slug={caseStudy.slug}
-                                    />
-                                </ScrollReveal>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
 
             {/* FAQ */}
             <section className="relative py-24 bg-background">

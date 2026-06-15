@@ -52,7 +52,6 @@ const translations: Record<Language, Record<string, string>> = {
     es: {
         // Navbar
         'nav.services': 'Servicios',
-        'nav.cases': 'Casos de Éxito',
         'nav.process': 'Proceso',
         'nav.resources': 'Recursos',
         'nav.about': 'Nosotros',
@@ -64,10 +63,9 @@ const translations: Record<Language, Record<string, string>> = {
         'lang.english': 'English',
 
         // Home Hero
-        'home.hero.title': 'Automatiza tu negocio y recupera 50–80% del tiempo operativo',
+        'home.hero.title': 'Automatiza tu negocio y recupera tiempo operativo',
         'home.hero.subtitle': 'Conectamos tu CRM, WhatsApp y sistemas internos con flujos inteligentes 24/7',
         'home.hero.cta.primary': 'Obtén una Auditoría Gratuita',
-        'home.hero.cta.secondary': 'Ver Casos de Éxito',
         'home.hero.benefit1': 'Sin contratar personal adicional',
         'home.hero.benefit2': 'Implementado en días',
         'home.hero.benefit3': 'Soporte local en Colombia',
@@ -82,14 +80,10 @@ const translations: Record<Language, Record<string, string>> = {
         'home.problem.slow.desc': 'Respuestas tardías y oportunidades perdidas',
         'home.solution.auto': 'Facturación automática',
         'home.solution.auto.desc': 'Procesos instantáneos sin intervención humana',
-        'home.solution.zero': 'Cero errores',
-        'home.solution.zero.desc': 'Precisión del 100% en cada transacción',
+        'home.solution.zero': 'Menos errores',
+        'home.solution.zero.desc': 'Procesos consistentes que reducen los errores manuales',
         'home.solution.247': 'Workflows 24/7',
         'home.solution.247.desc': 'Tu negocio funciona incluso mientras duermes',
-
-        // Home - Social Proof
-        'home.proof.title': 'Resultados reales de empresas en Colombia',
-        'home.proof.subtitle': 'Más de 50 empresas ya automatizaron sus procesos y recuperaron tiempo valioso',
 
         // Home - How It Works
         'home.how.title': 'Cómo funciona',
@@ -129,10 +123,9 @@ const translations: Record<Language, Record<string, string>> = {
         'home.usecase.6': 'Recordatorios y agendamiento',
 
         // Home - Final CTA
-        'home.cta.title': '¿Listo para recuperar 40+ horas al mes?',
-        'home.cta.desc': 'Obtén tu auditoría gratuita hoy y descubre cuánto tiempo y dinero puedes ahorrar',
+        'home.cta.title': '¿Listo para recuperar tiempo en tu operación?',
+        'home.cta.desc': 'Obtén tu auditoría gratuita hoy y descubre qué procesos puedes automatizar',
         'home.cta.primary': 'Solicitar Auditoría Gratuita',
-        'home.cta.secondary': 'Ver Casos de Éxito',
 
         // Common
         'common.readMore': 'Leer más',
@@ -153,7 +146,6 @@ const translations: Record<Language, Record<string, string>> = {
     en: {
         // Navbar
         'nav.services': 'Services',
-        'nav.cases': 'Success Stories',
         'nav.process': 'Process',
         'nav.resources': 'Resources',
         'nav.about': 'About Us',
@@ -165,10 +157,9 @@ const translations: Record<Language, Record<string, string>> = {
         'lang.english': 'English',
 
         // Home Hero
-        'home.hero.title': 'Automate your business and recover 50–80% of operational time',
+        'home.hero.title': 'Automate your business and recover operational time',
         'home.hero.subtitle': 'We connect your CRM, WhatsApp and internal systems with intelligent 24/7 flows',
         'home.hero.cta.primary': 'Get a Free Audit',
-        'home.hero.cta.secondary': 'View Success Stories',
         'home.hero.benefit1': 'No need to hire additional staff',
         'home.hero.benefit2': 'Implemented in days',
         'home.hero.benefit3': 'Local support in Colombia',
@@ -183,14 +174,10 @@ const translations: Record<Language, Record<string, string>> = {
         'home.problem.slow.desc': 'Late responses and missed opportunities',
         'home.solution.auto': 'Automatic invoicing',
         'home.solution.auto.desc': 'Instant processes without human intervention',
-        'home.solution.zero': 'Zero errors',
-        'home.solution.zero.desc': '100% accuracy in every transaction',
+        'home.solution.zero': 'Fewer errors',
+        'home.solution.zero.desc': 'Consistent processes that reduce manual errors',
         'home.solution.247': '24/7 Workflows',
         'home.solution.247.desc': 'Your business runs even while you sleep',
-
-        // Home - Social Proof
-        'home.proof.title': 'Real results from companies in Colombia',
-        'home.proof.subtitle': 'Over 50 companies have already automated their processes and recovered valuable time',
 
         // Home - How It Works
         'home.how.title': 'How it works',
@@ -230,10 +217,9 @@ const translations: Record<Language, Record<string, string>> = {
         'home.usecase.6': 'Reminders and scheduling',
 
         // Home - Final CTA
-        'home.cta.title': 'Ready to recover 40+ hours per month?',
-        'home.cta.desc': 'Get your free audit today and discover how much time and money you can save',
+        'home.cta.title': 'Ready to recover time in your operation?',
+        'home.cta.desc': 'Get your free audit today and discover which processes you can automate',
         'home.cta.primary': 'Request Free Audit',
-        'home.cta.secondary': 'View Success Stories',
 
         // Common
         'common.readMore': 'Read more',

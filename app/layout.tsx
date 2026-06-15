@@ -5,14 +5,14 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { WhatsAppButton } from '@/components/forms/WhatsAppButton'
 import { LanguageProvider } from '@/lib/i18n'
-import { generateMetadata as genMeta, generateOrganizationSchema } from '@/lib/seo'
+import { generateMetadata as genMeta, generateOrganizationSchema, generateLocalBusinessSchema, generateWebSiteSchema } from '@/lib/seo'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = genMeta({
     title: 'Flumen Solutions - Automatización de Procesos Empresariales en Colombia',
     description:
-        'Automatización de procesos, integración de CRM y WhatsApp, asistentes de IA y consultoría en automatización en Bogotá, Colombia. Recupera 50-80% de tu tiempo operativo.',
+        'Automatización de procesos, integración de CRM y WhatsApp, asistentes de IA y consultoría en automatización en Bogotá, Colombia. Recupera tiempo operativo y escala sin contratar.',
 })
 
 export default function RootLayout({
@@ -20,14 +20,21 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    const organizationSchema = generateOrganizationSchema()
+    const graph = {
+        '@context': 'https://schema.org',
+        '@graph': [
+            generateOrganizationSchema(),
+            generateLocalBusinessSchema(),
+            generateWebSiteSchema(),
+        ],
+    }
 
     return (
         <html lang="es" className={inter.variable}>
             <head>
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
                 />
                 {process.env.NEXT_PUBLIC_GA_ID && (
                     <>

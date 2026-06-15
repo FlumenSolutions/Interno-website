@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
+import { ScrollReveal } from './ScrollReveal'
 
 interface ProcessStepProps {
     icon: React.ReactNode
@@ -14,13 +14,7 @@ interface ProcessStepProps {
 
 export function ProcessStep({ icon, title, description, deliverables, isFirst, isLast }: ProcessStepProps) {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
-            className="relative flex gap-6 md:gap-12 pb-12 last:pb-0"
-        >
+        <ScrollReveal className="relative flex gap-6 md:gap-12 pb-12 last:pb-0">
             {/* Timeline Line */}
             {!isLast && (
                 <div className="absolute left-[28px] top-[60px] bottom-0 w-0.5 bg-gradient-to-b from-accent/50 to-accent/10" />
@@ -54,6 +48,6 @@ export function ProcessStep({ icon, title, description, deliverables, isFirst, i
                     </div>
                 )}
             </div>
-        </motion.div>
+        </ScrollReveal>
     )
 }

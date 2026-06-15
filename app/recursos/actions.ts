@@ -1,8 +1,8 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import { revalidatePath } from 'next/cache'
 import { unstable_noStore as noStore } from 'next/cache'
+import { getLocalPosts, getLocalPostBySlug } from '@/data/posts'
 
 export async function getPosts(category?: string) {
     noStore(); // Disable cache for this action
@@ -13,8 +13,6 @@ export async function getPosts(category?: string) {
             where.category = category
         }
 
-        // Force dynamic fetch to ensure we see new posts immediately during dev
-        // In production, we might want to use revalidatePath trigger instead
         const posts = await prisma.post.findMany({
             where,
             orderBy: {
@@ -30,13 +28,16 @@ export async function getPosts(category?: string) {
             },
         })
 
-        // Explicitly revalidate the resources page to ensure fresh data
-        revalidatePath('/recursos')
+        // Si la BD responde pero no hay posts publicados, usa los de respaldo.
+        if (posts.length === 0) {
+            return getLocalPosts(category)
+        }
 
         return posts
     } catch (error) {
-        console.error('Error fetching posts:', error)
-        return []
+        // BD no disponible: usa los artículos de respaldo locales.
+        console.error('Error fetching posts (usando posts locales de respaldo):', error)
+        return getLocalPosts(category)
     }
 }
 
@@ -48,9 +49,11 @@ export async function getPostBySlug(slug: string) {
                 published: true,
             },
         })
-        return post
+
+        // Si no está en la BD, intenta con los posts de respaldo locales.
+        return post ?? getLocalPostBySlug(slug)
     } catch (error) {
-        console.error(`Error fetching post with slug ${slug}:`, error)
-        return null
+        console.error(`Error fetching post ${slug} (usando posts locales de respaldo):`, error)
+        return getLocalPostBySlug(slug)
     }
 }

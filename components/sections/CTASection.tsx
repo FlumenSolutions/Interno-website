@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { ScrollReveal } from './ScrollReveal'
 
 interface CTASectionProps {
     title: string
@@ -31,23 +31,10 @@ export function CTASection({
             {/* Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#00B8A9] to-[#009F95]" />
 
-            {/* Noise Texture */}
-            <div className="absolute inset-0 opacity-[0.04] mix-blend-overlay pointer-events-none"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-                }}
-            />
-
             {/* Content */}
             <div className="container relative z-10">
-                <motion.div
-                    initial={{ opacity: 0, y: 30, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="max-w-4xl mx-auto text-center"
-                >
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                <ScrollReveal className="max-w-4xl mx-auto text-center">
+                    <h2 className="text-balance text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
                         {title}
                     </h2>
                     <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
@@ -79,7 +66,7 @@ export function CTASection({
                             </Button>
                         )}
                     </div>
-                </motion.div>
+                </ScrollReveal>
             </div>
         </section>
     )

@@ -24,7 +24,7 @@ export const services: Service[] = [
         id: '1',
         slug: 'automatizacion-procesos',
         title: 'Automatización de Procesos',
-        shortDescription: 'Elimina tareas repetitivas y recupera hasta 80% del tiempo operativo',
+        shortDescription: 'Elimina tareas repetitivas y recupera tiempo operativo',
         description: 'Diseñamos e implementamos flujos de trabajo automatizados que conectan tus sistemas, eliminan tareas manuales y reducen errores humanos. Desde facturación hasta reportes, automatizamos procesos end-to-end.',
         icon: Zap,
         features: [
@@ -46,11 +46,11 @@ export const services: Service[] = [
         ],
         tools: ['n8n', 'Make', 'Zapier', 'API REST', 'Webhooks'],
         benefits: [
-            'Reducción de 50-80% en tiempo operativo',
-            'Eliminación de errores humanos',
+            'Menos tiempo dedicado a tareas operativas',
+            'Menos errores en procesos manuales',
             'Procesos 24/7 sin intervención',
             'Escalabilidad sin contratar personal',
-            'ROI visible en 2-3 meses',
+            'Equipos enfocados en trabajo de mayor valor',
         ],
         whoIsFor: [
             'Empresas con procesos repetitivos',
@@ -91,7 +91,7 @@ export const services: Service[] = [
         tools: ['WhatsApp Business API', 'HubSpot', 'Zoho CRM', 'Pipedrive', 'n8n', 'Make'],
         benefits: [
             'Respuesta inmediata a clientes 24/7',
-            'Aumento de 40% en tasa de conversión',
+            'Más oportunidades atendidas a tiempo',
             'Centralización de comunicaciones',
             'Reducción de tiempos de respuesta',
             'Mejor experiencia del cliente',
@@ -134,7 +134,7 @@ export const services: Service[] = [
         ],
         tools: ['OpenAI GPT', 'LangChain', 'Pinecone', 'ChromaDB', 'n8n', 'WhatsApp API'],
         benefits: [
-            'Reducción de 70% en consultas al equipo',
+            'Menos consultas repetitivas para tu equipo',
             'Disponibilidad 24/7',
             'Respuestas consistentes y precisas',
             'Escalabilidad sin límites',

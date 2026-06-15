@@ -34,15 +34,14 @@ export default async function RecursosPage({
         <div className="bg-background min-h-screen pb-20">
             <PageHeader
                 title="Blog & Recursos"
-                subtitle="Centro de Conocimiento"
                 description="Guías, tutoriales y estrategias sobre automatización de procesos para escalar tu negocio."
             />
 
             <section className="container pb-16">
 
-                {/* Minimalist Filters */}
+                {/* Category Filters (pills) */}
                 <ScrollReveal delay={0.1}>
-                    <div className="flex flex-wrap gap-4 border-b border-border/40 pb-6 mb-12 justify-center md:justify-start">
+                    <div className="flex flex-wrap gap-2.5 mb-12 justify-center md:justify-start">
                         {categories.map((cat) => {
                             const isActive = cat === category
                             return (
@@ -50,9 +49,9 @@ export default async function RecursosPage({
                                     key={cat}
                                     href={cat === 'Todas' ? '/recursos' : `/recursos?category=${encodeURIComponent(cat)}`}
                                     scroll={false}
-                                    className={`text-sm font-medium transition-colors hover:text-white pb-2 border-b-2 ${isActive
-                                        ? 'text-white border-white'
-                                        : 'text-muted-foreground border-transparent'
+                                    className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${isActive
+                                        ? 'bg-accent text-white shadow-md shadow-accent/20'
+                                        : 'border border-white/10 bg-white/[0.03] text-white/65 hover:border-accent/30 hover:text-white'
                                         }`}
                                 >
                                     {cat}
@@ -84,25 +83,39 @@ export default async function RecursosPage({
 
                     {/* Empty State */}
                     {allPosts.length === 0 && (
-                        <div className="text-center py-24 text-muted-foreground border-t border-border/20">
-                            <p>No hay artículos publicados aún.</p>
+                        <div className="text-center py-20 md:py-28 max-w-md mx-auto">
+                            <h3 className="text-2xl font-semibold text-white mb-3">
+                                Estamos escribiendo
+                            </h3>
+                            <p className="text-white/70 leading-relaxed mb-8">
+                                Pronto publicaremos guías y estrategias de automatización pensadas
+                                para PyMEs. Mientras tanto, cuéntanos tu caso y te respondemos directo.
+                            </p>
+                            <Link
+                                href="/contacto"
+                                className="inline-flex items-center justify-center px-6 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+                            >
+                                Hablar con Flumen
+                            </Link>
                         </div>
                     )}
                 </div>
 
-                {/* Newsletter / CTA Section (Minimal) */}
+                {/* Newsletter / CTA Card */}
                 <ScrollReveal delay={0.4}>
-                    <div className="mt-32 pt-16 border-t border-border/40">
-                        <div className="max-w-xl">
-                            <h3 className="text-2xl font-medium text-white mb-4">Mantente actualizado</h3>
-                            <p className="text-muted-foreground mb-6">
+                    <div className="mt-24 md:mt-32 relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-8 md:p-12">
+                        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
+                        <div className="relative max-w-xl">
+                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Mantente actualizado</h3>
+                            <p className="text-white/70 leading-relaxed mb-7">
                                 Recibe las últimas guías y estrategias de automatización directamente en tu bandeja de entrada.
                             </p>
                             <a
                                 href="/contacto"
-                                className="inline-flex items-center justify-center px-6 py-3 bg-white text-black text-sm font-medium rounded hover:bg-white/90 transition-colors"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white text-sm font-semibold rounded-xl shadow-md shadow-accent/20 hover:bg-accent/90 hover:-translate-y-0.5 transition-all"
                             >
                                 Suscribirme
+                                <span aria-hidden="true">→</span>
                             </a>
                         </div>
                     </div>

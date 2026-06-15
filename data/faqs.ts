@@ -14,7 +14,7 @@ export const faqs: FAQ[] = [
     {
         category: 'general',
         question: '¿En qué se diferencia de contratar más personal?',
-        answer: 'La automatización trabaja 24/7 sin errores, no requiere capacitación continua, no se enferma ni toma vacaciones, y el costo es una inversión única vs. salarios recurrentes. Además, permite que tu equipo se enfoque en tareas estratégicas.',
+        answer: 'La automatización trabaja 24/7 con procesos consistentes, no requiere capacitación continua, no se enferma ni toma vacaciones, y el costo es una inversión única vs. salarios recurrentes. Además, permite que tu equipo se enfoque en tareas estratégicas.',
     },
     {
         category: 'general',
@@ -57,8 +57,8 @@ export const faqs: FAQ[] = [
     },
     {
         category: 'costos',
-        question: '¿Cuál es el ROI típico?',
-        answer: 'La mayoría de nuestros clientes recuperan la inversión en 2-4 meses gracias al ahorro en tiempo y reducción de errores. Algunos casos con alto volumen de transacciones lo logran en menos de 2 meses.',
+        question: '¿Cómo se mide el retorno de la inversión?',
+        answer: 'El retorno proviene del tiempo que tu equipo deja de gastar en tareas manuales y de la reducción de errores. En la auditoría gratuita estimamos contigo cuántas horas podrías recuperar y en qué procesos, para que tengas una base concreta antes de invertir.',
     },
 
     // Técnico

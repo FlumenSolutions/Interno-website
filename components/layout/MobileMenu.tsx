@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 const navigation = [
     { name: 'Servicios', href: '/servicios' },
-    { name: 'Casos de Éxito', href: '/casos-exito' },
     { name: 'Proceso', href: '/proceso' },
     { name: 'Recursos', href: '/recursos' },
     { name: 'Nosotros', href: '/nosotros' },

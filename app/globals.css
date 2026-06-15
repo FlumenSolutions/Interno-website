@@ -46,25 +46,13 @@
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
-    cursor: default;
-    caret-color: transparent;
   }
 
-  /* Restore cursor and caret for inputs and textareas */
-  input,
-  textarea,
-  [contenteditable="true"] {
-    cursor: text;
-    caret-color: auto;
-    /* Or use a specific color like hsl(var(--primary)) */
-  }
-
-  /* Restore pointer cursor for interactive elements */
-  button,
-  a,
-  select,
-  [role="button"] {
-    cursor: pointer;
+  /* Foco visible y accesible en todo elemento interactivo (teclado) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--accent));
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   h1,
@@ -137,14 +125,41 @@
   @apply text-lg md:text-xl leading-relaxed;
 }
 
-/* Gradient text effect */
-.gradient-text {
-  @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
+/* Hero entrance — CSS-first so el contenido NUNCA queda invisible si la animación
+   se pausa (tabs en segundo plano, renderers headless). El estado base ya es visible;
+   la animación solo realza. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Glass morphism effect */
-.glass {
-  @apply bg-white/5 backdrop-blur-md border border-white/10;
+.hero-rise {
+  animation: hero-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--hero-delay, 0ms);
+}
+
+@keyframes hero-scroll-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.hero-scroll-dot span {
+  animation: hero-scroll-bob 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rise {
+    animation: none;
+  }
+  .hero-scroll-dot span {
+    animation: none;
+  }
 }
 
 /* Floating animation for background elements */

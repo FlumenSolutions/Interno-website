@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { createNoise3D } from "simplex-noise";
 
 export const WavyBackground = ({
@@ -26,40 +26,7 @@ export const WavyBackground = ({
     waveOpacity?: number;
     [key: string]: any;
 }) => {
-    const noise = createNoise3D();
-    let w: number,
-        h: number,
-        nt: number,
-        i: number,
-        x: number,
-        ctx: any,
-        canvas: any;
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const getSpeed = () => {
-        switch (speed) {
-            case "slow":
-                return 0.001;
-            case "fast":
-                return 0.002;
-            default:
-                return 0.001;
-        }
-    };
-
-    const init = () => {
-        canvas = canvasRef.current;
-        ctx = canvas.getContext("2d");
-        w = ctx.canvas.width = window.innerWidth;
-        h = ctx.canvas.height = window.innerHeight;
-        ctx.filter = `blur(${blur}px)`;
-        nt = 0;
-        window.onresize = function () {
-            w = ctx.canvas.width = window.innerWidth;
-            h = ctx.canvas.height = window.innerHeight;
-            ctx.filter = `blur(${blur}px)`;
-        };
-        render();
-    };
 
     const waveColors = colors ?? [
         "#26377D", // Flumen Deep Blue
@@ -68,62 +35,146 @@ export const WavyBackground = ({
         "#4A5F9D", // Medium Blue
         "#1ECAD3", // Bright Aqua
     ];
-    const drawWave = (n: number) => {
-        nt += getSpeed();
-        for (i = 0; i < n; i++) {
-            ctx.beginPath();
-            ctx.lineWidth = waveWidth || 50;
-            ctx.strokeStyle = waveColors[i % waveColors.length];
-            for (x = 0; x < w; x += 5) {
-                var y = noise(x / 800, 0.3 * i, nt) * 100;
-                ctx.lineTo(x, y + h * 0.5);
-            }
-            ctx.stroke();
-            ctx.closePath();
-        }
-    };
-
-    let animationId: number;
-    const render = () => {
-        ctx.fillStyle = backgroundFill || "#1C2536";
-        ctx.globalAlpha = waveOpacity || 0.5;
-        ctx.fillRect(0, 0, w, h);
-        drawWave(5);
-        animationId = requestAnimationFrame(render);
-    };
 
     useEffect(() => {
-        init();
-        return () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        const noise = createNoise3D();
+        const getSpeed = () => (speed === "slow" ? 0.0009 : 0.0016);
+
+        // Respeta usuarios que prefieren menos movimiento: dibuja un frame estático.
+        const reduceMotion =
+            typeof window !== "undefined" &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        let w = 0;
+        let h = 0;
+        let nt = 0;
+        let animationId = 0;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+        const resize = () => {
+            // Usa el tamaño real del contenedor (cae al viewport si por timing aún es 0).
+            const rect = canvas.getBoundingClientRect();
+            const cssW = Math.max(rect.width, window.innerWidth) || window.innerWidth || 1280;
+            const cssH = Math.max(rect.height, window.innerHeight) || window.innerHeight || 800;
+            w = canvas.width = cssW * dpr;
+            h = canvas.height = cssH * dpr;
+            canvas.style.width = `${cssW}px`;
+            canvas.style.height = `${cssH}px`;
+            ctx.filter = `blur(${blur}px)`;
+        };
+
+        const drawWave = (n: number) => {
+            nt += getSpeed();
+            // Las ondas atraviesan la mitad inferior y se escalonan hacia abajo, creando
+            // una corriente con profundidad. Cada capa fluye lateralmente (offset en nt)
+            // para que se lea movimiento real, no solo ondulación en el sitio.
+            for (let i = 0; i < n; i++) {
+                ctx.beginPath();
+                ctx.lineWidth = (waveWidth || 50) * dpr;
+                ctx.strokeStyle = waveColors[i % waveColors.length];
+                // capas más profundas = más abajo y con más amplitud
+                const baseline = h * (0.52 + i * 0.05);
+                const amplitude = (70 + i * 18) * dpr;
+                const drift = nt * (1 + i * 0.15); // desplazamiento lateral por capa
+                for (let x = 0; x < w; x += 5) {
+                    const y = noise(x / 800 + drift, 0.35 * i, nt) * amplitude;
+                    ctx.lineTo(x, y + baseline);
+                }
+                ctx.stroke();
+                ctx.closePath();
+            }
+        };
+
+        const drawFrame = () => {
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = backgroundFill || "#1C2536";
+            ctx.fillRect(0, 0, w, h);
+            ctx.globalAlpha = waveOpacity;
+            drawWave(7);
+        };
+
+        let running = false;
+        const loop = () => {
+            drawFrame();
+            animationId = requestAnimationFrame(loop);
+        };
+        const start = () => {
+            if (running || reduceMotion) return;
+            running = true;
+            animationId = requestAnimationFrame(loop);
+        };
+        const stop = () => {
+            running = false;
             cancelAnimationFrame(animationId);
         };
-    }, []);
 
-    const [isSafari, setIsSafari] = useState(false);
-    useEffect(() => {
-        setIsSafari(
-            typeof window !== "undefined" &&
-            navigator.userAgent.includes("Safari") &&
-            !navigator.userAgent.includes("Chrome")
+        resize();
+        drawFrame(); // primer frame siempre, incluso con reduced-motion
+
+        // Arranca la animación de inmediato. Los navegadores ya pausan requestAnimationFrame
+        // automáticamente en pestañas en segundo plano, así que no hace falta gestionarlo a mano.
+        start();
+
+        // Pausa solo cuando el hero sale del viewport (ahorra CPU al hacer scroll).
+        const io = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    start();
+                } else {
+                    stop();
+                }
+            },
+            { threshold: 0 }
         );
+        io.observe(canvas);
+
+        window.addEventListener("resize", resize);
+
+        return () => {
+            stop();
+            io.disconnect();
+            window.removeEventListener("resize", resize);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <div
             className={cn(
-                "h-screen flex flex-col items-center justify-center",
+                "relative flex flex-col items-center justify-center overflow-hidden",
                 containerClassName
             )}
         >
             <canvas
-                className="absolute inset-0 z-0"
+                className="absolute inset-0 z-0 h-full w-full"
                 ref={canvasRef}
-                id="canvas"
+                aria-hidden="true"
+            />
+            {/* Scrim doble: (1) un velo vertical que oscurece la franja del título
+                (centro-arriba) pero deja respirar la corriente abajo, y (2) un realce
+                radial sutil detrás del texto. Garantiza contraste AA sin apagar la onda. */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-[1]"
                 style={{
-                    ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
+                    background:
+                        "linear-gradient(to bottom, rgba(15,21,36,0.78) 0%, rgba(15,21,36,0.55) 30%, rgba(15,21,36,0.15) 55%, rgba(15,21,36,0) 78%)",
                 }}
-            ></canvas>
-            <div className={cn("relative z-10", className)} {...props}>
+            />
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 z-[1]"
+                style={{
+                    background:
+                        "radial-gradient(70% 45% at 50% 40%, rgba(15,21,36,0.55) 0%, rgba(15,21,36,0) 70%)",
+                }}
+            />
+            <div className={cn("relative z-10 w-full", className)} {...props}>
                 {children}
             </div>
         </div>

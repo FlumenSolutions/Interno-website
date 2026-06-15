@@ -3,13 +3,12 @@
 import { motion } from 'framer-motion'
 import { Hero } from '@/components/sections/Hero'
 import { ServiceCard } from '@/components/sections/ServiceCard'
-import { TestimonialCard } from '@/components/sections/TestimonialCard'
 import { ProcessStep } from '@/components/sections/ProcessStep'
 import { TrustBar } from '@/components/sections/TrustBar'
 import { CTASection } from '@/components/sections/CTASection'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
+import { SectionBackground } from '@/components/sections/SectionBackground'
 import { services } from '@/data/services'
-import { cases } from '@/data/cases'
 import { ArrowRight, CheckCircle, XCircle, Search, Map, Zap, Rocket } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n'
 
@@ -26,10 +25,6 @@ export default function HomePage() {
                     text: t('home.hero.cta.primary'),
                     href: '/contacto',
                 }}
-                secondaryCTA={{
-                    text: t('home.hero.cta.secondary'),
-                    href: '/casos-exito',
-                }}
                 benefits={[
                     t('home.hero.benefit1'),
                     t('home.hero.benefit2'),
@@ -38,8 +33,9 @@ export default function HomePage() {
             />
 
             {/* Problem → Solution Section */}
-            <section className="section-padding bg-background">
-                <div className="container">
+            <section className="section-padding bg-background relative overflow-hidden">
+                <SectionBackground variant="dots" glows={['top-right']} />
+                <div className="container relative z-10">
                     <ScrollReveal>
                         <h2 className="text-h2 text-center mb-16 text-white">
                             {t('home.problem.title')}
@@ -116,34 +112,10 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* Proof / Social Validation */}
-            <section className="section-padding bg-muted/30">
-                <div className="container">
-                    <ScrollReveal>
-                        <h2 className="text-h2 text-center mb-4">{t('home.proof.title')}</h2>
-                        <p className="text-body text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-                            {t('home.proof.subtitle')}
-                        </p>
-                    </ScrollReveal>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {cases.slice(0, 3).map((caseStudy, index) => (
-                            <ScrollReveal key={caseStudy.id} delay={index * 0.1}>
-                                <TestimonialCard
-                                    quote={caseStudy.testimonial.quote}
-                                    author={caseStudy.testimonial.author}
-                                    position={caseStudy.testimonial.position}
-                                    company={caseStudy.client}
-                                />
-                            </ScrollReveal>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* How It Works */}
-            <section className="section-padding bg-background">
-                <div className="container">
+            <section className="section-padding bg-background relative overflow-hidden">
+                <SectionBackground variant="grid" glows={['left']} />
+                <div className="container relative z-10">
                     <ScrollReveal>
                         <h2 className="text-h2 text-center mb-4 text-white">{t('home.how.title')}</h2>
                         <p className="text-body text-center text-white/70 mb-16 max-w-2xl mx-auto">
@@ -202,8 +174,9 @@ export default function HomePage() {
             </section>
 
             {/* Services Grid */}
-            <section className="section-padding bg-muted/30">
-                <div className="container">
+            <section className="section-padding bg-muted/30 relative overflow-hidden">
+                <SectionBackground variant="dots" glows={['bottom']} />
+                <div className="container relative z-10">
                     <ScrollReveal>
                         <div className="flex flex-col items-center mb-16">
                             <h2 className="text-h2 text-center mb-6">{t('home.services.title')}</h2>
@@ -237,11 +210,6 @@ export default function HomePage() {
             <section className="relative py-24 bg-background overflow-hidden">
                 {/* Background Effects */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/5 via-background to-background pointer-events-none" />
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-                    }}
-                />
 
                 <div className="container relative z-10">
                     <ScrollReveal>
@@ -249,19 +217,18 @@ export default function HomePage() {
                     </ScrollReveal>
 
                     {/* Use Cases Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mb-24">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mb-16 lg:mb-20">
                         {[1, 2, 3, 4, 5, 6].map((num, index) => (
                             <motion.div
                                 key={num}
-                                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                                viewport={{ once: true }}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-40px' }}
                                 transition={{ delay: index * 0.05, duration: 0.4 }}
-                                whileHover={{ scale: 1.02, backgroundColor: 'rgba(255, 255, 255, 0.03)' }}
                                 className={`
-                                    flex items-center gap-4 p-3 rounded-lg border border-white/5 bg-white/[0.02] backdrop-blur-sm
-                                    hover:border-accent/30 hover:shadow-[0_0_20px_rgba(0,184,169,0.1)] transition-all duration-300 cursor-default
-                                    ${index % 3 === 1 ? 'lg:translate-y-6' : ''}
+                                    flex items-center gap-4 p-4 rounded-lg border border-white/5 bg-white/[0.02]
+                                    hover:bg-white/[0.04] hover:border-accent/30 hover:-translate-y-0.5 transition-all duration-300 cursor-default
+                                    ${index % 3 === 1 ? 'lg:translate-y-6 lg:hover:translate-y-[calc(1.5rem-2px)]' : ''}
                                 `}
                             >
                                 <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 border border-accent/20 shadow-[0_0_10px_rgba(0,184,169,0.1)]">
@@ -273,7 +240,7 @@ export default function HomePage() {
                     </div>
 
                     {/* Divider */}
-                    <div className="relative w-full max-w-4xl mx-auto mb-24">
+                    <div className="relative w-full max-w-4xl mx-auto mb-16 lg:mb-20">
                         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-accent/50 to-transparent blur-sm h-px" />
                         <div className="w-full h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
                     </div>
@@ -290,10 +257,6 @@ export default function HomePage() {
                 primaryCTA={{
                     text: t('home.cta.primary'),
                     href: '/contacto',
-                }}
-                secondaryCTA={{
-                    text: t('home.cta.secondary'),
-                    href: '/casos-exito',
                 }}
                 variant="accent"
             />

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1524"/>
+      <stop offset="55%" stop-color="#15233A"/>
+      <stop offset="100%" stop-color="#0C3B3A"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#26377D"/>
+      <stop offset="50%" stop-color="#00B8A9"/>
+      <stop offset="100%" stop-color="#1ECAD3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- onda atmosférica inferior -->
+  <path d="M0 470 C 220 420, 420 540, 640 480 S 1020 420, 1200 500 L 1200 630 L 0 630 Z"
+        fill="url(#wave)" opacity="0.22"/>
+  <path d="M0 510 C 240 470, 440 580, 660 520 S 1030 470, 1200 540 L 1200 630 L 0 630 Z"
+        fill="url(#wave)" opacity="0.30"/>
+  <!-- wordmark -->
+  <text x="80" y="270" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="150"
+        font-weight="800" letter-spacing="-5">
+    <tspan fill="#E4ECF7">Flu</tspan><tspan fill="#00B8A9">men</tspan>
+  </text>
+  <!-- tagline -->
+  <text x="84" y="350" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="46"
+        font-weight="600" fill="#F2F6FC">Automatización inteligente para tu negocio</text>
+  <!-- subline -->
+  <text x="84" y="406" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="28"
+        font-weight="400" fill="#9FB0C7">CRM · WhatsApp · IA · n8n — Colombia</text>
+</svg>

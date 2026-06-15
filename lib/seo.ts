@@ -22,7 +22,7 @@ export function generateMetadata({
     publishedTime?: string
 }): Metadata {
     const url = `${siteUrl}${path}`
-    const ogImage = image || `${siteUrl}/og-image.jpg`
+    const ogImage = image || `${siteUrl}/og-image.png`
     const metaDescription = description || siteDescription
 
     return {
@@ -59,14 +59,7 @@ export function generateMetadata({
             description: metaDescription,
             url,
             siteName,
-            images: [
-                {
-                    url: ogImage,
-                    width: 1200,
-                    height: 630,
-                    alt: title,
-                },
-            ],
+            images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
             locale: 'es_CO',
             type,
             ...(type === 'article' && publishedTime ? { publishedTime } : {}),
@@ -112,8 +105,79 @@ export function generateOrganizationSchema() {
             availableLanguage: 'Spanish',
         },
         sameAs: [
-            // Add social media URLs here
+            'https://www.linkedin.com/company/flumensolutions',
         ],
+    }
+}
+
+export function generateLocalBusinessSchema() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'ProfessionalService',
+        '@id': `${siteUrl}/#business`,
+        name: siteName,
+        url: siteUrl,
+        logo: `${siteUrl}/logo.png`,
+        image: `${siteUrl}/og-image.png`,
+        description: siteDescription,
+        priceRange: '$$',
+        areaServed: [
+            { '@type': 'Country', name: 'Colombia' },
+            { '@type': 'Country', name: 'México' },
+        ],
+        address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'Bogotá',
+            addressRegion: 'Cundinamarca',
+            addressCountry: 'CO',
+        },
+        contactPoint: {
+            '@type': 'ContactPoint',
+            telephone: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER,
+            contactType: 'customer service',
+            areaServed: ['CO', 'MX'],
+            availableLanguage: ['Spanish', 'English'],
+        },
+        sameAs: ['https://www.linkedin.com/company/flumensolutions'],
+    }
+}
+
+export function generateWebSiteSchema() {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: siteName,
+        url: siteUrl,
+        inLanguage: 'es-CO',
+        publisher: { '@type': 'Organization', name: siteName, url: siteUrl },
+    }
+}
+
+export function generateArticleSchema(article: {
+    title: string
+    description: string
+    slug: string
+    publishedAt?: string
+    image?: string
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: article.title,
+        description: article.description,
+        image: article.image || `${siteUrl}/og-image.png`,
+        datePublished: article.publishedAt,
+        dateModified: article.publishedAt,
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': `${siteUrl}/recursos/${article.slug}`,
+        },
+        author: { '@type': 'Organization', name: siteName, url: siteUrl },
+        publisher: {
+            '@type': 'Organization',
+            name: siteName,
+            logo: { '@type': 'ImageObject', url: `${siteUrl}/logo.png` },
+        },
     }
 }
 

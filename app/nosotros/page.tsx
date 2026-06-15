@@ -1,5 +1,6 @@
 import { PageHeader } from '@/components/sections/PageHeader'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
+import { SectionBackground } from '@/components/sections/SectionBackground'
 import { CTASection } from '@/components/sections/CTASection'
 import { generateMetadata as genMeta } from '@/lib/seo'
 import { Metadata } from 'next'
@@ -8,7 +9,7 @@ import { Target, Eye, Award, Users } from 'lucide-react'
 export const metadata: Metadata = genMeta({
     title: 'Sobre Nosotros - Flumen Solutions',
     description:
-        'Somos expertos en automatización de procesos empresariales en Colombia. Ayudamos a empresas a recuperar tiempo, eliminar errores y escalar sin límites.',
+        'Somos expertos en automatización de procesos empresariales en Colombia. Ayudamos a empresas a recuperar tiempo, reducir errores y escalar a través de la automatización inteligente.',
     path: '/nosotros',
 })
 
@@ -16,7 +17,7 @@ const values = [
     {
         icon: Target,
         title: 'Resultados Medibles',
-        description: 'Cada proyecto tiene métricas claras de éxito y ROI comprobable.',
+        description: 'Cada proyecto se define con métricas claras de éxito desde el inicio.',
     },
     {
         icon: Users,
@@ -25,8 +26,8 @@ const values = [
     },
     {
         icon: Award,
-        title: 'Excelencia Técnica',
-        description: 'Certificados en las mejores herramientas de automatización del mercado.',
+        title: 'Fundamento Técnico',
+        description: 'Equipo de ingeniería que trabaja a fondo con las principales herramientas de automatización.',
     },
     {
         icon: Eye,
@@ -40,46 +41,58 @@ export default function NosotrosPage() {
         <>
             <PageHeader
                 title="Sobre Flumen Solutions"
-                subtitle="Quiénes Somos"
-                description="Ayudamos a empresas a recuperar tiempo, eliminar errores y escalar sin límites a través de la automatización inteligente."
+                description="Ayudamos a empresas a recuperar tiempo, reducir errores y escalar a través de la automatización inteligente."
             />
 
-            {/* Mission */}
-            <section className="section-padding bg-background">
-                <div className="container">
-                    <div className="max-w-4xl mx-auto">
+            {/* Mission & Vision */}
+            <section className="section-padding bg-background relative overflow-hidden">
+                <SectionBackground variant="grid" glows={['left', 'right']} />
+                <div className="container relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+                        {/* Misión */}
                         <ScrollReveal>
-                            <h2 className="text-h2 mb-6 text-center text-white">Nuestra Misión</h2>
-                            <p className="text-body-lg text-center text-muted-foreground mb-8">
-                                Democratizar la automatización empresarial en Colombia, haciendo que tecnologías avanzadas
-                                sean accesibles para empresas de todos los tamaños. Creemos que ningún negocio debería
-                                perder tiempo en tareas repetitivas cuando puede enfocarse en lo que realmente importa:
-                                sus clientes y su crecimiento.
-                            </p>
+                            <article className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-8 lg:p-10 transition-all duration-500 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/5">
+                                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-accent/10 blur-3xl transition-opacity duration-500 group-hover:opacity-150" />
+                                <div className="relative">
+                                    <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 border border-accent/20">
+                                        <Target className="h-7 w-7 text-accent" />
+                                    </div>
+                                    <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Nuestra Misión</h2>
+                                    <p className="text-body text-white/70 leading-relaxed">
+                                        Democratizar la automatización empresarial en Colombia, haciendo que tecnologías
+                                        avanzadas sean accesibles para empresas de todos los tamaños. Creemos que ningún
+                                        negocio debería perder tiempo en tareas repetitivas cuando puede enfocarse en lo
+                                        que realmente importa: sus clientes y su crecimiento.
+                                    </p>
+                                </div>
+                            </article>
                         </ScrollReveal>
-                    </div>
-                </div>
-            </section>
 
-            {/* Vision */}
-            <section className="section-padding bg-muted/5 border-y border-white/5">
-                <div className="container">
-                    <div className="max-w-4xl mx-auto">
-                        <ScrollReveal>
-                            <h2 className="text-h2 mb-6 text-center text-white">Nuestra Visión</h2>
-                            <p className="text-body-lg text-center text-muted-foreground">
-                                Ser la consultora de automatización #1 en Colombia, reconocida por transformar
-                                negocios a través de soluciones inteligentes que generan resultados medibles y
-                                sostenibles en el tiempo.
-                            </p>
+                        {/* Visión */}
+                        <ScrollReveal delay={0.1}>
+                            <article className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-8 lg:p-10 transition-all duration-500 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/5">
+                                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/20 blur-3xl transition-opacity duration-500 group-hover:opacity-150" />
+                                <div className="relative">
+                                    <div className="mb-6 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-accent/10 border border-accent/20">
+                                        <Eye className="h-7 w-7 text-accent" />
+                                    </div>
+                                    <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4">Nuestra Visión</h2>
+                                    <p className="text-body text-white/70 leading-relaxed">
+                                        Ser un referente de automatización en Colombia, reconocido por transformar
+                                        negocios a través de soluciones inteligentes que generan resultados medibles y
+                                        sostenibles en el tiempo.
+                                    </p>
+                                </div>
+                            </article>
                         </ScrollReveal>
                     </div>
                 </div>
             </section>
 
             {/* Values */}
-            <section className="section-padding bg-background">
-                <div className="container">
+            <section className="section-padding bg-background relative overflow-hidden">
+                <SectionBackground variant="dots" glows={['top']} />
+                <div className="container relative z-10">
                     <ScrollReveal>
                         <h2 className="text-h2 mb-12 text-center text-white">Nuestros Valores</h2>
                     </ScrollReveal>
@@ -104,8 +117,9 @@ export default function NosotrosPage() {
             </section>
 
             {/* Why Choose Us */}
-            <section className="section-padding bg-muted/5 border-y border-white/5">
-                <div className="container">
+            <section className="section-padding bg-muted/5 border-y border-white/5 relative overflow-hidden">
+                <SectionBackground variant="grid" glows={['bottom']} />
+                <div className="container relative z-10">
                     <ScrollReveal>
                         <h2 className="text-h2 mb-12 text-center text-white">¿Por qué elegirnos?</h2>
                     </ScrollReveal>
@@ -113,8 +127,8 @@ export default function NosotrosPage() {
                     <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
                         {[
                             {
-                                title: 'Experiencia Comprobada',
-                                description: '50+ empresas automatizadas con resultados medibles y ROI comprobado.',
+                                title: 'Fundadores Técnicos',
+                                description: 'Construido por ingenieros que diseñan e implementan cada automatización de principio a fin.',
                             },
                             {
                                 title: 'Tecnología de Punta',
@@ -122,7 +136,7 @@ export default function NosotrosPage() {
                             },
                             {
                                 title: 'Soporte Local',
-                                description: 'Equipo en Colombia con respuesta en menos de 24 horas.',
+                                description: 'Equipo en Colombia que entiende tu mercado y responde rápido.',
                             },
                             {
                                 title: 'Implementación Rápida',
@@ -149,17 +163,18 @@ export default function NosotrosPage() {
             </section>
 
             {/* Team */}
-            <section className="section-padding bg-background">
-                <div className="container">
+            <section className="section-padding bg-background relative overflow-hidden">
+                <SectionBackground variant="glow" glows={['center']} />
+                <div className="container relative z-10">
                     <ScrollReveal>
                         <div className="max-w-3xl mx-auto text-center">
                             <h2 className="text-h2 mb-4 text-white">Nuestro Equipo</h2>
                             <p className="text-body text-muted-foreground mb-12">
-                                Un equipo multidisciplinario de ingenieros, consultores y especialistas en automatización
-                                dedicados a transformar tu negocio.
+                                Flumen fue fundada por tres ingenieros apasionados por la automatización.
+                                Diseñamos, construimos e implementamos cada solución de principio a fin.
                             </p>
                             <p className="text-body-lg font-semibold text-accent">
-                                Certificados en n8n, Make, y tecnologías de IA
+                                Trabajamos con n8n, Make y tecnologías de IA
                             </p>
                         </div>
                     </ScrollReveal>
@@ -173,10 +188,6 @@ export default function NosotrosPage() {
                 primaryCTA={{
                     text: 'Solicitar Auditoría Gratuita',
                     href: '/contacto',
-                }}
-                secondaryCTA={{
-                    text: 'Ver Casos de Éxito',
-                    href: '/casos-exito',
                 }}
                 variant="accent"
             />

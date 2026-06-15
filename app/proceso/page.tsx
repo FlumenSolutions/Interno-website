@@ -22,7 +22,6 @@ export default function ProcesoPage() {
         <>
             <PageHeader
                 title="Nuestro Proceso"
-                subtitle="Metodología Probada"
                 description="Desde la auditoría inicial hasta el soporte continuo, te acompañamos en cada paso del camino."
             />
 
@@ -30,9 +29,9 @@ export default function ProcesoPage() {
                 <div className="container">
                     <ScrollReveal>
                         <div className="max-w-4xl mx-auto text-center mb-16">
-                            <h2 className="text-h2 mb-4 text-white">5 Fases para el Éxito</h2>
+                            <h2 className="text-h2 mb-4 text-white">5 Fases, de principio a fin</h2>
                             <p className="text-body text-white/70">
-                                Un proceso transparente y estructurado que garantiza resultados
+                                Un proceso transparente y estructurado, paso a paso
                             </p>
                         </div>
                     </ScrollReveal>

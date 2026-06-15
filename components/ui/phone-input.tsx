@@ -21,6 +21,7 @@ export function PhoneInput({ value, onChange, placeholder, className, error }: P
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            numberInputProps={{ id: 'phone', 'aria-label': 'Teléfono (WhatsApp)' }}
             className={cn(
                 'phone-input-container',
                 error && 'phone-input-error',
