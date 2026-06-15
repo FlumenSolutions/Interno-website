@@ -63,16 +63,15 @@ export const WavyBackground = ({
         const overscan = blur * 2;
 
         const resize = () => {
-            // Usa el tamaño real del contenedor (cae al viewport si por timing aún es 0).
-            // visualViewport refleja el viewport real en iOS (barra de URL, overscroll)
-            // mejor que innerHeight, evitando que el canvas quede mal dimensionado.
-            const rect = canvas.getBoundingClientRect();
-            const vw = window.visualViewport?.width || window.innerWidth;
-            const vh = window.visualViewport?.height || window.innerHeight;
-            const baseW = Math.max(rect.width, vw) || vw || 1280;
-            const baseH = Math.max(rect.height, vh) || vh || 800;
-            const cssW = baseW + overscan * 2;
-            const cssH = baseH + overscan * 2;
+            // El canvas es position:fixed y cubre el viewport, así que se dimensiona
+            // SOLO con el tamaño del viewport — nunca con getBoundingClientRect (que
+            // durante el overscroll elástico de iOS devuelve valores inflados que
+            // empujaban las ondas fuera de vista). Al ser fixed, no se mueve con el
+            // rebote: queda pegado a la pantalla y las ondas se mantienen en su sitio.
+            const vw = window.visualViewport?.width || window.innerWidth || 1280;
+            const vh = window.visualViewport?.height || window.innerHeight || 800;
+            const cssW = vw + overscan * 2;
+            const cssH = vh + overscan * 2;
             w = canvas.width = cssW * dpr;
             h = canvas.height = cssH * dpr;
             canvas.style.width = `${cssW}px`;
@@ -90,8 +89,11 @@ export const WavyBackground = ({
                 ctx.beginPath();
                 ctx.lineWidth = (waveWidth || 50) * dpr;
                 ctx.strokeStyle = waveColors[i % waveColors.length];
-                // capas más profundas = más abajo y con más amplitud
-                const baseline = h * (0.52 + i * 0.05);
+                // Las ondas se anclan a una distancia FIJA desde el borde inferior del
+                // canvas (no a una fracción de la altura). Así, aunque iOS cambie la
+                // altura del viewport durante el overscroll, las ondas se mantienen
+                // ancladas a la parte baja visible y no "se van hacia abajo".
+                const baseline = h - (overscan + 90 + i * 40) * dpr;
                 const amplitude = (70 + i * 18) * dpr;
                 const drift = nt * (1 + i * 0.15); // desplazamiento lateral por capa
                 for (let x = 0; x < w; x += 5) {
