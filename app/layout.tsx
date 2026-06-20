@@ -10,9 +10,9 @@ import { generateMetadata as genMeta, generateOrganizationSchema, generateLocalB
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = genMeta({
-    title: 'Flumen Solutions - Automatización de Procesos Empresariales en Colombia',
+    title: 'Flumen Solutions - Software a la medida, construido con IA',
     description:
-        'Automatización de procesos, integración de CRM y WhatsApp, asistentes de IA y consultoría en automatización en Bogotá, Colombia. Recupera tiempo operativo y escala sin contratar.',
+        'Construimos las aplicaciones, sitios web, chatbots y automatizaciones que tu negocio necesita — más rápido y a menor costo, gracias a la IA. Colombia.',
 })
 
 // viewportFit: 'cover' permite que env(safe-area-inset-*) tenga valores reales
