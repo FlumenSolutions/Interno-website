@@ -24,7 +24,7 @@ export const localPosts: LocalPost[] = [
             'WhatsApp es el canal donde te escriben tus clientes, pero responder lo mismo todo el día agota a tu equipo. Te explicamos qué se puede automatizar y qué conviene dejar en manos de una persona.',
         category: 'Guías',
         tags: ['whatsapp', 'automatización', 'atención al cliente', 'pymes'],
-        coverImage: '/blog/whatsapp.svg',
+        coverImage: '/images/whatsapp.png',
         metaTitle: 'Cómo automatizar WhatsApp en tu negocio | Flumen',
         metaDescription:
             'Guía práctica para automatizar la atención por WhatsApp Business en tu PyME: respuestas automáticas, cotizaciones, recordatorios y cuándo dejar pasar a una persona.',
@@ -77,7 +77,7 @@ Si quieres, en una auditoría gratuita revisamos tus conversaciones reales de Wh
             'Tener un CRM no sirve de mucho si vive aislado del resto de tu operación. Te explicamos qué significa integrarlo y cómo dar el primer paso sin un proyecto gigante.',
         category: 'Guías',
         tags: ['crm', 'integración', 'automatización', 'pymes'],
-        coverImage: '/blog/crm.svg',
+        coverImage: '/images/crm.png',
         metaTitle: 'Cómo integrar tu CRM en una PyME | Flumen',
         metaDescription:
             'Qué significa integrar un CRM con tus otras herramientas (WhatsApp, correo, facturación) y cómo empezar paso a paso sin un proyecto costoso.',
@@ -119,7 +119,7 @@ Si tu CRM se siente como una carga en vez de una ayuda, probablemente el problem
             'La IA está en todas las conversaciones, pero ¿qué puede hacer de verdad por una pequeña o mediana empresa hoy? Separamos lo útil de lo exagerado.',
         category: 'Tendencias',
         tags: ['inteligencia artificial', 'automatización', 'pymes', 'tendencias'],
-        coverImage: '/blog/ia.svg',
+        coverImage: '/images/ia.png',
         metaTitle: 'Automatización con IA para PyMEs: qué es realista hoy | Flumen',
         metaDescription:
             'Qué puede hacer la inteligencia artificial por una PyME hoy mismo, qué todavía es exageración, y cómo evaluar si te conviene sin caer en promesas vacías.',
@@ -169,7 +169,7 @@ Si quieres saber qué tarea de tu negocio es buena candidata para IA —y cuál 
             'Si reconoces alguna de estas situaciones en tu día a día, probablemente estás perdiendo horas en tareas que un flujo automatizado podría resolver solo.',
         category: 'Guías',
         tags: ['automatización', 'pymes', 'productividad'],
-        coverImage: '/blog/senales.svg',
+        coverImage: '/images/senales.png',
         metaTitle: '5 señales de que tu PyME necesita automatización | Flumen',
         metaDescription:
             'Reconoce las señales de que tu empresa está lista para automatizar procesos: tareas repetitivas, errores manuales, respuestas lentas y más.',
