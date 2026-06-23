@@ -1,8 +1,9 @@
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
 import { SectionBackground } from '@/components/sections/SectionBackground'
-import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema } from '@/lib/seo'
+import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo'
 import { Metadata } from 'next'
 import { getPostBySlug } from '../actions'
+import { getLocalPostBySlug } from '@/data/posts'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -54,6 +55,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         { name: 'Recursos', url: `${siteUrl}/recursos` },
         { name: post.title, url: `${siteUrl}/recursos/${post.slug}` },
     ])
+    // Los FAQs viven en data/posts.ts (la tabla Post no tiene esa columna). Se
+    // toman del post si los trae; si viene de la BD, se buscan por slug en el local.
+    const faqs =
+        (post as { faqs?: { question: string; answer: string }[] }).faqs ??
+        getLocalPostBySlug(post.slug)?.faqs ??
+        []
+    const faqSchema = faqs.length > 0 ? generateFAQSchema(faqs) : null
 
     return (
         <div className="bg-background min-h-screen pb-20">
@@ -65,6 +73,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
+            {faqSchema && (
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+                />
+            )}
             {/* Editorial Header */}
             <header className="relative overflow-hidden pt-36 md:pt-40 pb-12">
                 <SectionBackground variant="dots" glows={['top']} />
@@ -80,13 +94,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </h1>
                     <div className="flex items-center justify-center gap-3 text-sm text-white/60">
                         {post.publishedAt && (
-                            <time dateTime={post.publishedAt.toISOString()}>
-                                {new Date(post.publishedAt).toLocaleDateString('es-CO', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                })}
-                            </time>
+                            <span>
+                                Actualizado el{' '}
+                                <time dateTime={new Date(post.publishedAt).toISOString()}>
+                                    {new Date(post.publishedAt).toLocaleDateString('es-CO', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                    })}
+                                </time>
+                            </span>
                         )}
                         <span>•</span>
                         <span>5 min lectura</span>
@@ -149,6 +166,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         </ReactMarkdown>
                     </div>
                 </ScrollReveal>
+
+                {/* Preguntas frecuentes (extraíble por motores de IA + rich snippet) */}
+                {faqs.length > 0 && (
+                    <ScrollReveal delay={0.2}>
+                        <section className="mt-20 pt-10 border-t border-white/10">
+                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-tight">
+                                Preguntas frecuentes
+                            </h2>
+                            <div className="space-y-6">
+                                {faqs.map((faq, i) => (
+                                    <div key={i}>
+                                        <h3 className="text-lg font-semibold text-white mb-2">{faq.question}</h3>
+                                        <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    </ScrollReveal>
+                )}
 
                 {/* Footer / Back Link */}
                 <ScrollReveal delay={0.3}>

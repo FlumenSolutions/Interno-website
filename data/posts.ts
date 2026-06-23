@@ -14,6 +14,7 @@ export interface LocalPost {
     metaTitle?: string
     metaDescription?: string
     publishedAt: Date
+    faqs?: { question: string; answer: string }[]
 }
 
 export const localPosts: LocalPost[] = [
@@ -69,6 +70,20 @@ Así nadie espera horas por una respuesta básica, y tu equipo recibe los casos 
 Muchos negocios compran un "bot" genérico, lo conectan y esperan magia. A las semanas lo apagan porque respondía mal y molestaba a los clientes. La diferencia no está en la herramienta, sino en **diseñar el flujo según cómo escribe de verdad tu cliente**.
 
 Si quieres, en una auditoría gratuita revisamos tus conversaciones reales de WhatsApp y te decimos qué se puede automatizar sin arriesgar la relación con tus clientes, sin compromiso.`,
+        faqs: [
+            {
+                question: '¿Un chatbot de WhatsApp reemplaza a mi equipo de atención?',
+                answer: 'No. Un chatbot bien diseñado se encarga de la primera línea —preguntas frecuentes, horarios, cotizaciones simples— y deja a tu equipo solo los casos que de verdad necesitan criterio humano. El objetivo es liberar a tu equipo de lo repetitivo, no reemplazarlo.',
+            },
+            {
+                question: '¿Qué se puede automatizar en WhatsApp sin perder el trato humano?',
+                answer: 'Se pueden automatizar respuestas a preguntas frecuentes, el saludo y la clasificación inicial, cotizaciones simples y recordatorios. Conviene dejar en manos de una persona los reclamos delicados, las negociaciones y cualquier caso donde una respuesta equivocada cueste un cliente.',
+            },
+            {
+                question: '¿Por qué fallan muchos chatbots de WhatsApp?',
+                answer: 'La causa más común no es la herramienta, sino el diseño: se instala un bot genérico sin adaptarlo a cómo escribe de verdad el cliente. Un flujo diseñado a partir de conversaciones reales evita respuestas fuera de lugar que molestan a los clientes.',
+            },
+        ],
     },
     {
         title: 'Integrar tu CRM con el resto de tus herramientas: por dónde empezar',
@@ -111,6 +126,20 @@ No intentes integrar todo de golpe. El error clásico es querer un proyecto enor
 CRMs como HubSpot, Zoho o Pipedrive ya tienen todo lo necesario para integrarse. El reto no es la herramienta: es **diseñar bien qué se conecta con qué** según cómo trabaja tu equipo.
 
 Si tu CRM se siente como una carga en vez de una ayuda, probablemente el problema es que está aislado. En una auditoría gratuita revisamos tu operación y te mostramos qué integración te daría el mayor ahorro de tiempo primero, sin compromiso.`,
+        faqs: [
+            {
+                question: '¿Qué significa integrar un CRM?',
+                answer: 'Integrar un CRM es conectarlo con las herramientas que ya usas para que la información fluya sola: que un contacto nuevo de WhatsApp se cree solo en el CRM, que al cerrar una venta se genere la factura sin re-teclear, o que una cotización quede registrada en el historial automáticamente.',
+            },
+            {
+                question: '¿Por dónde debo empezar a integrar mi CRM?',
+                answer: 'Empieza por el punto de más dolor: identifica el dato que tu equipo re-escribe a mano todos los días y conecta solo dos herramientas para resolverlo (por ejemplo, formulario web → CRM). Una victoria pequeña genera confianza; luego mides el tiempo recuperado y decides qué integrar después.',
+            },
+            {
+                question: '¿El problema es el CRM o cómo está configurado?',
+                answer: 'Casi siempre es la configuración, no la herramienta. CRMs como HubSpot, Zoho o Pipedrive ya tienen lo necesario para integrarse. El reto es diseñar bien qué se conecta con qué según cómo trabaja tu equipo; un CRM aislado se siente como una carga aunque sea bueno.',
+            },
+        ],
     },
     {
         title: 'Automatización con IA para PyMEs: qué es realista hoy y qué es humo',
@@ -161,6 +190,20 @@ Si tienes respuestas claras, probablemente la IA te sirva. Si no, primero convie
 La IA para PyMEs hoy es real y útil, pero no es magia. Lo que marca la diferencia es elegir **el problema correcto** y montarla con supervisión, no creer en promesas de reemplazo total.
 
 Si quieres saber qué tarea de tu negocio es buena candidata para IA —y cuál no— en una auditoría gratuita lo revisamos juntos con los pies en la tierra, sin compromiso.`,
+        faqs: [
+            {
+                question: '¿Qué puede hacer la IA por una PyME hoy?',
+                answer: 'Hoy la IA ya sirve para responder preguntas sobre la propia información del negocio (precios, políticas, catálogo), resumir y clasificar (correos, solicitudes, documentos) y redactar borradores (cotizaciones, respuestas frecuentes) que una persona luego revisa. El patrón: la IA hace el 80% repetitivo y una persona pone el criterio final.',
+            },
+            {
+                question: '¿La IA va a reemplazar a mi equipo?',
+                answer: 'No, y desconfía de quien lo prometa. La IA es un excelente asistente y un mal jefe: úsala para acelerar a tu equipo en tareas repetitivas, no para que decida sola en temas sensibles como dinero, contratos o reclamos, que necesitan supervisión humana.',
+            },
+            {
+                question: '¿Cómo sé si la IA le conviene a mi negocio?',
+                answer: 'Hazte tres preguntas: ¿qué tarea concreta y repetitiva quiero quitarle a mi equipo?, ¿tengo la información ordenada para que la IA trabaje con datos reales?, y ¿quién va a revisar lo que produzca? Si tienes respuestas claras, probablemente te sirva; si no, primero conviene ordenar el proceso.',
+            },
+        ],
     },
     {
         title: '5 señales de que tu PyME ya necesita automatización',
@@ -201,6 +244,20 @@ Si para atender más clientes la única salida que ves es contratar más gente p
 ## ¿Y ahora qué?
 
 Reconocer estas señales es el primer paso. El segundo es mapear qué procesos concretos conviene automatizar primero — normalmente los más repetitivos y de mayor impacto. Si quieres, en una auditoría gratuita revisamos juntos tus procesos y te decimos dónde está el mayor ahorro de tiempo, sin compromiso.`,
+        faqs: [
+            {
+                question: '¿Cómo sé si mi PyME necesita automatización?',
+                answer: 'Hay señales claras: si tu equipo copia y pega los mismos datos entre sistemas, responde una y otra vez lo mismo, tarda medio día en armar reportes, comete errores manuales que cuestan, o creciste pero la operación no escala sin contratar más gente. Si reconoces alguna, probablemente ya es momento.',
+            },
+            {
+                question: '¿La automatización es solo para grandes empresas?',
+                answer: 'No. La mayoría de las PyMEs ya tienen procesos perfectos para automatizar; el problema es que casi nadie se detiene a identificarlos. Una regla simple: si haces la misma secuencia de clics más de tres veces por semana, probablemente se puede automatizar.',
+            },
+            {
+                question: '¿Por dónde conviene empezar a automatizar?',
+                answer: 'Por los procesos más repetitivos y de mayor impacto. El primer paso es reconocer las señales; el segundo, mapear qué procesos concretos automatizar primero para lograr el mayor ahorro de tiempo con el menor esfuerzo.',
+            },
+        ],
     },
 ]
 
