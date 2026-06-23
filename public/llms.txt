@@ -1,0 +1,48 @@
+# Flumen Solutions
+
+> Flumen Solutions es una empresa colombiana que construye software a la medida con inteligencia artificial: aplicaciones web, sitios web, chatbots y automatización de procesos. Usa IA de última generación para entregar más rápido y a menor costo que el desarrollo tradicional. Fundada por tres ingenieros. Atiende empresas y PyMEs en Colombia y México.
+
+## Qué hace Flumen
+
+- **Aplicaciones a la medida**: paneles internos, portales para clientes, sistemas de gestión, MVPs. Software hecho para el negocio, no plantillas.
+- **Páginas y sitios web**: sitios corporativos, landing pages, blogs — rápidos, optimizados para móvil y para Google.
+- **Chatbots y asistentes con IA**: asistentes entrenados con la información del negocio que atienden por WhatsApp y web.
+- **Automatización de procesos**: conexión de herramientas y automatización de tareas repetitivas (reportes, recordatorios, traspaso de datos).
+
+## Diferenciador
+
+Flumen construye apoyándose en IA de última generación, lo que permite llegar a una versión funcional en mucho menos tiempo y a menor costo que un desarrollo tradicional. El cliente es dueño del código y de los datos.
+
+## Cómo trabajan
+
+1. Cuéntanos tu idea: entienden la necesidad y dicen con claridad qué se puede construir, sin compromiso.
+2. Diseñan la solución: definen alcance y la validan con el cliente.
+3. Construyen con IA: desarrollo acelerado hasta una versión funcional para probar.
+4. Entregan y acompañan: desplegado en la nube, con soporte posterior.
+
+## Para quién
+
+Dueños y gerentes de PyMEs (no técnicos), emprendedores con una idea para construir, y equipos con procesos que ningún software comercial cubre. Mercado: Colombia y México.
+
+## Páginas clave
+
+- Inicio: https://www.flumensolutions.com
+- Servicios: https://www.flumensolutions.com/servicios
+- Aplicaciones a la medida: https://www.flumensolutions.com/servicios/desarrollo-aplicaciones
+- Páginas y sitios web: https://www.flumensolutions.com/servicios/paginas-web
+- Chatbots y asistentes con IA: https://www.flumensolutions.com/servicios/chatbots-asistentes-ia
+- Automatización de procesos: https://www.flumensolutions.com/servicios/automatizacion-procesos
+- Cómo trabajamos: https://www.flumensolutions.com/proceso
+- Blog y recursos: https://www.flumensolutions.com/recursos
+- Nosotros: https://www.flumensolutions.com/nosotros
+- Contacto: https://www.flumensolutions.com/contacto
+
+## Precios
+
+Los proyectos se cotizan a la medida según el alcance. Construir con IA suele resultar más económico que el desarrollo tradicional. Detalle en https://www.flumensolutions.com/pricing.md y cotización sin compromiso escribiendo desde https://www.flumensolutions.com/contacto
+
+## Contacto
+
+- Web: https://www.flumensolutions.com/contacto
+- LinkedIn: https://www.linkedin.com/company/flumensolutions
+- Ubicación: Bogotá, Colombia (atención remota en Colombia y México)
