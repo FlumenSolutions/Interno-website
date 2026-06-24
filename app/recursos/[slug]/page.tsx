@@ -141,6 +141,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                 p: ({ node, ...props }) => <p className="text-lg text-gray-300 mb-8 leading-8" {...props} />,
                                 ul: ({ node, ...props }) => <ul className="list-disc list-outside space-y-3 mb-8 text-gray-300 pl-4" {...props} />,
                                 ol: ({ node, ...props }) => <ol className="list-decimal list-outside space-y-3 mb-8 text-gray-300 pl-4" {...props} />,
+                                // Tablas con estilo de marca (scroll horizontal en móvil)
+                                table: ({ node, ...props }) => (
+                                    <div className="my-10 -mx-4 sm:mx-0 overflow-x-auto">
+                                        <table className="w-full min-w-[36rem] border-collapse overflow-hidden rounded-xl border border-white/10 text-left text-base" {...props} />
+                                    </div>
+                                ),
+                                thead: ({ node, ...props }) => <thead className="!bg-white/[0.07]" {...props} />,
+                                th: ({ node, ...props }) => <th className="!border-b !border-white/15 !px-4 !py-3 !text-white !font-semibold !align-top" {...props} />,
+                                td: ({ node, ...props }) => <td className="!border-b !border-white/5 !px-4 !py-3 !align-top !text-gray-300" {...props} />,
+                                tr: ({ node, ...props }) => <tr className="transition-colors hover:!bg-white/[0.03]" {...props} />,
                                 // Enhanced blockquote
                                 blockquote: ({ node, ...props }) => (
                                     <blockquote className="border-l-2 border-accent pl-6 py-1 my-10 text-xl italic text-white/80" {...props} />
