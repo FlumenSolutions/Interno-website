@@ -24,6 +24,7 @@ export async function getPosts(category?: string) {
                 category: true,
                 slug: true,
                 publishedAt: true,
+                updatedAt: true,
                 coverImage: true,
             },
         })
