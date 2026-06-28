@@ -12,6 +12,7 @@ export function generateMetadata({
     noIndex = false,
     type = 'website',
     publishedTime,
+    articleKeywords,
 }: {
     title: string
     description?: string
@@ -20,6 +21,7 @@ export function generateMetadata({
     noIndex?: boolean
     type?: 'website' | 'article'
     publishedTime?: string
+    articleKeywords?: string[]
 }): Metadata {
     const url = `${siteUrl}${path}`
     const ogImage = image || `${siteUrl}/og-image.png`
@@ -31,7 +33,7 @@ export function generateMetadata({
             template: `%s | ${siteName}`,
         },
         description: metaDescription,
-        keywords: [
+        keywords: articleKeywords || [
             'desarrollo de software a la medida',
             'desarrollo de aplicaciones',
             'desarrollo web',
@@ -159,7 +161,9 @@ export function generateArticleSchema(article: {
     description: string
     slug: string
     publishedAt?: string
+    modifiedAt?: string
     image?: string
+    wordCount?: number
 }) {
     return {
         '@context': 'https://schema.org',
@@ -168,7 +172,9 @@ export function generateArticleSchema(article: {
         description: article.description,
         image: article.image || `${siteUrl}/og-image.png`,
         datePublished: article.publishedAt,
-        dateModified: article.publishedAt,
+        dateModified: article.modifiedAt || article.publishedAt,
+        ...(article.wordCount ? { wordCount: article.wordCount } : {}),
+        inLanguage: 'es',
         mainEntityOfPage: {
             '@type': 'WebPage',
             '@id': `${siteUrl}/recursos/${article.slug}`,
