@@ -2,8 +2,9 @@ import { ScrollReveal } from '@/components/sections/ScrollReveal'
 import { SectionBackground } from '@/components/sections/SectionBackground'
 import { generateMetadata as genMeta, generateArticleSchema, generateBreadcrumbSchema, generateFAQSchema } from '@/lib/seo'
 import { Metadata } from 'next'
-import { getPostBySlug } from '../actions'
+import { getPostBySlug, getRelatedPosts } from '../actions'
 import { getLocalPostBySlug } from '@/data/posts'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -41,6 +42,28 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     if (!post) {
         notFound()
     }
+
+    const relatedPosts = await getRelatedPosts(
+        post.slug,
+        post.category,
+        post.tags as string[] | undefined,
+    )
+
+    // Mapeo de tags/tema del post → servicio relevante para el CTA contextual.
+    const serviceMap: Record<string, { title: string; href: string }> = {
+        whatsapp: { title: 'Chatbots y asistentes con IA', href: '/servicios/chatbots-asistentes-ia' },
+        chatbot: { title: 'Chatbots y asistentes con IA', href: '/servicios/chatbots-asistentes-ia' },
+        'inteligencia artificial': { title: 'Chatbots y asistentes con IA', href: '/servicios/chatbots-asistentes-ia' },
+        crm: { title: 'Automatización de procesos', href: '/servicios/automatizacion-procesos' },
+        integración: { title: 'Automatización de procesos', href: '/servicios/automatizacion-procesos' },
+        automatización: { title: 'Automatización de procesos', href: '/servicios/automatizacion-procesos' },
+        'software a la medida': { title: 'Aplicaciones a la medida', href: '/servicios/desarrollo-aplicaciones' },
+        'desarrollo de software': { title: 'Aplicaciones a la medida', href: '/servicios/desarrollo-aplicaciones' },
+    }
+    const tags = (post.tags as string[] | undefined) ?? []
+    const matchedService = tags
+        .map((t) => serviceMap[t.toLowerCase()])
+        .find(Boolean) ?? { title: 'Qué construimos', href: '/servicios' }
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flumensolutions.com'
     const articleSchema = generateArticleSchema({
@@ -196,13 +219,66 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                     </ScrollReveal>
                 )}
 
+                {/* CTA contextual a servicio relevante */}
+                <ScrollReveal>
+                    <div className="mt-16 p-8 rounded-2xl border border-accent/20 bg-gradient-to-br from-accent/10 to-accent/[0.03] text-center">
+                        <p className="text-lg text-white font-semibold mb-2">¿Necesitas algo así para tu negocio?</p>
+                        <p className="text-gray-400 mb-6">Conoce cómo podemos ayudarte con nuestro servicio de {matchedService.title.toLowerCase()}.</p>
+                        <Link
+                            href={matchedService.href}
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-sm font-semibold rounded-xl shadow-md shadow-accent/20 hover:bg-accent/90 hover:-translate-y-0.5 transition-all"
+                        >
+                            Ver servicio: {matchedService.title}
+                            <span aria-hidden="true">→</span>
+                        </Link>
+                    </div>
+                </ScrollReveal>
+
+                {/* Artículos relacionados */}
+                {relatedPosts.length > 0 && (
+                    <ScrollReveal>
+                        <section className="mt-16 pt-10 border-t border-white/10">
+                            <h2 className="text-2xl font-bold text-white mb-8 tracking-tight">
+                                Sigue leyendo
+                            </h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {relatedPosts.map((rp) => (
+                                    <Link
+                                        key={rp.slug}
+                                        href={`/recursos/${rp.slug}`}
+                                        className="group block rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-accent/30 hover:bg-white/[0.04] transition-all"
+                                    >
+                                        {rp.coverImage && (
+                                            <div className="aspect-video overflow-hidden">
+                                                <img
+                                                    src={rp.coverImage}
+                                                    alt={rp.title}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                                    loading="lazy"
+                                                />
+                                            </div>
+                                        )}
+                                        <div className="p-5">
+                                            {rp.category && (
+                                                <span className="text-xs font-medium text-accent mb-2 block">{rp.category}</span>
+                                            )}
+                                            <h3 className="text-base font-semibold text-white leading-snug group-hover:text-accent transition-colors line-clamp-2">
+                                                {rp.title}
+                                            </h3>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </section>
+                    </ScrollReveal>
+                )}
+
                 {/* Footer / Back Link */}
-                <ScrollReveal delay={0.3}>
-                    <div className="mt-20 pt-10 border-t border-white/10 flex justify-between items-center">
+                <ScrollReveal delay={0.1}>
+                    <div className="mt-12 pt-10 border-t border-white/10 flex justify-between items-center">
                         <a href="/recursos" className="inline-flex items-center text-muted-foreground hover:text-white transition-colors group">
                             <span className="mr-2 group-hover:-translate-x-1 transition-transform">←</span> Volver al blog
                         </a>
-                        {/* Tags or Sharing could go here */}
                     </div>
                 </ScrollReveal>
             </article>

@@ -41,6 +41,51 @@ export async function getPosts(category?: string) {
     }
 }
 
+export async function getRelatedPosts(currentSlug: string, category?: string | null, tags?: string[]) {
+    noStore()
+    try {
+        // 1. Misma categoría (excluyendo el actual)
+        const byCategory = category
+            ? await prisma.post.findMany({
+                  where: { published: true, slug: { not: currentSlug }, category },
+                  orderBy: { publishedAt: 'desc' },
+                  take: 3,
+                  select: { title: true, slug: true, excerpt: true, coverImage: true, category: true, publishedAt: true },
+              })
+            : []
+
+        if (byCategory.length >= 3) return byCategory.slice(0, 3)
+
+        // 2. Completar con posts que compartan tags
+        const existingSlugs = new Set([currentSlug, ...byCategory.map((p) => p.slug)])
+        let byTags: typeof byCategory = []
+        if (tags && tags.length > 0) {
+            byTags = await prisma.post.findMany({
+                where: { published: true, slug: { notIn: Array.from(existingSlugs) }, tags: { hasSome: tags } },
+                orderBy: { publishedAt: 'desc' },
+                take: 3 - byCategory.length,
+                select: { title: true, slug: true, excerpt: true, coverImage: true, category: true, publishedAt: true },
+            })
+        }
+        const combined = [...byCategory, ...byTags]
+        if (combined.length >= 2) return combined.slice(0, 3)
+
+        // 3. Rellenar con los más recientes
+        const allSlugs = new Set([currentSlug, ...combined.map((p) => p.slug)])
+        const recent = await prisma.post.findMany({
+            where: { published: true, slug: { notIn: Array.from(allSlugs) } },
+            orderBy: { publishedAt: 'desc' },
+            take: 3 - combined.length,
+            select: { title: true, slug: true, excerpt: true, coverImage: true, category: true, publishedAt: true },
+        })
+        return [...combined, ...recent].slice(0, 3)
+    } catch {
+        // Fallback local
+        const local = getLocalPosts().filter((p) => p.slug !== currentSlug).slice(0, 3)
+        return local
+    }
+}
+
 export async function getPostBySlug(slug: string) {
     try {
         const post = await prisma.post.findUnique({
