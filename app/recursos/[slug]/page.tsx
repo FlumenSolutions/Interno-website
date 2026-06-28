@@ -5,6 +5,7 @@ import { Metadata } from 'next'
 import { getPostBySlug, getRelatedPosts } from '../actions'
 import { getLocalPostBySlug } from '@/data/posts'
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -146,11 +147,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 <div className="container max-w-5xl mb-16">
                     <ScrollReveal delay={0.1}>
                         <div className="relative aspect-[21/9] w-full overflow-hidden rounded-xl">
-                            {/* In a real scenario, use Next Image */}
-                            <img
+                            <Image
                                 src={post.coverImage}
                                 alt={post.title}
-                                className="object-cover w-full h-full"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 1024px"
+                                priority
                             />
                         </div>
                     </ScrollReveal>
