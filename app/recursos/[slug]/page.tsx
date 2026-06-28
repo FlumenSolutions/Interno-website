@@ -27,12 +27,14 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
         })
     }
 
+    const kw = (post as { keywords?: string | null }).keywords
     return genMeta({
         title: post.metaTitle || post.title,
         description: post.metaDescription || post.excerpt,
         path: `/recursos/${post.slug}`,
         publishedTime: post.publishedAt?.toISOString(),
         type: 'article',
+        articleKeywords: kw ? kw.split(',').map((k: string) => k.trim()).filter(Boolean) : undefined,
     })
 }
 
@@ -66,12 +68,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         .find(Boolean) ?? { title: 'Qué construimos', href: '/servicios' }
 
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flumensolutions.com'
+    const wordCount = post.content ? post.content.split(/\s+/).length : undefined
+    const updatedAt = (post as { updatedAt?: Date }).updatedAt
     const articleSchema = generateArticleSchema({
         title: post.title,
         description: post.metaDescription || post.excerpt,
         slug: post.slug,
         publishedAt: post.publishedAt?.toISOString(),
+        modifiedAt: updatedAt?.toISOString() || post.publishedAt?.toISOString(),
         image: post.coverImage || undefined,
+        wordCount,
     })
     const breadcrumbSchema = generateBreadcrumbSchema([
         { name: 'Inicio', url: siteUrl },
