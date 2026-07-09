@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 
 export function WhatsAppButton() {
     const [isVisible, setIsVisible] = useState(false)
-    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+573001234567'
+    const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+573180640132'
     const message = encodeURIComponent('Hola, me gustaría obtener más información sobre sus servicios de automatización.')
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${message}`
 
