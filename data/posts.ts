@@ -26,9 +26,9 @@ export const localPosts: LocalPost[] = [
         category: 'Guías',
         tags: ['software a la medida', 'desarrollo de software', 'pymes', 'comparativa'],
         coverImage: '/images/apps.png',
-        metaTitle: 'Software a la medida vs. comercial: cuál elegir | Flumen',
+        metaTitle: 'Software a la medida vs. software comercial: cuál conviene para tu negocio',
         metaDescription:
-            'Comparativa honesta entre software a la medida y software comercial para PyMEs: costos, tiempos, flexibilidad y cuándo conviene cada uno.',
+            '¿Comprar software enlatado o desarrollar algo propio? Comparamos costos, tiempos y flexibilidad para que elijas lo que de verdad le conviene a tu PyME en Colombia.',
         publishedAt: new Date('2026-06-18T09:00:00Z'),
         content: `Cuando un negocio necesita una herramienta de software, casi siempre aparece la misma duda: ¿pago una suscripción a un software ya hecho, o mando a construir algo a la medida? No hay una respuesta única — depende de tu caso. Esta guía compara ambas opciones con honestidad, incluyendo cuándo conviene cada una.
 
