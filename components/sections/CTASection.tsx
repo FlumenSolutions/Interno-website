@@ -27,14 +27,14 @@ export function CTASection({
     variant = 'default',
 }: CTASectionProps) {
     return (
-        <section className="relative py-20 overflow-hidden">
+        <section className="relative py-28 md:py-36 overflow-hidden">
             {/* Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-[#00B8A9] to-[#009F95]" />
 
             {/* Content */}
             <div className="container relative z-10">
                 <ScrollReveal className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-balance text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+                    <h2 className="text-balance text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[0.98]">
                         {title}
                     </h2>
                     <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
@@ -46,7 +46,7 @@ export function CTASection({
                         <Button
                             asChild
                             size="xl"
-                            className="bg-white text-[#009F95] hover:bg-white/95 hover:-translate-y-0.5 shadow-lg hover:shadow-xl transition-all duration-300 font-bold px-8 h-14 rounded-xl group"
+                            className="bg-white text-accent-700 hover:bg-white/95 hover:-translate-y-1 hover:scale-[1.02] shadow-lg hover:shadow-2xl transition-all duration-300 ease-out font-bold px-8 h-14 rounded-xl group"
                         >
                             <Link href={primaryCTA.href}>
                                 {primaryCTA.text}
