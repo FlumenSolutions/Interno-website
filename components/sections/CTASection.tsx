@@ -34,7 +34,7 @@ export function CTASection({
             {/* Content */}
             <div className="container relative z-10">
                 <ScrollReveal className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-balance text-4xl md:text-6xl lg:text-7xl font-black text-white mb-6 tracking-tight leading-[0.98]">
+                    <h2 className="text-balance text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight leading-[0.98]">
                         {title}
                     </h2>
                     <p className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed font-medium">

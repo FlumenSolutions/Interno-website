@@ -102,11 +102,11 @@
 
 /* Typography scale */
 .text-h1 {
-  @apply text-4xl md:text-6xl lg:text-7xl font-black leading-[0.95] tracking-tight;
+  @apply text-4xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight;
 }
 
 .text-h2 {
-  @apply text-3xl md:text-5xl lg:text-6xl font-black leading-[0.98] tracking-tight;
+  @apply text-3xl md:text-5xl lg:text-6xl font-bold leading-[0.98] tracking-tight;
 }
 
 .text-h3 {

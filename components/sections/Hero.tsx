@@ -41,7 +41,7 @@ export function Hero({ title, subtitle, description, primaryCTA, secondaryCTA, b
             <div className="text-center px-4 pt-24 md:pt-32">
                 {/* Title */}
                 <h1
-                    className="hero-rise mx-auto max-w-[20ch] text-balance font-black text-white mb-7 leading-[0.98] tracking-[-0.035em]"
+                    className="hero-rise mx-auto max-w-[20ch] text-balance font-bold text-white mb-7 leading-[0.98] tracking-[-0.035em]"
                     style={{ fontSize: "clamp(2.75rem, 8.5vw, 6rem)", ['--hero-delay' as any]: '40ms' }}
                 >
                     {title}

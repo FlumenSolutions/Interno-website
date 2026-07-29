@@ -35,7 +35,7 @@ export function ServiceCard({ title, description, icon, features, href }: Servic
                             {icon}
                         </div>
 
-                        <h3 className="text-xl md:text-2xl font-black tracking-tight group-hover:text-accent transition-colors duration-300">
+                        <h3 className="text-xl md:text-2xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300">
                             {title}
                         </h3>
                     </div>
