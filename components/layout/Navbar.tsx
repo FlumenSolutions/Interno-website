@@ -77,7 +77,7 @@ export function Navbar() {
                         <div className="ml-2">
                             <Button
                                 asChild
-                                className="group h-10 rounded-xl bg-accent px-5 font-semibold text-white shadow-md shadow-accent/20 transition-all hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30"
+                                className="group h-10 rounded-xl bg-accent px-5 font-semibold text-background shadow-md shadow-accent/20 transition-all hover:bg-accent-600 hover:shadow-lg hover:shadow-accent/30"
                             >
                                 <Link href="/contacto">
                                     {t('nav.cta')}

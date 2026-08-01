@@ -35,7 +35,7 @@ export function ServiceCard({ title, description, icon, features, href }: Servic
                             {icon}
                         </div>
 
-                        <h3 className="text-xl font-bold group-hover:text-accent transition-colors duration-300">
+                        <h3 className="text-xl md:text-2xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300">
                             {title}
                         </h3>
                     </div>
@@ -102,9 +102,9 @@ export function ServiceCard({ title, description, icon, features, href }: Servic
                 </CardContent>
 
                 <CardFooter className="px-6 pb-6 pt-0">
-                    <Button asChild className="w-full bg-primary text-white hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300 h-10 rounded-lg text-sm font-medium group/btn">
+                    <Button asChild className="w-full bg-primary text-white hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300 h-11 rounded-lg text-sm font-medium group/btn">
                         <Link href={href}>
-                            Solicitar servicio
+                            Ver detalles
                             <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                         </Link>
                     </Button>

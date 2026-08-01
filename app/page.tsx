@@ -9,7 +9,7 @@ import { CTASection } from '@/components/sections/CTASection'
 import { ScrollReveal } from '@/components/sections/ScrollReveal'
 import { SectionBackground } from '@/components/sections/SectionBackground'
 import { services } from '@/data/services'
-import { ArrowRight, CheckCircle, XCircle, Search, Map, Zap, Rocket } from 'lucide-react'
+import { ArrowRight, Search, Map, Zap, Rocket } from 'lucide-react'
 import { useLanguage } from '@/lib/i18n'
 
 export default function HomePage() {
@@ -42,72 +42,27 @@ export default function HomePage() {
                         </h2>
                     </ScrollReveal>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        <ScrollReveal delay={0.1}>
-                            <div className="text-center p-6 bg-destructive/10 border border-destructive/30 rounded-lg">
-                                <XCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
-                                <h3 className="font-semibold text-lg mb-2 text-white">{t('home.problem.manual')}</h3>
-                                <p className="text-sm text-white/70">
-                                    {t('home.problem.manual.desc')}
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={0.2}>
-                            <div className="text-center p-6 bg-destructive/10 border border-destructive/30 rounded-lg">
-                                <XCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
-                                <h3 className="font-semibold text-lg mb-2 text-white">{t('home.problem.errors')}</h3>
-                                <p className="text-sm text-white/70">
-                                    {t('home.problem.errors.desc')}
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={0.3}>
-                            <div className="text-center p-6 bg-destructive/10 border border-destructive/30 rounded-lg">
-                                <XCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
-                                <h3 className="font-semibold text-lg mb-2 text-white">{t('home.problem.slow')}</h3>
-                                <p className="text-sm text-white/70">
-                                    {t('home.problem.slow.desc')}
-                                </p>
-                            </div>
-                        </ScrollReveal>
-                    </div>
-
-                    <div className="flex justify-center my-8">
-                        <ArrowRight className="w-8 h-8 text-accent rotate-90" />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                        <ScrollReveal delay={0.4}>
-                            <div className="text-center p-6 bg-accent/10 border border-accent/30 rounded-lg">
-                                <CheckCircle className="w-12 h-12 text-accent mx-auto mb-4" />
-                                <h3 className="font-semibold text-lg mb-2 text-white">{t('home.solution.auto')}</h3>
-                                <p className="text-sm text-white/70">
-                                    {t('home.solution.auto.desc')}
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={0.5}>
-                            <div className="text-center p-6 bg-accent/10 border border-accent/30 rounded-lg">
-                                <CheckCircle className="w-12 h-12 text-accent mx-auto mb-4" />
-                                <h3 className="font-semibold text-lg mb-2 text-white">{t('home.solution.zero')}</h3>
-                                <p className="text-sm text-white/70">
-                                    {t('home.solution.zero.desc')}
-                                </p>
-                            </div>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={0.6}>
-                            <div className="text-center p-6 bg-accent/10 border border-accent/30 rounded-lg">
-                                <CheckCircle className="w-12 h-12 text-accent mx-auto mb-4" />
-                                <h3 className="font-semibold text-lg mb-2 text-white">{t('home.solution.247')}</h3>
-                                <p className="text-sm text-white/70">
-                                    {t('home.solution.247.desc')}
-                                </p>
-                            </div>
-                        </ScrollReveal>
+                    <div className="max-w-3xl mx-auto divide-y divide-white/10">
+                        {[
+                            { problem: t('home.problem.manual'), solution: t('home.solution.auto'), solutionDesc: t('home.solution.auto.desc') },
+                            { problem: t('home.problem.errors'), solution: t('home.solution.zero'), solutionDesc: t('home.solution.zero.desc') },
+                            { problem: t('home.problem.slow'), solution: t('home.solution.247'), solutionDesc: t('home.solution.247.desc') },
+                        ].map((row, i) => (
+                            <ScrollReveal key={i} delay={i * 0.1}>
+                                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 py-6">
+                                    <span className="text-base sm:text-lg text-white/40 line-through decoration-white/20 sm:w-[38%] sm:text-right sm:flex-shrink-0">
+                                        {row.problem}
+                                    </span>
+                                    <ArrowRight className="hidden sm:block w-5 h-5 text-accent flex-shrink-0" />
+                                    <span className="text-lg sm:text-xl font-semibold text-white">
+                                        {row.solution}
+                                        <span className="block sm:inline sm:before:content-['_—_'] text-sm sm:text-base font-normal text-white/60">
+                                            {row.solutionDesc}
+                                        </span>
+                                    </span>
+                                </div>
+                            </ScrollReveal>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -178,12 +133,14 @@ export default function HomePage() {
                 <SectionBackground variant="dots" glows={['bottom']} />
                 <div className="container relative z-10">
                     <ScrollReveal>
-                        <div className="flex flex-col items-center mb-16">
-                            <h2 className="text-h2 text-center mb-6">{t('home.services.title')}</h2>
-                            <div className="w-24 h-1.5 bg-accent rounded-full mb-8" />
-                            <p className="text-body text-center text-muted-foreground max-w-2xl mx-auto">
-                                {t('home.services.subtitle')}
-                            </p>
+                        <div className="max-w-5xl mx-auto mb-16 md:mb-20">
+                            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-12">
+                                <h2 className="text-h2 max-w-xl">{t('home.services.title')}</h2>
+                                <p className="text-body text-muted-foreground max-w-sm md:text-right md:pb-2">
+                                    {t('home.services.subtitle')}
+                                </p>
+                            </div>
+                            <div className="w-24 h-1.5 bg-accent rounded-full mt-8" />
                         </div>
                     </ScrollReveal>
 
@@ -207,7 +164,7 @@ export default function HomePage() {
             </section>
 
             {/* Use Cases & Trust Section */}
-            <section className="relative py-24 bg-background overflow-hidden">
+            <section className="section-padding relative bg-background overflow-hidden">
                 {/* Background Effects */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/5 via-background to-background pointer-events-none" />
 
@@ -216,26 +173,19 @@ export default function HomePage() {
                         <h2 className="text-h2 text-center mb-16 text-white">{t('home.usecases.title')}</h2>
                     </ScrollReveal>
 
-                    {/* Use Cases Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto px-4 mb-16 lg:mb-20">
+                    {/* Use Cases */}
+                    <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mx-auto px-4 mb-16 lg:mb-20">
                         {[1, 2, 3, 4, 5, 6].map((num, index) => (
-                            <motion.div
+                            <motion.span
                                 key={num}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, margin: '-40px' }}
-                                transition={{ delay: index * 0.05, duration: 0.4 }}
-                                className={`
-                                    flex items-center gap-4 p-4 rounded-lg border border-white/5 bg-white/[0.02]
-                                    hover:bg-white/[0.04] hover:border-accent/30 hover:-translate-y-0.5 transition-all duration-300 cursor-default
-                                    ${index % 3 === 1 ? 'lg:translate-y-6 lg:hover:translate-y-[calc(1.5rem-2px)]' : ''}
-                                `}
+                                transition={{ delay: index * 0.04, duration: 0.3 }}
+                                className="text-sm text-white/75 bg-white/[0.03] px-4 py-2 rounded-full border border-white/10 hover:border-accent/30 hover:text-white transition-colors duration-300 cursor-default"
                             >
-                                <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 border border-accent/20 shadow-[0_0_10px_rgba(0,184,169,0.1)]">
-                                    <CheckCircle className="w-4 h-4 text-accent drop-shadow-[0_0_5px_rgba(0,184,169,0.5)]" />
-                                </div>
-                                <span className="text-sm font-medium text-white/90 tracking-wide">{t(`home.usecase.${num}`)}</span>
-                            </motion.div>
+                                {t(`home.usecase.${num}`)}
+                            </motion.span>
                         ))}
                     </div>
 

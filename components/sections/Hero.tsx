@@ -32,24 +32,24 @@ export function Hero({ title, subtitle, description, primaryCTA, secondaryCTA, b
                 "#4A5F9D", // Medium Blue
                 "#1ECAD3", // Bright Aqua
             ]}
-            waveWidth={48}
+            waveWidth={56}
             backgroundFill="#0F1524"
-            blur={11}
+            blur={10}
             speed="slow"
-            waveOpacity={0.5}
+            waveOpacity={0.65}
         >
             <div className="text-center px-4 pt-24 md:pt-32">
                 {/* Title */}
                 <h1
-                    className="hero-rise mx-auto max-w-[18ch] text-balance font-bold text-white mb-6 leading-[1.08] tracking-[-0.02em]"
-                    style={{ fontSize: "clamp(2.25rem, 6vw, 5.25rem)", ['--hero-delay' as any]: '40ms' }}
+                    className="hero-rise mx-auto max-w-[20ch] text-balance font-bold text-white mb-7 leading-[0.98] tracking-[-0.035em]"
+                    style={{ fontSize: "clamp(2.75rem, 8.5vw, 6rem)", ['--hero-delay' as any]: '40ms' }}
                 >
                     {title}
                 </h1>
 
                 {/* Subtitle */}
                 <p
-                    className="hero-rise text-pretty text-lg sm:text-xl md:text-2xl text-white/85 mb-8 max-w-2xl mx-auto leading-relaxed"
+                    className="hero-rise text-pretty text-lg sm:text-xl md:text-2xl font-light text-white/75 mb-8 max-w-2xl mx-auto leading-relaxed"
                     style={{ ['--hero-delay' as any]: '160ms' }}
                 >
                     {subtitle}
@@ -73,12 +73,12 @@ export function Hero({ title, subtitle, description, primaryCTA, secondaryCTA, b
                     {primaryCTA && (
                         <Button
                             asChild
-                            size="lg"
-                            className="w-full sm:w-auto text-lg px-8 py-6 rounded-xl bg-accent hover:bg-accent/90 text-white shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/30 hover:-translate-y-0.5 transition-all group"
+                            size="xl"
+                            className="w-full sm:w-auto text-lg sm:text-xl px-10 py-7 rounded-xl bg-accent hover:bg-accent-600 text-background font-bold shadow-[0_0_40px_rgba(0,184,169,0.35)] hover:shadow-[0_0_60px_rgba(0,184,169,0.5)] hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out group"
                         >
                             <Link href={primaryCTA.href}>
                                 {primaryCTA.text}
-                                <span className="ml-2 group-hover:translate-x-1 transition-transform inline-block">
+                                <span className="ml-2 group-hover:translate-x-1.5 transition-transform inline-block">
                                     →
                                 </span>
                             </Link>

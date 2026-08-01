@@ -43,7 +43,7 @@ export function Footer() {
                                 />
                             </Link>
                             <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
-                                Automatización inteligente para empresas que buscan escalar. Recupera tiempo, elimina errores y optimiza tus operaciones con tecnología de vanguardia.
+                                Software a la medida, construido con IA. Reemplazamos el Excel que se quedó corto y las herramientas que no encajan con tu negocio.
                             </p>
                             <div className="flex flex-col gap-3 mt-2">
                                 <a href="mailto:info@flumensolutions.com" className="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition-colors group">
@@ -93,13 +93,13 @@ export function Footer() {
 
                     {/* CTA Column */}
                     <div className="lg:col-span-3">
-                        <h3 className="font-semibold text-white mb-6">¿Listo para escalar?</h3>
+                        <h3 className="font-semibold text-white mb-6">¿Tienes una idea en mente?</h3>
                         <p className="text-sm text-slate-400 mb-6 leading-relaxed">
-                            Agenda una auditoría gratuita y descubre el potencial de tu empresa.
+                            Cuéntanos qué necesitas, sin compromiso.
                         </p>
                         <Link
                             href="/contacto"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-[#0B0F1A] rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm group"
+                            className="inline-flex items-center justify-center gap-2 min-h-[44px] px-5 py-3 bg-white text-background rounded-lg hover:bg-gray-100 transition-colors font-medium text-sm group"
                         >
                             Cuéntanos tu idea
                             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
