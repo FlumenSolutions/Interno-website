@@ -1,4 +1,45 @@
+'use client'
+
 import Script from 'next/script'
+import { Suspense, useEffect } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
+
+declare global {
+    interface Window {
+        dataLayer: unknown[]
+        gtag: (...args: unknown[]) => void
+        fbq: (...args: unknown[]) => void
+    }
+}
+
+/**
+ * Next.js hace navegación client-side entre rutas (no hay full page reload),
+ * así que gtag/fbq solo se enteran del primer page_view a menos que los
+ * avisemos manualmente en cada cambio de pathname/query.
+ */
+function RouteChangeTracker() {
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '')
+
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'page_view', {
+                page_path: url,
+                page_location: window.location.href,
+                page_title: document.title,
+            })
+        }
+
+        if (typeof window.fbq === 'function') {
+            window.fbq('track', 'PageView')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname, searchParams])
+
+    return null
+}
 
 /**
  * Centraliza los scripts de medición y retargeting.
@@ -9,6 +50,10 @@ import Script from 'next/script'
  *   NEXT_PUBLIC_GA_ID          -> Google Analytics 4 (ej. G-XXXXXXXXXX)
  *   NEXT_PUBLIC_META_PIXEL_ID  -> Meta/Facebook Pixel (solo dígitos)
  *   NEXT_PUBLIC_LINKEDIN_ID    -> LinkedIn Insight Tag (Partner ID, solo dígitos)
+ *
+ * El page_view inicial y cada cambio de ruta posterior se reportan desde
+ * RouteChangeTracker, así que send_page_view va en false para no duplicar
+ * el primer hit.
  */
 export function Analytics() {
     const gaId = process.env.NEXT_PUBLIC_GA_ID
@@ -28,8 +73,9 @@ export function Analytics() {
                         {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
               gtag('js', new Date());
-              gtag('config', '${gaId}');
+              gtag('config', '${gaId}', { send_page_view: false });
             `}
                     </Script>
                 </>
@@ -49,7 +95,6 @@ export function Analytics() {
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
               fbq('init', '${metaPixelId}');
-              fbq('track', 'PageView');
             `}
                     </Script>
                     <noscript>
@@ -95,6 +140,12 @@ export function Analytics() {
                         />
                     </noscript>
                 </>
+            )}
+
+            {(gaId || metaPixelId) && (
+                <Suspense fallback={null}>
+                    <RouteChangeTracker />
+                </Suspense>
             )}
         </>
     )
