@@ -17,9 +17,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/contacto',
     ]
 
+    // Sin lastModified: no tenemos fecha real de última edición por página
+    // estática, y poner new Date() en cada build/request le miente a Google
+    // ("esto cambió ahora mismo" en cada request) — eso hace que ignore la
+    // señal. Mejor omitirla que fingirla.
     const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
         url: `${baseUrl}${route}`,
-        lastModified: new Date(),
         changeFrequency: route === '' ? 'daily' : 'weekly',
         priority: route === '' ? 1 : route.startsWith('/servicios') ? 0.9 : 0.8,
     }))
@@ -28,12 +31,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     let postEntries: MetadataRoute.Sitemap = []
     try {
         const posts = await getPosts()
-        postEntries = posts.map((post: any) => ({
-            url: `${baseUrl}/recursos/${post.slug}`,
-            lastModified: post.updatedAt ? new Date(post.updatedAt) : post.publishedAt ? new Date(post.publishedAt) : new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.7,
-        }))
+        postEntries = posts.map((post: any) => {
+            const realDate = post.updatedAt || post.publishedAt
+            return {
+                url: `${baseUrl}/recursos/${post.slug}`,
+                ...(realDate ? { lastModified: new Date(realDate) } : {}),
+                changeFrequency: 'monthly',
+                priority: 0.7,
+            }
+        })
     } catch {
         postEntries = []
     }
