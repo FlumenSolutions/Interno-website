@@ -6,7 +6,7 @@ import { generateMetadata as genMeta } from '@/lib/seo'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = genMeta({
-    title: 'Qué construimos — Software a la medida con IA',
+    title: 'Qué construimos con IA para tu negocio',
     description:
         'Aplicaciones a la medida, páginas web, chatbots con IA y automatización de procesos. Software hecho para tu negocio, construido más rápido con IA. Colombia.',
     path: '/servicios',
