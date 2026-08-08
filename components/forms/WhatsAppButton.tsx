@@ -2,8 +2,11 @@
 
 import { MessageCircle } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
+import { trackGA4Event, trackMetaEvent } from '@/lib/analytics-events'
 
 export function WhatsAppButton() {
+    const pathname = usePathname()
     const [isVisible, setIsVisible] = useState(false)
     const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '+573180640132'
     const message = encodeURIComponent('Hola, me gustaría obtener más información sobre sus servicios de automatización.')
@@ -17,11 +20,17 @@ export function WhatsAppButton() {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
+    if (pathname?.startsWith('/lab')) return null
+
     return (
         <a
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => {
+                trackGA4Event('whatsapp_click', { page_path: pathname })
+                trackMetaEvent('Contact')
+            }}
             className={`fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20BA5A] transition-all duration-300 group ${isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                 }`}
             aria-label="Contactar por WhatsApp"
