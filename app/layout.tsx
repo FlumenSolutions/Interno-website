@@ -7,6 +7,7 @@ import { WhatsAppButton } from '@/components/forms/WhatsAppButton'
 import { LanguageProvider } from '@/lib/i18n'
 import { generateMetadata as genMeta, generateOrganizationSchema, generateLocalBusinessSchema, generateWebSiteSchema } from '@/lib/seo'
 import { Analytics } from '@/components/analytics/Analytics'
+import { CookieConsent } from '@/components/analytics/CookieConsent'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
@@ -53,6 +54,7 @@ export default function RootLayout({
                     <main>{children}</main>
                     <Footer />
                     <WhatsAppButton />
+                    <CookieConsent />
                 </LanguageProvider>
             </body>
         </html>

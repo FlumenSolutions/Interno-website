@@ -1,8 +1,9 @@
 'use client'
 
 import Script from 'next/script'
-import { Suspense, useEffect } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
+import { hasRejectedCookies } from '@/lib/cookie-consent'
 
 declare global {
     interface Window {
@@ -23,6 +24,7 @@ function RouteChangeTracker() {
     const searchParams = useSearchParams()
 
     useEffect(() => {
+        if (hasRejectedCookies()) return
         const url = pathname + (searchParams.toString() ? `?${searchParams.toString()}` : '')
 
         if (typeof window.gtag === 'function') {
@@ -61,6 +63,17 @@ export function Analytics() {
     const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID
     const linkedInId = process.env.NEXT_PUBLIC_LINKEDIN_ID
 
+    // Modelo opt-out: por defecto medimos, salvo que la persona ya haya
+    // rechazado antes en este navegador. Se resuelve en cliente para no
+    // desincronizar el render de servidor (localStorage no existe ahí).
+    const [rejected, setRejected] = useState<boolean | null>(null)
+
+    useEffect(() => {
+        setRejected(hasRejectedCookies())
+    }, [])
+
+    if (rejected !== false) return null
+
     return (
         <>
             {/* Google Analytics 4 */}
@@ -75,6 +88,7 @@ export function Analytics() {
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               window.gtag = gtag;
+              gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'granted' });
               gtag('js', new Date());
               gtag('config', '${gaId}', { send_page_view: false });
             `}
