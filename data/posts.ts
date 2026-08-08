@@ -100,7 +100,7 @@ No se trata de cuál es "mejor" en abstracto, sino de cuál encaja con tu caso. 
         category: 'Guías',
         tags: ['whatsapp', 'automatización', 'atención al cliente', 'pymes'],
         coverImage: '/images/whatsapp.png',
-        metaTitle: 'Cómo automatizar WhatsApp en tu negocio | Flumen',
+        metaTitle: 'Cómo automatizar WhatsApp en tu negocio',
         metaDescription:
             'Guía práctica para automatizar la atención por WhatsApp Business en tu PyME: respuestas automáticas, cotizaciones, recordatorios y cuándo dejar pasar a una persona.',
         publishedAt: new Date('2026-06-12T09:00:00Z'),
@@ -167,7 +167,7 @@ Si quieres, en una auditoría gratuita revisamos tus conversaciones reales de Wh
         category: 'Guías',
         tags: ['crm', 'integración', 'automatización', 'pymes'],
         coverImage: '/images/crm.png',
-        metaTitle: 'Cómo integrar tu CRM en una PyME | Flumen',
+        metaTitle: 'Cómo integrar tu CRM en una PyME',
         metaDescription:
             'Qué significa integrar un CRM con tus otras herramientas (WhatsApp, correo, facturación) y cómo empezar paso a paso sin un proyecto costoso.',
         publishedAt: new Date('2026-06-08T09:00:00Z'),
@@ -223,7 +223,7 @@ Si tu CRM se siente como una carga en vez de una ayuda, probablemente el problem
         category: 'Tendencias',
         tags: ['inteligencia artificial', 'automatización', 'pymes', 'tendencias'],
         coverImage: '/images/ia.png',
-        metaTitle: 'Automatización con IA para PyMEs: qué es realista hoy | Flumen',
+        metaTitle: 'Automatización con IA para PyMEs: qué es realista hoy',
         metaDescription:
             'Qué puede hacer la inteligencia artificial por una PyME hoy mismo, qué todavía es exageración, y cómo evaluar si te conviene sin caer en promesas vacías.',
         publishedAt: new Date('2026-06-04T09:00:00Z'),
@@ -287,7 +287,7 @@ Si quieres saber qué tarea de tu negocio es buena candidata para IA —y cuál 
         category: 'Guías',
         tags: ['automatización', 'pymes', 'productividad'],
         coverImage: '/images/senales.png',
-        metaTitle: '5 señales de que tu PyME necesita automatización | Flumen',
+        metaTitle: '5 señales de que tu PyME necesita automatización',
         metaDescription:
             'Reconoce las señales de que tu empresa está lista para automatizar procesos: tareas repetitivas, errores manuales, respuestas lentas y más.',
         publishedAt: new Date('2026-06-10T09:00:00Z'),
