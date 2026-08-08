@@ -282,7 +282,9 @@ export default function PrivacyPage() {
                             <li>Cookies, etiquetas de seguimiento, analítica web o telemetría del sistema.</li>
                         </ul>
                         <p className="mb-6">
-                            El uso de dichos datos se regula en la Política de Cookies y no implicará perfilamiento automatizado con efectos jurídicos, salvo autorización específica.
+                            El uso de dichos datos se regula en la{' '}
+                            <a href="/cookies" className="text-white underline hover:no-underline">Política de Cookies</a>
+                            {' '}y no implicará perfilamiento automatizado con efectos jurídicos, salvo autorización específica.
                         </p>
 
                         <h3 className="text-xl font-semibold text-white mb-2">7.6. Datos que FLUMEN NO recolecta</h3>
