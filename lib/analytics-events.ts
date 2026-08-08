@@ -14,3 +14,9 @@ export function trackMetaEvent(eventName: string, params?: Record<string, unknow
         window.fbq('track', eventName, params)
     }
 }
+
+export function trackLinkedInConversion(conversionId: number) {
+    if (typeof window !== 'undefined' && typeof window.lintrk === 'function') {
+        window.lintrk('track', { conversion_id: conversionId })
+    }
+}

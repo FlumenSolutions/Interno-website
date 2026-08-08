@@ -3,7 +3,9 @@
 import { MessageCircle } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { trackGA4Event, trackMetaEvent } from '@/lib/analytics-events'
+import { trackGA4Event, trackMetaEvent, trackLinkedInConversion } from '@/lib/analytics-events'
+
+const LINKEDIN_CONTACT_CONVERSION_ID = 29280354
 
 export function WhatsAppButton() {
     const pathname = usePathname()
@@ -30,6 +32,7 @@ export function WhatsAppButton() {
             onClick={() => {
                 trackGA4Event('whatsapp_click', { page_path: pathname })
                 trackMetaEvent('Contact')
+                trackLinkedInConversion(LINKEDIN_CONTACT_CONVERSION_ID)
             }}
             className={`fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-[calc(1.5rem+env(safe-area-inset-right))] z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20BA5A] transition-all duration-300 group ${isVisible ? 'scale-100 opacity-100' : 'scale-0 opacity-0'
                 }`}
