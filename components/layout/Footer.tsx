@@ -20,6 +20,7 @@ const company = [
 const legal = [
     { name: 'Privacidad', href: '/privacidad' },
     { name: 'Términos', href: '/terminos' },
+    { name: 'Cookies', href: '/cookies' },
 ]
 
 export function Footer() {
