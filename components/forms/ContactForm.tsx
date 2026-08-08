@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { contactFormSchema, auditFormSchema, type ContactFormData, type AuditFormData } from '@/lib/validations'
+import { trackGA4Event, trackMetaEvent } from '@/lib/analytics-events'
 import { Loader2, CheckCircle, AlertCircle } from 'lucide-react'
 
 interface ContactFormProps {
@@ -73,6 +74,8 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
             }
 
             setStatus('success')
+            trackGA4Event('generate_lead', { form_source: source })
+            trackMetaEvent('Lead', { content_name: source === 'audit' ? 'audit_form' : 'contact_form' })
             setFormData({
                 name: '',
                 email: '',
