@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
+import { generateMetadata as genMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-    title: 'Términos y Condiciones | Flumen Solutions',
+export const metadata: Metadata = genMeta({
+    title: 'Términos y Condiciones',
     description: 'Lee los términos y condiciones de uso del sitio y los servicios de Flumen Solutions.',
-}
+    path: '/terminos',
+})
 
 export default function TermsPage() {
     return (

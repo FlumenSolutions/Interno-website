@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
+import { generateMetadata as genMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-    title: 'Política de Cookies | Flumen Solutions',
+export const metadata: Metadata = genMeta({
+    title: 'Política de Cookies',
     description: 'Conoce qué cookies y tecnologías de seguimiento usa Flumen Solutions, con qué propósito y cómo puedes administrarlas.',
-}
+    path: '/cookies',
+})
 
 export default function CookiesPage() {
     return (

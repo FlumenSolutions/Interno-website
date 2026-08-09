@@ -1,6 +1,8 @@
 import { MetadataRoute } from 'next'
 import { getPosts } from './recursos/actions'
 
+const legalRoutes = ['/privacidad', '/terminos', '/cookies']
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flumensolutions.com'
 
@@ -15,17 +17,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         '/recursos',
         '/nosotros',
         '/contacto',
+        // Legales: tráfico bajo, pero Google las usa como señal de que hay un
+        // negocio real detrás. Prioridad baja para no competir con las
+        // páginas comerciales.
+        ...legalRoutes,
     ]
 
     // Sin lastModified: no tenemos fecha real de última edición por página
     // estática, y poner new Date() en cada build/request le miente a Google
     // ("esto cambió ahora mismo" en cada request) — eso hace que ignore la
     // señal. Mejor omitirla que fingirla.
-    const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
-        url: `${baseUrl}${route}`,
-        changeFrequency: route === '' ? 'daily' : 'weekly',
-        priority: route === '' ? 1 : route.startsWith('/servicios') ? 0.9 : 0.8,
-    }))
+    const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((route) => {
+        const isLegal = legalRoutes.includes(route)
+        return {
+            url: `${baseUrl}${route}`,
+            changeFrequency: route === '' ? 'daily' : isLegal ? 'yearly' : 'weekly',
+            priority: route === '' ? 1 : isLegal ? 0.3 : route.startsWith('/servicios') ? 0.9 : 0.8,
+        }
+    })
 
     // Posts del blog (BD o respaldo local). Si falla, el sitemap igual se genera.
     let postEntries: MetadataRoute.Sitemap = []
