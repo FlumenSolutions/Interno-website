@@ -166,7 +166,6 @@ export default function ProcesoPage() {
                     text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
-                variant="accent"
             />
         </>
     )

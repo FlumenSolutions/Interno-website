@@ -191,7 +191,6 @@ export default function NosotrosPage() {
                     text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
-                variant="accent"
             />
         </>
     )

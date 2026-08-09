@@ -16,7 +16,6 @@ interface CTASectionProps {
         text: string
         href: string
     }
-    variant?: 'default' | 'accent'
 }
 
 export function CTASection({
@@ -24,7 +23,6 @@ export function CTASection({
     description,
     primaryCTA,
     secondaryCTA,
-    variant = 'default',
 }: CTASectionProps) {
     return (
         <section className="relative py-28 md:py-36 overflow-hidden">

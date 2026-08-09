@@ -47,7 +47,7 @@ export function Footer() {
                                 Software a la medida, construido con IA. Reemplazamos el Excel que se quedó corto y las herramientas que no encajan con tu negocio.
                             </p>
                             <div className="flex flex-col gap-3 mt-2">
-                                <a href="mailto:info@flumensolutions.com" className="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition-colors group">
+                                <a href="mailto:info@flumensolutions.com" className="flex items-center gap-3 text-sm text-slate-400 hover:text-white transition-colors group py-1 -my-1">
                                     <Mail className="w-4 h-4 text-slate-500 group-hover:text-white transition-colors" />
                                     info@flumensolutions.com
                                 </a>
@@ -67,7 +67,11 @@ export function Footer() {
                                 <li key={item.name}>
                                     <Link
                                         href={item.href}
-                                        className="text-sm text-slate-400 hover:text-white transition-colors opacity-80 hover:opacity-100 block"
+                                        // py-1 sube el área tocable de 20px a 28px, por
+                                        // encima del mínimo 24x24 de WCAG 2.5.8. El -my-1
+                                        // la descuenta del flujo, así que el espaciado
+                                        // visual del footer no cambia.
+                                        className="text-sm text-slate-400 hover:text-white transition-colors opacity-80 hover:opacity-100 block py-1 -my-1"
                                     >
                                         {item.name}
                                     </Link>
@@ -83,7 +87,11 @@ export function Footer() {
                                 <li key={item.name}>
                                     <Link
                                         href={item.href}
-                                        className="text-sm text-slate-400 hover:text-white transition-colors opacity-80 hover:opacity-100 block"
+                                        // py-1 sube el área tocable de 20px a 28px, por
+                                        // encima del mínimo 24x24 de WCAG 2.5.8. El -my-1
+                                        // la descuenta del flujo, así que el espaciado
+                                        // visual del footer no cambia.
+                                        className="text-sm text-slate-400 hover:text-white transition-colors opacity-80 hover:opacity-100 block py-1 -my-1"
                                     >
                                         {item.name}
                                     </Link>
@@ -118,7 +126,7 @@ export function Footer() {
                             <Link
                                 key={item.name}
                                 href={item.href}
-                                className="text-xs text-slate-400 hover:text-white transition-colors"
+                                className="text-xs text-slate-400 hover:text-white transition-colors py-1.5 -my-1.5"
                             >
                                 {item.name}
                             </Link>
