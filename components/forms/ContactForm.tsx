@@ -19,6 +19,21 @@ interface ContactFormProps {
 
 type FormData = ContactFormData & AuditFormData
 
+/**
+ * Orden visual de los campos. Zod devuelve los errores en el orden del esquema,
+ * que no tiene por qué coincidir con el del formulario; para enfocar "el
+ * primero" hay que saber cuál va primero en pantalla.
+ */
+const ORDEN_CAMPOS: (keyof FormData)[] = [
+    'name',
+    'email',
+    'phone',
+    'company',
+    'automationArea',
+    'companySize',
+    'message',
+]
+
 export function ContactForm({ source = 'contact', title, description }: ContactFormProps) {
     const [formData, setFormData] = useState<FormData>({
         name: '',
@@ -70,6 +85,21 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
             })
             setErrors(fieldErrors)
             setStatus('idle')
+
+            // Lleva el foco al primer campo con error, en orden visual. Sin esto
+            // el envío fallido no avisa de nada: los campos quedan marcados,
+            // pero si el formulario está fuera de la vista no se percibe, y con
+            // lector de pantalla el foco se queda en el botón. Al enfocar el
+            // campo se anuncia su etiqueta y su error, que ya van enlazados con
+            // aria-describedby. El setTimeout espera al re-render de React.
+            const primerCampoConError = ORDEN_CAMPOS.find((campo) => fieldErrors[campo])
+            if (primerCampoConError) {
+                setTimeout(() => {
+                    const el = document.getElementById(primerCampoConError)
+                    el?.focus()
+                    el?.scrollIntoView({ block: 'center', behavior: 'smooth' })
+                }, 0)
+            }
             return
         }
 
