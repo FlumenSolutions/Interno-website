@@ -47,7 +47,7 @@ export default function ServiciosPage() {
                             </p>
                             <a
                                 href="/contacto"
-                                className="inline-block px-8 py-3 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors font-medium shadow-lg shadow-accent/20"
+                                className="inline-block px-8 py-3 bg-accent text-background rounded-md hover:bg-accent/90 transition-colors font-medium shadow-lg shadow-accent/20"
                             >
                                 Cuéntanos tu idea
                             </a>

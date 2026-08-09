@@ -50,7 +50,7 @@ export default async function RecursosPage({
                                     href={cat === 'Todas' ? '/recursos' : `/recursos?category=${encodeURIComponent(cat)}`}
                                     scroll={false}
                                     className={`rounded-full px-4 py-2 text-sm font-medium transition-all ${isActive
-                                        ? 'bg-accent text-white shadow-md shadow-accent/20'
+                                        ? 'bg-accent text-background shadow-md shadow-accent/20'
                                         : 'border border-white/10 bg-white/[0.03] text-white/65 hover:border-accent/30 hover:text-white'
                                         }`}
                                 >
@@ -93,7 +93,7 @@ export default async function RecursosPage({
                             </p>
                             <Link
                                 href="/contacto"
-                                className="inline-flex items-center justify-center px-6 py-3 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent/90 transition-colors"
+                                className="inline-flex items-center justify-center px-6 py-3 bg-accent text-background text-sm font-semibold rounded-lg hover:bg-accent/90 transition-colors"
                             >
                                 Hablar con Flumen
                             </Link>
@@ -112,7 +112,7 @@ export default async function RecursosPage({
                             </p>
                             <a
                                 href="/contacto"
-                                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-white text-sm font-semibold rounded-xl shadow-md shadow-accent/20 hover:bg-accent/90 hover:-translate-y-0.5 transition-all"
+                                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-accent text-background text-sm font-semibold rounded-xl shadow-md shadow-accent/20 hover:bg-accent/90 hover:-translate-y-0.5 transition-all"
                             >
                                 Suscribirme
                                 <span aria-hidden="true">→</span>
