@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { Hero } from '@/components/sections/Hero'
 import { ServiceCard } from '@/components/sections/ServiceCard'
 import { ProcessStep } from '@/components/sections/ProcessStep'
@@ -173,21 +172,24 @@ export default function HomePage() {
                         <h2 className="text-h2 text-center mb-16 text-white">{t('home.usecases.title')}</h2>
                     </ScrollReveal>
 
-                    {/* Use Cases */}
-                    <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mx-auto px-4 mb-16 lg:mb-20">
-                        {[1, 2, 3, 4, 5, 6].map((num, index) => (
-                            <motion.span
-                                key={num}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: '-40px' }}
-                                transition={{ delay: index * 0.04, duration: 0.3 }}
-                                className="text-sm text-white/75 bg-white/[0.03] px-4 py-2 rounded-full border border-white/10 hover:border-accent/30 hover:text-white transition-colors duration-300 cursor-default"
-                            >
-                                {t(`home.usecase.${num}`)}
-                            </motion.span>
-                        ))}
-                    </div>
+                    {/* Use Cases — el revelado va por ScrollReveal, no por
+                        `initial={{opacity:0}}` de framer-motion: eso último se
+                        serializa como opacity:0 en el HTML, así que sin JS las
+                        seis píldoras quedaban invisibles para siempre.
+                        ScrollReveal parte de visible y solo se arma si JS
+                        confirma que puede observar. */}
+                    <ScrollReveal>
+                        <div className="flex flex-wrap justify-center gap-2.5 max-w-3xl mx-auto px-4 mb-16 lg:mb-20">
+                            {[1, 2, 3, 4, 5, 6].map((num) => (
+                                <span
+                                    key={num}
+                                    className="text-sm text-white/75 bg-white/[0.03] px-4 py-2 rounded-full border border-white/10 hover:border-accent/30 hover:text-white transition-colors duration-300 cursor-default"
+                                >
+                                    {t(`home.usecase.${num}`)}
+                                </span>
+                            ))}
+                        </div>
+                    </ScrollReveal>
 
                     {/* Divider */}
                     <div className="relative w-full max-w-4xl mx-auto mb-16 lg:mb-20">
