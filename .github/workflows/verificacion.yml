@@ -1,0 +1,51 @@
+# Comprueba que cada cambio propuesto no rompe el sitio.
+#
+# Corre en cada pull request contra main y en cada push a main. Si algo falla,
+# GitHub marca el PR en rojo antes de que se fusione.
+#
+# No necesita credenciales: el build llega a la base de datos solo para armar
+# el sitemap, y app/recursos/actions.ts cae a los artículos de respaldo locales
+# si no responde. Verificado — el build termina en éxito sin DATABASE_URL.
+name: Verificación
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Si se empuja dos veces seguidas a la misma rama, cancela la ejecución vieja
+# en vez de dejar las dos corriendo.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificar:
+    name: Tipos, lint y build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar el código
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          # Node 20 LTS: es lo que Next 14 soporta de forma estable.
+          node-version: '20'
+          cache: npm
+
+      - name: Instalar dependencias
+        # `npm ci` instala exactamente lo del package-lock, sin actualizar nada.
+        # El postinstall del proyecto se encarga de `prisma generate`.
+        run: npm ci
+
+      - name: Comprobar tipos
+        run: npx tsc --noEmit
+
+      - name: Revisar código
+        run: npx next lint
+
+      - name: Compilar el sitio
+        run: npx next build
