@@ -251,7 +251,6 @@ export default function ServicePage({ params }: ServicePageProps) {
                     text: 'Cuéntanos tu idea',
                     href: '/contacto',
                 }}
-                variant="accent"
             />
         </>
     )

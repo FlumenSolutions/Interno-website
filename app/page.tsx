@@ -208,7 +208,6 @@ export default function HomePage() {
                     text: t('home.cta.primary'),
                     href: '/contacto',
                 }}
-                variant="accent"
             />
         </>
     )
