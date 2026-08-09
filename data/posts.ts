@@ -333,6 +333,75 @@ Reconocer estas señales es el primer paso. El segundo es mapear qué procesos c
             },
         ],
     },
+    {
+        title: 'Chatbot vs. atención humana: cuándo automatizar y cuándo no',
+        slug: 'chatbot-vs-atencion-humana-cuando-automatizar',
+        excerpt:
+            'Automatizar de más molesta a tus clientes; automatizar de menos agota a tu equipo. Un marco práctico para decidir qué le toca al chatbot y qué le toca a una persona.',
+        category: 'Guías',
+        tags: ['chatbots', 'atención al cliente', 'automatización', 'pymes'],
+        coverImage: '/images/chatbots.png',
+        metaTitle: 'Cuándo automatizar tu atención al cliente',
+        metaDescription:
+            'Cuándo conviene un chatbot y cuándo una persona: un marco práctico para decidir qué automatizar en tu atención al cliente sin perder la relación con quien te compra.',
+        publishedAt: new Date('2026-08-08T09:00:00Z'),
+        content: `"¿Deberíamos poner un chatbot?" es la pregunta equivocada. La pregunta correcta es: ¿qué parte de mi atención al cliente le conviene a un flujo automatizado, y qué parte necesita a una persona? Confundir las dos cosas es la razón número uno por la que un chatbot termina apagado a las pocas semanas.
+
+Esto aplica sin importar el canal — WhatsApp, chat del sitio, correo o teléfono. El marco es el mismo.
+
+## El error en ambas direcciones
+
+Automatizar de más y automatizar de menos fallan por razones distintas, pero fallan igual de rápido:
+
+- **Automatizar de más**: el cliente siente que habla con una pared. Un reclamo real recibe una respuesta genérica, o el bot no sabe salir de su guion cuando la conversación se sale del molde. El cliente se frustra y tú pierdes la venta o la relación.
+- **Automatizar de menos**: tu equipo repite el mismo mensaje veinte veces al día, los tiempos de respuesta se alargan, y las tareas mecánicas les quitan tiempo al trabajo que sí requiere criterio.
+
+El punto medio no es "un poco de cada cosa al azar" — es saber exactamente dónde trazar la línea.
+
+## Tres preguntas para decidir
+
+1. **¿La respuesta sigue una regla fija?** Horarios, precios de lista, estado de un pedido, disponibilidad — si la respuesta correcta no cambia según el caso, es candidata a automatizarse.
+2. **¿Una respuesta equivocada cuesta caro?** Un reclamo delicado, una negociación de alto valor, una excepción a la política — si el margen de error es bajo, necesita criterio humano.
+3. **¿Se repite todos los días?** Si tu equipo escribe casi el mismo mensaje una y otra vez, automatizarlo libera tiempo real. Si es un caso raro, no vale la pena construir un flujo para eso.
+
+> Regla práctica: automatiza lo que es repetitivo y de bajo riesgo. Deja en manos de una persona lo que es infrecuente o de alto riesgo — aunque también sea repetitivo.
+
+## Lo que sí conviene automatizar
+
+- Preguntas frecuentes (horarios, ubicación, formas de pago).
+- Clasificación inicial: entender qué necesita el cliente y dirigirlo al lugar correcto.
+- Cotizaciones simples que siguen una fórmula clara.
+- Recordatorios, confirmaciones y seguimiento de estado.
+
+## Lo que conviene dejar en manos de una persona
+
+- Reclamos y clientes molestos.
+- Negociaciones y ventas de alto valor.
+- Cualquier excepción a la regla — el chatbot no debe improvisar política de la empresa.
+- El primer contacto con un cliente grande o estratégico.
+
+## El punto que casi nadie considera: la salida
+
+Un buen flujo automatizado no solo responde bien — también sabe **cuándo rendirse** y pasarle el caso a una persona, con el contexto ya recogido. El fracaso más común no es que el chatbot responda mal una vez; es que no sepa detectar que debería dejar de intentarlo y avisar a alguien.
+
+## En resumen
+
+No se trata de elegir entre chatbot o persona — se trata de dividir el trabajo según reglas claras: lo repetitivo y de bajo riesgo al flujo automatizado, lo que necesita criterio a tu equipo, y un mecanismo claro para pasar de uno a otro. Si quieres, en una auditoría gratuita revisamos tu atención al cliente actual y te decimos honestamente qué automatizar primero, sin compromiso.`,
+        faqs: [
+            {
+                question: '¿Cuándo conviene automatizar la atención al cliente con un chatbot?',
+                answer: 'Cuando la respuesta sigue una regla fija (horarios, precios, estado de un pedido), se repite frecuentemente y una respuesta equivocada no cuesta caro. Si esas tres condiciones se cumplen, automatizarlo libera tiempo real de tu equipo.',
+            },
+            {
+                question: '¿Qué pasa si automatizo demasiado la atención al cliente?',
+                answer: 'El cliente siente que habla con una pared: recibe respuestas genéricas ante reclamos reales, o el bot no sabe salir de su guion cuando la conversación se sale del molde. Eso frustra al cliente y puede costarte la venta o la relación.',
+            },
+            {
+                question: '¿Qué debe hacer un chatbot cuando no puede resolver algo?',
+                answer: 'Reconocer sus límites y pasarle el caso a una persona con el contexto ya recogido, en vez de insistir o dar una respuesta genérica. Un flujo bien diseñado sabe cuándo rendirse — ese es el punto que más suele fallar en los chatbots mal implementados.',
+            },
+        ],
+    },
 ]
 
 export function getLocalPosts(category?: string): LocalPost[] {
