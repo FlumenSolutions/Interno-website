@@ -218,7 +218,7 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                                 name="automationArea"
                                 value={formData.automationArea}
                                 onChange={handleChange}
-                                className={`w-full px-3 py-2 bg-input border rounded-md text-sm text-foreground transition-all focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring ${errors.automationArea ? 'border-destructive' : 'border-border'
+                                className={`w-full px-3 py-2 bg-input border rounded-md text-base md:text-sm text-foreground transition-all focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring ${errors.automationArea ? 'border-destructive' : 'border-border'
                                     }`}
                                 {...errorProps('automationArea')}
                             >
@@ -241,7 +241,7 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                                 name="companySize"
                                 value={formData.companySize}
                                 onChange={handleChange}
-                                className="w-full px-3 py-2 bg-input border border-border rounded-md text-sm text-foreground transition-all focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring"
+                                className="w-full px-3 py-2 bg-input border border-border rounded-md text-base md:text-sm text-foreground transition-all focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring"
                             >
                                 <option value="">Selecciona una opción</option>
                                 <option value="solo">Trabajo solo / Emprendedor</option>
