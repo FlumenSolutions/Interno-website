@@ -86,7 +86,11 @@ export function ServiceCard({ title, description, icon, features, href }: Servic
                                 e.preventDefault()
                                 setIsExpanded(!isExpanded)
                             }}
-                            className="mt-4 text-xs font-medium text-accent flex items-center gap-1 hover:text-accent/80 transition-colors focus:outline-none"
+                            // py-2 sube el objetivo táctil de 16px a 32px de alto:
+                            // a 16px no llegaba ni al mínimo de 24x24 de WCAG 2.5.8.
+                            // El outline no se suprime — DESIGN.md lo prohíbe: sin él
+                            // quien navega con teclado no ve dónde está.
+                            className="mt-4 -mb-1 py-2 text-xs font-medium text-accent flex items-center gap-1 hover:text-accent/80 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-2"
                         >
                             {isExpanded ? (
                                 <>
