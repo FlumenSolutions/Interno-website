@@ -42,6 +42,16 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
         }
     }
 
+    /**
+     * Vincula un campo con su mensaje de error. Sin esto el error solo existe
+     * visualmente (borde rojo + texto debajo): quien usa lector de pantalla
+     * no recibe ninguna señal de qué campo falló ni por qué.
+     */
+    const errorProps = (field: keyof FormData) =>
+        errors[field]
+            ? { 'aria-invalid': true, 'aria-describedby': `${field}-error` }
+            : {}
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setErrors({})
@@ -96,7 +106,9 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
 
     if (status === 'success') {
         return (
-            <div className="bg-accent/10 border border-accent rounded-lg p-8 text-center">
+            // role="status": el formulario se sustituye por este bloque, así que
+            // sin anuncio quien no ve la pantalla no sabe si el envío funcionó.
+            <div role="status" className="bg-accent/10 border border-accent rounded-lg p-8 text-center">
                 <CheckCircle className="w-12 h-12 text-accent mx-auto mb-4" />
                 <h3 className="text-h3 mb-2">¡Mensaje enviado!</h3>
                 <p className="text-muted-foreground mb-4">
@@ -135,8 +147,9 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                             onChange={handleChange}
                             placeholder="Juan Pérez"
                             className={errors.name ? 'border-destructive' : ''}
+                            {...errorProps('name')}
                         />
-                        {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
+                        {errors.name && <p id="name-error" className="text-sm text-destructive mt-1">{errors.name}</p>}
                     </div>
 
                     <div>
@@ -151,8 +164,9 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                             onChange={handleChange}
                             placeholder="juan@empresa.com"
                             className={errors.email ? 'border-destructive' : ''}
+                            {...errorProps('email')}
                         />
-                        {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
+                        {errors.email && <p id="email-error" className="text-sm text-destructive mt-1">{errors.email}</p>}
                     </div>
                 </div>
 
@@ -171,8 +185,9 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                             }}
                             placeholder="+57 300 123 4567"
                             error={!!errors.phone}
+                            describedById={errors.phone ? 'phone-error' : undefined}
                         />
-                        {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
+                        {errors.phone && <p id="phone-error" className="text-sm text-destructive mt-1">{errors.phone}</p>}
                     </div>
 
                     <div>
@@ -186,8 +201,9 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                             onChange={handleChange}
                             placeholder="Mi Empresa S.A.S"
                             className={errors.company ? 'border-destructive' : ''}
+                            {...errorProps('company')}
                         />
-                        {errors.company && <p className="text-sm text-destructive mt-1">{errors.company}</p>}
+                        {errors.company && <p id="company-error" className="text-sm text-destructive mt-1">{errors.company}</p>}
                     </div>
                 </div>
 
@@ -204,6 +220,7 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                                 onChange={handleChange}
                                 className={`w-full px-3 py-2 bg-input border rounded-md text-sm text-foreground transition-all focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring ${errors.automationArea ? 'border-destructive' : 'border-border'
                                     }`}
+                                {...errorProps('automationArea')}
                             >
                                 <option value="">Selecciona una opción</option>
                                 <option value="ventas">Ventas y captación de leads</option>
@@ -212,7 +229,7 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                                 <option value="facturacion">Facturación / Finanzas</option>
                                 <option value="diagnostico">No estoy seguro (quiero diagnóstico)</option>
                             </select>
-                            {errors.automationArea && <p className="text-sm text-destructive mt-1">{errors.automationArea}</p>}
+                            {errors.automationArea && <p id="automationArea-error" className="text-sm text-destructive mt-1">{errors.automationArea}</p>}
                         </div>
 
                         <div>
@@ -252,12 +269,15 @@ export function ContactForm({ source = 'contact', title, description }: ContactF
                         }
                         rows={5}
                         className={errors.message ? 'border-destructive' : ''}
+                            {...errorProps('message')}
                     />
-                    {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
+                    {errors.message && <p id="message-error" className="text-sm text-destructive mt-1">{errors.message}</p>}
                 </div>
 
+                {/* role="alert" para que el fallo de envío se anuncie: aparece
+                    después de pulsar, así que sin esto pasa desapercibido. */}
                 {status === 'error' && (
-                    <div className="bg-destructive/10 border border-destructive rounded-lg p-4 flex items-start gap-3">
+                    <div role="alert" className="bg-destructive/10 border border-destructive rounded-lg p-4 flex items-start gap-3">
                         <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
                         <p className="text-sm text-destructive">{errorMessage}</p>
                     </div>

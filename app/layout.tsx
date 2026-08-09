@@ -49,9 +49,18 @@ export default function RootLayout({
             </head>
             <body className={inter.className}>
                 <Analytics />
+                {/* Primer elemento enfocable de la página: permite saltar los
+                    seis enlaces del navbar en cada navegación (WCAG 2.4.1).
+                    Oculto salvo cuando recibe foco por teclado. */}
+                <a
+                    href="#contenido"
+                    className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-background focus:shadow-lg"
+                >
+                    Saltar al contenido
+                </a>
                 <LanguageProvider>
                     <Navbar />
-                    <main>{children}</main>
+                    <main id="contenido">{children}</main>
                     <Footer />
                     <WhatsAppButton />
                     <CookieConsent />

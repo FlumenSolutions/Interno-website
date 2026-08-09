@@ -11,9 +11,15 @@ interface PhoneInputProps {
     placeholder?: string
     className?: string
     error?: boolean
+    /**
+     * Id del párrafo que contiene el mensaje de error. El componente no
+     * propaga props sueltas al input interno, así que hay que pasarlo
+     * explícitamente para poder anunciarlo con aria-describedby.
+     */
+    describedById?: string
 }
 
-export function PhoneInput({ value, onChange, placeholder, className, error }: PhoneInputProps) {
+export function PhoneInput({ value, onChange, placeholder, className, error, describedById }: PhoneInputProps) {
     return (
         <PhoneInputWithCountry
             international
@@ -21,7 +27,12 @@ export function PhoneInput({ value, onChange, placeholder, className, error }: P
             value={value}
             onChange={onChange}
             placeholder={placeholder}
-            numberInputProps={{ id: 'phone', 'aria-label': 'Teléfono (WhatsApp)' }}
+            numberInputProps={{
+                id: 'phone',
+                'aria-label': 'Teléfono (WhatsApp)',
+                ...(error ? { 'aria-invalid': true } : {}),
+                ...(describedById ? { 'aria-describedby': describedById } : {}),
+            }}
             className={cn(
                 'phone-input-container',
                 error && 'phone-input-error',
