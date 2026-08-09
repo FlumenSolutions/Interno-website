@@ -28,8 +28,13 @@ export function CTASection({
 }: CTASectionProps) {
     return (
         <section className="relative py-28 md:py-36 overflow-hidden">
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00B8A9] to-[#009F95]" />
+            {/* Background Gradient.
+                Usa accent-700 → accent-800 y no el teal DEFAULT: sobre #00B8A9
+                el titular blanco daba 2,49:1 y el párrafo 2,27:1, muy por
+                debajo del 3:1 y 4,5:1 que exige WCAG AA. Con accent-700 como
+                extremo claro quedan en 6,14:1 y 5,33:1 sin salirse de la
+                escala de marca ya definida en tailwind.config. */}
+            <div className="absolute inset-0 bg-gradient-to-br from-accent-700 to-accent-800" />
 
             {/* Content */}
             <div className="container relative z-10">
@@ -60,7 +65,11 @@ export function CTASection({
                                 asChild
                                 size="xl"
                                 variant="outline"
-                                className="bg-transparent border-2 border-white/30 text-white hover:bg-white/10 hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 font-semibold px-8 h-14 rounded-xl"
+                                // border-white/60 y no /30: el borde es lo único que
+                                // delimita este botón, y a 30% quedaba en 1,86:1 sobre
+                                // el fondo — por debajo del 3:1 que WCAG pide a un
+                                // elemento de interfaz. A 60% da 3,25:1.
+                                className="bg-transparent border-2 border-white/60 text-white hover:bg-white/10 hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 font-semibold px-8 h-14 rounded-xl"
                             >
                                 <Link href={secondaryCTA.href}>{secondaryCTA.text}</Link>
                             </Button>
