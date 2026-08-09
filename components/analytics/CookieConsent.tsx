@@ -76,7 +76,7 @@ export function CookieConsent() {
                             <button
                                 type="button"
                                 onClick={() => dismiss('accepted')}
-                                className="text-sm font-medium text-white bg-accent hover:bg-[#00A396] transition-colors px-4 py-2 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
+                                className="text-sm font-medium text-background bg-accent hover:bg-[#00A396] transition-colors px-4 py-2 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2"
                             >
                                 Aceptar
                             </button>

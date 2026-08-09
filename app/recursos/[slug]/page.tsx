@@ -235,7 +235,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                         <p className="text-gray-400 mb-6">Conoce cómo podemos ayudarte con nuestro servicio de {matchedService.title.toLowerCase()}.</p>
                         <Link
                             href={matchedService.href}
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-white text-sm font-semibold rounded-xl shadow-md shadow-accent/20 hover:bg-accent/90 hover:-translate-y-0.5 transition-all"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-background text-sm font-semibold rounded-xl shadow-md shadow-accent/20 hover:bg-accent/90 hover:-translate-y-0.5 transition-all"
                         >
                             Ver servicio: {matchedService.title}
                             <span aria-hidden="true">→</span>
