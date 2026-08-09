@@ -6,6 +6,12 @@ export interface Service {
     title: string
     shortDescription: string
     description: string
+    /**
+     * Texto para <meta name="description">. Se escribe aparte de `description`
+     * porque Google corta alrededor de los 160 caracteres: reutilizar el
+     * párrafo de la página (250-310) deja el fragmento cortado a media frase.
+     */
+    metaDescription: string
     icon: any
     features: string[]
     useCases: string[]
@@ -26,6 +32,8 @@ export const services: Service[] = [
         title: 'Aplicaciones a la medida',
         shortDescription: 'Software hecho para tu negocio, no plantillas genéricas',
         description: 'Construimos la aplicación que tu negocio necesita: paneles internos, herramientas de gestión, portales para clientes o el sistema que hoy resuelves a mano en Excel. Usamos IA de última generación para construir más rápido, así llegas a una versión funcional en mucho menos tiempo que un desarrollo tradicional.',
+        metaDescription:
+            'Paneles internos, portales de clientes y herramientas de gestión hechos para tu negocio. Con IA llegas a una versión funcional mucho antes.',
         icon: Code2,
         features: [
             'Análisis de lo que tu negocio necesita de verdad',
@@ -66,6 +74,8 @@ export const services: Service[] = [
         title: 'Páginas y sitios web',
         shortDescription: 'Tu presencia digital, rápida, moderna y que convierte',
         description: 'Diseñamos y desarrollamos sitios web y landing pages a la medida: rápidos, modernos, optimizados para celular y para aparecer en Google. No plantillas recicladas — un sitio pensado para que tu negocio se vea serio y convierta visitantes en clientes.',
+        metaDescription:
+            'Sitios web y landing pages a la medida: rápidos, optimizados para celular y para Google. Sin plantillas recicladas, pensados para convertir.',
         icon: Globe,
         features: [
             'Diseño a la medida de tu marca',
@@ -106,6 +116,8 @@ export const services: Service[] = [
         title: 'Chatbots y asistentes con IA',
         shortDescription: 'Asistentes que responden con la información de tu negocio',
         description: 'Creamos chatbots y asistentes con IA que conocen tu negocio: responden preguntas frecuentes, atienden por WhatsApp o web, y dejan a tu equipo solo los casos que de verdad necesitan una persona. Entrenados con tu información para que respondan con datos correctos, no genéricos.',
+        metaDescription:
+            'Chatbots entrenados con la información de tu negocio. Atienden por WhatsApp o web y dejan a tu equipo solo los casos que necesitan una persona.',
         icon: Bot,
         features: [
             'Entrenado con la información de tu negocio',
@@ -146,6 +158,8 @@ export const services: Service[] = [
         title: 'Automatización de procesos',
         shortDescription: 'Que el trabajo repetitivo se haga solo',
         description: 'Conectamos tus herramientas y automatizamos las tareas repetitivas que hoy te quitan tiempo: pasar datos de un lado a otro, generar reportes, enviar recordatorios. Diseñamos el flujo a la medida de cómo trabaja tu equipo, para que la operación corra sin intervención manual.',
+        metaDescription:
+            'Conectamos tus herramientas para que las tareas repetitivas se hagan solas: pasar datos, generar reportes, enviar recordatorios. A tu medida.',
         icon: Workflow,
         features: [
             'Mapeo de los procesos que más tiempo te quitan',

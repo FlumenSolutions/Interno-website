@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
 
     return genMeta({
         title: service.title,
-        description: service.description,
+        description: service.metaDescription,
         path: `/servicios/${service.slug}`,
     })
 }

@@ -10,7 +10,7 @@ import { PageHeader } from '@/components/sections/PageHeader'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = genMeta({
-    title: 'Recursos y Blog - Guías de Automatización',
+    title: 'Guías de automatización para PyMEs',
     description:
         'Guías, tutoriales y casos de estudio sobre automatización de procesos, integración de CRM, asistentes de IA y más.',
     path: '/recursos',

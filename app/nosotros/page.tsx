@@ -7,9 +7,11 @@ import { Metadata } from 'next'
 import { Target, Eye, Award, Users } from 'lucide-react'
 
 export const metadata: Metadata = genMeta({
-    title: 'Sobre Nosotros - Flumen Solutions',
+    // Sin la marca en el literal: la plantilla `%s | Flumen Solutions` del
+    // layout raíz ya la añade, y repetirla gastaba 17 caracteres del título.
+    title: 'Quiénes somos: software a la medida',
     description:
-        'Tres ingenieros que construyen software a la medida con IA para empresas en Colombia: aplicaciones, sitios web, chatbots y automatizaciones, sin humo y sin jerga.',
+        'Tres ingenieros que construyen software a la medida con IA para empresas en Colombia: aplicaciones, sitios web, chatbots y automatizaciones, sin humo.',
     path: '/nosotros',
 })
 

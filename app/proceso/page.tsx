@@ -9,9 +9,9 @@ import { Metadata } from 'next'
 import { Search, Lightbulb, Code, Rocket, HeadphonesIcon } from 'lucide-react'
 
 export const metadata: Metadata = genMeta({
-    title: 'Cómo trabajamos — De tu idea al software funcionando',
+    title: 'Cómo trabajamos: de tu idea al software',
     description:
-        'Conoce nuestro proceso para construir tu software: entendemos tu idea, diseñamos la solución, la construimos con IA y la entregamos funcionando, con acompañamiento.',
+        'Nuestro proceso para construir tu software: entendemos tu idea, diseñamos la solución, la construimos con IA y la entregamos funcionando.',
     path: '/proceso',
 })
 
