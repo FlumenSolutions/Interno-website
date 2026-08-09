@@ -1,19 +1,53 @@
 'use server'
 
 import { prisma } from '@/lib/prisma'
-import { unstable_noStore as noStore } from 'next/cache'
+import { unstable_cache } from 'next/cache'
 import { getLocalPosts, getLocalPostBySlug } from '@/data/posts'
 
-export async function getPosts(category?: string) {
-    noStore(); // Disable cache for this action
-    try {
+/**
+ * Ventana de caché de las consultas del blog.
+ *
+ * Antes cada visita a /recursos golpeaba la base de datos: la página llevaba
+ * `force-dynamic` y las consultas `noStore()`. El listado solo cambia cuando
+ * se publica un artículo, así que una hora de caché quita prácticamente toda
+ * esa carga sin que el contenido se quede visiblemente viejo.
+ *
+ * Ojo: /recursos lee `searchParams.category`, lo que la vuelve dinámica de
+ * todos modos — por eso se cachea la consulta y no la página. El coste que se
+ * elimina es el de la base de datos, no el del render.
+ *
+ * Contrapartida: un artículo recién publicado puede tardar hasta una hora en
+ * aparecer. Si algún día hace falta que sea inmediato, `revalidateTag('posts')`
+ * desde una ruta protegida lo fuerza sin esperar.
+ */
+const CACHE_SEGUNDOS = 3600
+
+/**
+ * `unstable_cache` serializa a JSON, así que los DateTime de Prisma vuelven
+ * del caché como string y revientan en cuanto alguien llama `.toISOString()`
+ * sobre ellos. Hay que reconstruirlos al salir.
+ */
+const CAMPOS_FECHA = ['publishedAt', 'createdAt', 'updatedAt'] as const
+
+function revivirFechas<T>(registro: T): T {
+    if (!registro || typeof registro !== 'object') return registro
+    const copia: any = { ...registro }
+    for (const campo of CAMPOS_FECHA) {
+        if (typeof copia[campo] === 'string') {
+            copia[campo] = new Date(copia[campo])
+        }
+    }
+    return copia as T
+}
+
+const fetchPublishedPosts = unstable_cache(
+    async (category?: string) => {
         const where: any = { published: true }
-        // Filter by category if provided
         if (category && category !== 'Todas') {
             where.category = category
         }
 
-        const posts = await prisma.post.findMany({
+        return prisma.post.findMany({
             where,
             orderBy: {
                 publishedAt: 'desc',
@@ -28,6 +62,16 @@ export async function getPosts(category?: string) {
                 coverImage: true,
             },
         })
+    },
+    ['recursos-posts'],
+    { revalidate: CACHE_SEGUNDOS, tags: ['posts'] }
+)
+
+export async function getPosts(category?: string) {
+    try {
+        // El try/catch envuelve la llamada, no la consulta cacheada: así un
+        // fallo de la BD no queda cacheado durante una hora.
+        const posts = (await fetchPublishedPosts(category)).map(revivirFechas)
 
         // Si la BD responde pero no hay posts publicados, usa los de respaldo.
         if (posts.length === 0) {
@@ -42,9 +86,8 @@ export async function getPosts(category?: string) {
     }
 }
 
-export async function getRelatedPosts(currentSlug: string, category?: string | null, tags?: string[]) {
-    noStore()
-    try {
+const fetchRelatedPosts = unstable_cache(
+    async (currentSlug: string, category?: string | null, tags?: string[]) => {
         // 1. Misma categoría (excluyendo el actual)
         const byCategory = category
             ? await prisma.post.findMany({
@@ -80,6 +123,14 @@ export async function getRelatedPosts(currentSlug: string, category?: string | n
             select: { title: true, slug: true, excerpt: true, coverImage: true, category: true, publishedAt: true },
         })
         return [...combined, ...recent].slice(0, 3)
+    },
+    ['recursos-related'],
+    { revalidate: CACHE_SEGUNDOS, tags: ['posts'] }
+)
+
+export async function getRelatedPosts(currentSlug: string, category?: string | null, tags?: string[]) {
+    try {
+        return (await fetchRelatedPosts(currentSlug, category, tags)).map(revivirFechas)
     } catch {
         // Fallback local
         const local = getLocalPosts().filter((p) => p.slug !== currentSlug).slice(0, 3)
@@ -87,14 +138,21 @@ export async function getRelatedPosts(currentSlug: string, category?: string | n
     }
 }
 
-export async function getPostBySlug(slug: string) {
-    try {
-        const post = await prisma.post.findUnique({
+const fetchPostBySlug = unstable_cache(
+    async (slug: string) =>
+        prisma.post.findUnique({
             where: {
                 slug,
                 published: true,
             },
-        })
+        }),
+    ['recursos-post'],
+    { revalidate: CACHE_SEGUNDOS, tags: ['posts'] }
+)
+
+export async function getPostBySlug(slug: string) {
+    try {
+        const post = revivirFechas(await fetchPostBySlug(slug))
 
         // Si no está en la BD, intenta con los posts de respaldo locales.
         return post ?? getLocalPostBySlug(slug)

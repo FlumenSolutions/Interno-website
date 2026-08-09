@@ -7,7 +7,9 @@ import { getPosts } from './actions'
 import { BlogCard } from '@/components/blog/BlogCard'
 import { PageHeader } from '@/components/sections/PageHeader'
 
-export const dynamic = 'force-dynamic'
+// Sin `force-dynamic`: leer `searchParams.category` ya obliga a render
+// dinámico, así que declararlo no aportaba nada y sugería que el coste de
+// base de datos era inevitable. Las consultas se cachean en ./actions.
 
 export const metadata: Metadata = genMeta({
     title: 'Guías de automatización para PyMEs',
