@@ -10,7 +10,7 @@ import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 export const metadata: Metadata = genMeta({
     title: 'Contacto - Cuéntanos tu idea',
     description:
-        'Cuéntanos qué necesitas — una app, un sitio web, un chatbot o una automatización — y te decimos qué podemos construir. Respuesta en menos de 24 horas. Bogotá, Colombia.',
+        'Cuéntanos qué necesitas — una app, un sitio web, un chatbot o una automatización — y te decimos qué podemos construir. Respuesta en 24 horas.',
     path: '/contacto',
 })
 
