@@ -1,9 +1,14 @@
 import { Metadata } from 'next'
+import { generateMetadata as genMeta } from '@/lib/seo'
 
-export const metadata: Metadata = {
-    title: 'Política de Privacidad | Flumen Solutions',
+// Sin genMeta esta página heredaba el canonical del layout raíz (el home),
+// que le decía a Google que era un duplicado. El título tampoco debe incluir
+// la marca: la plantilla `%s | Flumen Solutions` ya la añade.
+export const metadata: Metadata = genMeta({
+    title: 'Política de Privacidad',
     description: 'Conoce cómo Flumen Solutions recopila, usa y protege tus datos personales.',
-}
+    path: '/privacidad',
+})
 
 export default function PrivacyPage() {
     return (
