@@ -33,6 +33,7 @@ export default function ServiciosPage() {
                                         icon={<Icon className="w-6 h-6 text-accent transition-transform duration-500 group-hover:scale-110" />}
                                         features={service.features}
                                         href={`/servicios/${service.slug}`}
+                                        headingLevel="h2"
                                     />
                                 </ScrollReveal>
                             )
@@ -41,7 +42,7 @@ export default function ServiciosPage() {
 
                     <ScrollReveal delay={0.4}>
                         <div className="mt-16 p-8 bg-accent/10 border border-accent/20 rounded-lg text-center max-w-3xl mx-auto">
-                            <h3 className="text-h3 mb-4 text-white">¿No sabes por dónde empezar?</h3>
+                            <h2 className="text-h3 mb-4 text-white">¿No sabes por dónde empezar?</h2>
                             <p className="text-body text-white/80 mb-6">
                                 Cuéntanos qué necesitas y te decimos qué podemos construir para tu negocio, sin compromiso.
                             </p>

@@ -13,10 +13,18 @@ interface ServiceCardProps {
     icon: React.ReactNode
     features: string[]
     href: string
+    /**
+     * Nivel semántico del título. En el home las tarjetas cuelgan de un h2 de
+     * sección y 'h3' es correcto; en /servicios cuelgan directamente del h1 y
+     * deben ser 'h2' para no dejar un hueco en la jerarquía. Solo cambia la
+     * etiqueta — el tamaño visual es el mismo en ambos casos.
+     */
+    headingLevel?: 'h2' | 'h3'
 }
 
-export function ServiceCard({ title, description, icon, features, href }: ServiceCardProps) {
+export function ServiceCard({ title, description, icon, features, href, headingLevel = 'h3' }: ServiceCardProps) {
     const [isExpanded, setIsExpanded] = useState(false)
+    const Heading = headingLevel
 
     return (
         <motion.div
@@ -35,9 +43,9 @@ export function ServiceCard({ title, description, icon, features, href }: Servic
                             {icon}
                         </div>
 
-                        <h3 className="text-xl md:text-2xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300">
+                        <Heading className="text-xl md:text-2xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300">
                             {title}
-                        </h3>
+                        </Heading>
                     </div>
 
                     <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">

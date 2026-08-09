@@ -72,9 +72,9 @@ export function BlogCard({ post, featured = false }: BlogCardProps) {
                         <span>5 min lectura</span>
                     </div>
 
-                    <h3 className={`font-medium text-foreground group-hover:text-accent transition-colors ${featured ? 'text-2xl md:text-3xl lg:text-4xl leading-tight' : 'text-xl leading-snug'}`}>
+                    <h2 className={`font-medium text-foreground group-hover:text-accent transition-colors ${featured ? 'text-2xl md:text-3xl lg:text-4xl leading-tight' : 'text-xl leading-snug'}`}>
                         {post.title}
-                    </h3>
+                    </h2>
 
                     <p className={`text-muted-foreground line-clamp-2 ${featured ? 'text-lg max-w-3xl mt-2' : 'text-sm'}`}>
                         {post.excerpt}

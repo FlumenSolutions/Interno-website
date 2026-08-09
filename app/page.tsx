@@ -50,7 +50,7 @@ export default function HomePage() {
                         ].map((row, i) => (
                             <ScrollReveal key={i} delay={i * 0.1}>
                                 <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 py-6">
-                                    <span className="text-base sm:text-lg text-white/40 line-through decoration-white/20 sm:w-[38%] sm:text-right sm:flex-shrink-0">
+                                    <span className="text-base sm:text-lg text-white/50 line-through decoration-white/20 sm:w-[38%] sm:text-right sm:flex-shrink-0">
                                         {row.problem}
                                     </span>
                                     <ArrowRight className="hidden sm:block w-5 h-5 text-accent flex-shrink-0" />
