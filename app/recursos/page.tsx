@@ -86,9 +86,9 @@ export default async function RecursosPage({
                     {/* Empty State */}
                     {allPosts.length === 0 && (
                         <div className="text-center py-20 md:py-28 max-w-md mx-auto">
-                            <h3 className="text-2xl font-semibold text-white mb-3">
+                            <h2 className="text-2xl font-semibold text-white mb-3">
                                 Estamos escribiendo
-                            </h3>
+                            </h2>
                             <p className="text-white/70 leading-relaxed mb-8">
                                 Pronto publicaremos guías y estrategias de automatización pensadas
                                 para PyMEs. Mientras tanto, cuéntanos tu caso y te respondemos directo.
@@ -108,7 +108,7 @@ export default async function RecursosPage({
                     <div className="mt-24 md:mt-32 relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.07] to-white/[0.02] p-8 md:p-12">
                         <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent/15 blur-3xl pointer-events-none" />
                         <div className="relative max-w-xl">
-                            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Mantente actualizado</h3>
+                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Mantente actualizado</h2>
                             <p className="text-white/70 leading-relaxed mb-7">
                                 Recibe las últimas guías y estrategias de automatización directamente en tu bandeja de entrada.
                             </p>

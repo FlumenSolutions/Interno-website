@@ -258,12 +258,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                                         className="group block rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden hover:border-accent/30 hover:bg-white/[0.04] transition-all"
                                     >
                                         {rp.coverImage && (
-                                            <div className="aspect-video overflow-hidden">
-                                                <img
+                                            <div className="relative aspect-video overflow-hidden">
+                                                <Image
                                                     src={rp.coverImage}
                                                     alt={rp.title}
-                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                                    loading="lazy"
+                                                    fill
+                                                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
                                             </div>
                                         )}
